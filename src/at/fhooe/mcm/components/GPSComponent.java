@@ -1,10 +1,11 @@
 package at.fhooe.mcm.components;
 
 import at.fhooe.mcm.interfaces.IComponent;
+import at.fhooe.mcm.interfaces.IObserver;
 
 import java.awt.*;
 
-public class GPSComponent implements IComponent {
+public class GPSComponent implements IComponent, IObserver {
     @Override
     public Panel getView() {
         return null;
@@ -14,4 +15,9 @@ public class GPSComponent implements IComponent {
     public String getName() {
         return null;
     }
+
+	@Override
+	public void update(Object _o) {
+		// TODO Auto-generated method stub
+	}
 }
