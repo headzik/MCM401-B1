@@ -1,5 +1,7 @@
 package at.fhooe.mcm;
 
+import at.fhooe.mcm.components.GISComponent;
+import at.fhooe.mcm.components.GPSComponent;
 import at.fhooe.mcm.components.POIComponent;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
@@ -17,6 +19,12 @@ public class Mediator implements IMediator {
         mMediatorView = new MediatorView();
         mComponents = new ArrayList<>();
 
+        GISComponent g = new GISComponent();
+        mComponents.add(g);        
+
+        GPSComponent gps = new GPSComponent();
+        mComponents.add(gps);
+
         POIComponent p = new POIComponent();
         mComponents.add(p);
 
@@ -24,7 +32,6 @@ public class Mediator implements IMediator {
     }
 
     public static void main(String[] args) {
-
         Mediator m = new Mediator();
 
 

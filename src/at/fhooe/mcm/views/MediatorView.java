@@ -40,7 +40,9 @@ public class MediatorView extends Frame {
 
 		// Add tab panel
 		mJTabbedPane = new JTabbedPane();
-		this.add(mJTabbedPane, BorderLayout.NORTH);
+		this.add(mJTabbedPane, BorderLayout.CENTER);
+
+		this.setLocationRelativeTo(null);
 		
 		// Set visible
 		this.setVisible(true);			
