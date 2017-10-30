@@ -1,10 +1,11 @@
 package at.fhooe.mcm.gis;
 
+import at.fhooe.mcm.poi.POIObject;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Polygon;
-import java.awt.Toolkit;
 
 
 public class DrawingContext {

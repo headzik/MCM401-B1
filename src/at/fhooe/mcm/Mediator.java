@@ -7,6 +7,7 @@ import at.fhooe.mcm.gis.GeoObject;
 import at.fhooe.mcm.gis.OSMServer;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
+import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.views.MediatorView;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class Mediator extends Observable implements IMediator {
+public class Mediator extends Observable implements IMediator, IObserver {
 
     private MediatorView mMediatorView;
     private List<IComponent> mComponents;
@@ -27,22 +28,33 @@ public class Mediator extends Observable implements IMediator {
         mComponents.add(g);
         addObserver(g);
 
-        GPSComponent gps = new GPSComponent();
-        mComponents.add(gps);
-
         POIComponent p = new POIComponent();
         mComponents.add(p);
+        addObserver(p);
+
+        GPSComponent gps = new GPSComponent();
+        mComponents.add(gps);
+        addObserver(gps);
+
 
         mMediatorView.addTabs(mComponents);
-
-        OSMServer server = new OSMServer();
-        for (GeoObject ob : server.extractData()){
-            notifyObservers(ob);
-        }
 
     }
 
     public static void main(String[] args) {
         Mediator m = new Mediator();
+        m.loadData();
+    }
+
+    private void loadData() {
+        OSMServer server = new OSMServer();
+        for (GeoObject ob : server.extractData()){
+            notifyObservers(ob);
+        }
+    }
+
+    @Override
+    public void update(Object _o) {
+
     }
 }

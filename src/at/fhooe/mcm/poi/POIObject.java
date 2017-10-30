@@ -1,4 +1,6 @@
-package at.fhooe.mcm.gis;
+package at.fhooe.mcm.poi;
+
+import at.fhooe.mcm.gis.GeoObject;
 
 import java.awt.Image;
 import java.awt.Polygon;
