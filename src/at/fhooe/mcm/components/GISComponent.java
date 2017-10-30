@@ -20,6 +20,8 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		GISController c = new GISController(mModel);
 		GISView v = new GISView(c);
 
+		c.setView(v);
+
 		mModel.addObserver(v);
 
 		view = v.getView();

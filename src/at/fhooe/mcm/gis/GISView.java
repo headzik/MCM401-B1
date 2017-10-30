@@ -15,8 +15,7 @@ import java.awt.TextField;
 import java.awt.image.BufferedImage;
 
 public class GISView implements IDataObserver {
-	
-	private Frame mFrame;
+
 	public DrawingPanel mPanel;
 	private Panel mMainPanel;
 	private Button mLoadButton, mZTFButton, mZoomInButton, 
@@ -78,8 +77,6 @@ public class GISView implements IDataObserver {
 		buttonPanel.add(new Panel());
 		buttonPanel.add(mPOIToggleButton);
 		buttonPanel.add(mScale);
-
-
 
 
 		mPanel.addComponentListener(mController);

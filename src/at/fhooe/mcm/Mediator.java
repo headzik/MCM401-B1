@@ -28,13 +28,11 @@ public class Mediator extends Observable implements IMediator, IObserver {
         mComponents.add(g);
         addObserver(g);
 
-        POIComponent p = new POIComponent();
+        POIComponent p = new POIComponent(this);
         mComponents.add(p);
-        addObserver(p);
 
         GPSComponent gps = new GPSComponent();
         mComponents.add(gps);
-        addObserver(gps);
 
 
         mMediatorView.addTabs(mComponents);
@@ -55,6 +53,6 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     @Override
     public void update(Object _o) {
-
+        notifyObservers(_o);
     }
 }

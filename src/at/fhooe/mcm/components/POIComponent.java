@@ -3,6 +3,7 @@ package at.fhooe.mcm.components;
 import java.awt.Color;
 import java.awt.Panel;
 
+import at.fhooe.mcm.Mediator;
 import at.fhooe.mcm.gis.GISModel;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
@@ -14,14 +15,22 @@ import at.fhooe.mcm.poi.POIView;
 
 public class POIComponent extends Observable implements IComponent, IObserver {
 
+	private Panel view;
 	IMediator mediator;
 	POIModel mModel;
+
+	public POIComponent(Mediator _mediator){
+		mModel = new POIModel();
+		POIView v = new POIView(new POIController(mModel));
+		view = v.getView();
+
+		mediator = _mediator;
+
+		mModel.addObserver(this);
+	}
 	
 	public Panel getView() {
-		POIModel m = new POIModel();
-		POIView v = new POIView(new POIController(m));
-
-		return v.getView();
+		return view;
 	}
 
 	public String getName() {
@@ -30,6 +39,6 @@ public class POIComponent extends Observable implements IComponent, IObserver {
 
 	@Override
 	public void update(Object _o) {
-		// TODO Auto-generated method stub
+		mediator.update(_o);
 	}
 }
