@@ -13,6 +13,21 @@ public class GPSController implements ItemListener {
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        mModel.startService();
+    	int state = e.getStateChange();
+	
+		if(isChecked(state)) {
+	        mModel.startService();
+		} else {
+	        mModel.stopService();
+		}
+    	
+    }
+    
+    public boolean isChecked(int state) {
+    	if(state == 1) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
 }

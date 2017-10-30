@@ -1,5 +1,6 @@
 package at.fhooe.mcm.components;
 
+import at.fhooe.mcm.gis.GISModel;
 import at.fhooe.mcm.gps.GPSController;
 import at.fhooe.mcm.gps.GPSModel;
 import at.fhooe.mcm.gps.GPSView;
@@ -8,18 +9,27 @@ import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
 
 import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class GPSComponent extends Observable implements IComponent, IObserver {
 
     private Panel view;
+	GPSModel mModel;
 
     public GPSComponent() {
-        GPSModel m = new GPSModel();
-        GPSController c = new GPSController(m);
-        GPSView v = new GPSView(c);
+        GPSModel m;
+		try {
+			mModel = new GPSModel();
+	        GPSController c = new GPSController(mModel);
+	        GPSView v = new GPSView(c);
 
-        view = v.getView();
-
+	        mModel.addListener(v);
+	        
+	        view = v.getView(); 
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}             
     }
 
     @Override

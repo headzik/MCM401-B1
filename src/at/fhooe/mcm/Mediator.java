@@ -13,7 +13,6 @@ import at.fhooe.mcm.views.MediatorView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 
 public class Mediator extends Observable implements IMediator, IObserver {
 
