@@ -7,7 +7,13 @@ import java.awt.Polygon;
 
 public class POIObject extends GeoObject {
 	
+	public static enum POI_TYPE {
+		TYPE_1, TYPE_2
+	}
+	
 	private Image mImg;
+	private POI_TYPE mType;
+	private boolean mVisible;
 
 	/**
 	 * Constructor.
@@ -16,9 +22,11 @@ public class POIObject extends GeoObject {
 	 * @param _poly Polygon
 	 * @param _img Image
 	 */
-	public POIObject(String _id, int _type, Polygon _poly, Image _img) {
+	public POIObject(String _id, int _type, Polygon _poly, Image _img, POI_TYPE _poitype) {
 		super(_id, _type, _poly);
 		mImg = _img;
+		mType = _poitype;
+		mVisible = false;
 	}
 	
 	/**
@@ -27,5 +35,17 @@ public class POIObject extends GeoObject {
 	 */
 	public Image getImage() {
 		return mImg;
+	}
+	
+	public void setVisible(boolean _visible) {
+		mVisible = _visible;
+	}
+	
+	public POI_TYPE getPOIType() {
+		return mType;
+	}
+	
+	public boolean isVisible() {
+		return mVisible;
 	}
 }

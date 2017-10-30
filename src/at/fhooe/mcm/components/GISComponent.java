@@ -40,7 +40,8 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 
 	@Override
 	public void update(Object _o) {
-		mModel.addObject(_o);
+		if (!mModel.containsObject(_o))
+			mModel.addObject(_o);
 	}
 
 }

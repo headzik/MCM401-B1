@@ -16,9 +16,17 @@ import static at.fhooe.mcm.gis.DrawingContext.POI_TYPE;
 public class POIController implements ItemListener {
 
     private POIModel mModel;
+    private POIObject p1, p2;
 
     public POIController(POIModel _model){
-        mModel = _model;
+        mModel = _model;    
+        
+        // Add hardcoded poi objects (2 different types) for testing
+        Point p = new Point(-754069, 8863172);
+		p1 = new POIObject("1", POI_TYPE, new Polygon(new int[]{(int)p.getX()},new int[]{(int)p.getY()},1), loadImage("resources/1.png"), POIObject.POI_TYPE.TYPE_1);
+		p2 = new POIObject("1", POI_TYPE, new Polygon(new int[]{(int)p.getX()},new int[]{(int)p.getY()},1), loadImage("resources/2.png"), POIObject.POI_TYPE.TYPE_2);
+		mModel.addPOI(p1);
+		mModel.addPOI(p2);
     }
     
     @Override
@@ -28,22 +36,18 @@ public class POIController implements ItemListener {
     	
     	switch(poiName) {
     	case "POI_1" : {
-			Point p = new Point(-754069, 8863172);
-			POIObject p1 = new POIObject("1", POI_TYPE, new Polygon(new int[]{(int)p.getX()},new int[]{(int)p.getY()},1), loadImage("resources/1.png"));
     		if(isChecked(state)) {
-				mModel.addPOI(p1);
+				mModel.setVisibleByType(true, POIObject.POI_TYPE.TYPE_1);
 			} else {
-    			mModel.removePOI(p1);
+				mModel.setVisibleByType(false, POIObject.POI_TYPE.TYPE_1);
     		}
     	}
     		break;
     	case "POI_2" :{
-			Point p = new Point(-760630,8734278);
-			POIObject p2 = new POIObject("1", POI_TYPE, new Polygon(new int[]{(int)p.getX()},new int[]{(int)p.getY()},1), loadImage("resources/2.png"));
     		if(isChecked(state)) {
-    			mModel.addPOI(p2);
+    			mModel.setVisibleByType(true, POIObject.POI_TYPE.TYPE_2);
     		} else {
-    			mModel.removePOI(p2);
+    			mModel.setVisibleByType(false, POIObject.POI_TYPE.TYPE_2);
     		}
     	}
     		break;

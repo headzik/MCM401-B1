@@ -39,6 +39,10 @@ public class GISModel extends DataObservable {
         mObjects = new Vector<>();
     }
 
+    public boolean containsObject(Object _o) {
+    	return mObjects.contains(_o);
+    }
+    
     /**
      * Setter for mDrawPOIs.
      *
@@ -111,7 +115,7 @@ public class GISModel extends DataObservable {
                 // Check if its a POI
                 if (mObjects.get(i).getType() == DrawingContext.POI_TYPE) {
                     // Is POI -> draw if visible
-                    if (isPOIVisible()) {
+                    if (((at.fhooe.mcm.poi.POIObject) mObjects.get(i)).isVisible()) {
                         DrawingContext.drawObject(mObjects.get(i), img.getGraphics(), mTransformationMatrix);
                     }
                 } else {
