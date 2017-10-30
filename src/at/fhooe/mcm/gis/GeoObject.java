@@ -46,6 +46,10 @@ public class GeoObject extends Object{
 		return mPolygon;
 	}
 	
+	public void setPoly(Polygon _poly) {
+		mPolygon = _poly;
+	}
+	
 	/**
 	 * Returns the bounds of the object polygon.
 	 * @return Rectangle containing bounds.

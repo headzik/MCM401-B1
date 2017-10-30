@@ -17,19 +17,13 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
 	GPSModel mModel;
 
     public GPSComponent() {
-        GPSModel m;
-		try {
-			mModel = new GPSModel();
-	        GPSController c = new GPSController(mModel);
-	        GPSView v = new GPSView(c);
+		mModel = new GPSModel();
+        GPSController c = new GPSController(mModel);
+        GPSView v = new GPSView(c);
 
-	        mModel.addListener(v);
-	        
-	        view = v.getView(); 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}             
+        mModel.addListener(v);
+        
+        view = v.getView();        
     }
 
     @Override

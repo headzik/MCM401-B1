@@ -3,6 +3,8 @@ package at.fhooe.mcm.gps;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import at.fhooe.mcm.poi.POIObject;
+
 public class GPSController implements ItemListener {
 
     GPSModel mModel;

@@ -2,13 +2,24 @@ package at.fhooe.mcm.gps;
 
 
 import at.fhooe.mcm.interfaces.ISatInfo;
+import at.fhooe.mcm.objects.Observable;
+import at.fhooe.mcm.poi.POIObject;
 
+import static at.fhooe.mcm.gis.DrawingContext.POI_TYPE;
+
+import java.awt.Point;
+import java.awt.Polygon;
+import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class GPSModel {
+import javax.imageio.ImageIO;
+
+public class GPSModel extends Observable {
 
     String mLine = "";
     String[] mLineArray = null;
@@ -28,13 +39,14 @@ public class GPSModel {
     List<ISatInfo> mSatInfo = new ArrayList<ISatInfo>();
 
     Thread mService;
-    
-    boolean running;
 
-    public GPSModel() throws FileNotFoundException {
-        mSim = new GPSReceiverSim("GPS-Log-I.log", 500, "$GPGGA");
+    private POIObject position;
+
+    public GPSModel() {
+        Point p = new Point(0, 0);
+    	position = new POIObject("1", POI_TYPE, new Polygon(new int[]{(int)p.getX()},new int[]{(int)p.getY()},1), loadImage("resources/1.png"), POIObject.POI_TYPE.TYPE_POSITION);
     }
-
+	
     public void getLatitude() {
         mGradLat = Double.parseDouble(mLineArray[2].substring(0, 2));
         mMinutes = Double.parseDouble(mLineArray[2].substring(2, mLineArray[2].length()));
@@ -120,21 +132,49 @@ public class GPSModel {
         for(ISatInfo info : mSatInfo){
             info.update(mInfo);
         }
+    }    
+    private void updateMediator() {
+        //for (POIObject poi : mPOIs){
+            notifyObservers(position);
+        //}
     }
     
     public void startService() {
-    	running = true;
-		mService = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				getData();
-				update();
-			}
-		});
-		mService.start();
+		try {
+			mSim = new GPSReceiverSim("GPS-Log-I.log", 500, "$GPGGA");
+			mService = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					getData();
+				}
+			});
+
+			update();
+			getLatitude();
+			getLongitude();
+			position.setPosition((int)mGradLat, (int)mGradLon);
+			position.setVisible(true);
+			updateMediator();
+			mService.start();
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
     
     public void stopService() {
-    	//mService.interrupt();
+        mSim = null;
     }
+    
+	private BufferedImage loadImage(String _s) {
+		try {
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+			InputStream input = classLoader.getResourceAsStream(_s);
+			return ImageIO.read(input);
+		} catch(IOException _ex) {
+			System.out.println("Error while loading pic");
+		}
+		return null;
+	}
 }
