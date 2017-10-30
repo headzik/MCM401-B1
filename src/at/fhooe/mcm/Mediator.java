@@ -31,7 +31,7 @@ public class Mediator extends Observable implements IMediator, IObserver {
         POIComponent p = new POIComponent(this);
         mComponents.add(p);
 
-        GPSComponent gps = new GPSComponent();
+        GPSComponent gps = new GPSComponent(this);
         mComponents.add(gps);
 
 
