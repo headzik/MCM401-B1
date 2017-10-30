@@ -33,7 +33,7 @@ public class OSMServer {
             System.out.println(">> Attempting to load data from OSM database...");
             // Load JDBC driver and establish connection
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:5432/osm_hawai";
+            String url = "jdbc:postgresql://localhost:5432/osm_faroe";
             mConn = DriverManager.getConnection(url, "geo", "geo");
             // Add geometry types to the connection
             PGConnection c = (PGConnection) mConn;

@@ -7,7 +7,8 @@ import at.fhooe.mcm.objects.Observable;
 import java.awt.*;
 
 public class GPSComponent extends Observable implements IComponent, IObserver {
-    @Override
+    
+	@Override
     public Panel getView() {
 		Panel p = new Panel();
 		p.setBackground(Color.BLUE);
@@ -23,6 +24,6 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
 	@Override
 	public void update(Object _o) {
 		// TODO Auto-generated method stub
-        System.out.println("GPSComponent update");
+       // System.out.println("GPSComponent update");
 	}
 }

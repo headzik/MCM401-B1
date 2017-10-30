@@ -14,8 +14,8 @@ public class POIView {
 
 
 
-        JCheckBox poiOne = new JCheckBox("POI_1", false);
-        JCheckBox poiTwo = new JCheckBox("POI_2", false);
+        Checkbox poiOne = new Checkbox("POI_1", false);
+        Checkbox poiTwo = new Checkbox("POI_2", false);
 
         // add listeners
         poiOne.addItemListener(_controller);

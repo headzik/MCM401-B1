@@ -10,7 +10,7 @@ public class POIModel {
 
     }
 
-    public void addPOIs(POIObject _poi){
+    public void addPOI(POIObject _poi){
         mPOIs.add(_poi);
     }
 }
