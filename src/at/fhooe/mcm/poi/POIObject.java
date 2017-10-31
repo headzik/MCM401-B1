@@ -8,7 +8,7 @@ import java.awt.Polygon;
 public class POIObject extends GeoObject {
 	
 	public static enum POI_TYPE {
-		TYPE_1, TYPE_2
+		TYPE_1, TYPE_2, TYPE_POSITION
 	}
 	
 	private Image mImg;

@@ -45,6 +45,6 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
 
 	@Override
 	public void update(Object _o) {
-		notifyObservers(_o);
+		mMediator.update(_o);
 	}
 }

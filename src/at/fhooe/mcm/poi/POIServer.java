@@ -104,7 +104,7 @@ public class POIServer {
 
     }
 
-    private BufferedImage loadImage(String _s) {
+    public static BufferedImage loadImage(String _s) {
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             InputStream input = classLoader.getResourceAsStream(_s);

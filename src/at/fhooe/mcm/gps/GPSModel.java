@@ -1,9 +1,15 @@
 package at.fhooe.mcm.gps;
 
+import java.awt.Polygon;
 import java.io.FileNotFoundException;
 
+import org.postgis.Point;
+
+import at.fhooe.mcm.gis.DrawingContext;
+import at.fhooe.mcm.gis.GeoDoublePoint;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.poi.POIObject;
+import at.fhooe.mcm.poi.POIServer;
 
 public class GPSModel extends Observable implements PositionUpdateListener {
 
@@ -14,12 +20,10 @@ public class GPSModel extends Observable implements PositionUpdateListener {
 	public GPSModel() {		
 		try {
 			 mParser = new NMEAParser("GPS-Log-III.log");
+			 mParser.addListener(this);
 		} catch (FileNotFoundException _e1) {
 			_e1.printStackTrace();
 		}		
-		
-		System.out.println(GPSModel.lat2y(48.369484d));
-		System.out.println(GPSModel.lon2x(14.512067d));
 	}
 	
 	public NMEAParser getParser() {
@@ -39,17 +43,22 @@ public class GPSModel extends Observable implements PositionUpdateListener {
 	@Override
 	public void updateSats(NMEAInfo _mInfo) {
 		// Set position of poi object to new position (convert coordinates)
+		int x = (int) degreeToMeter(_mInfo.getLatitude());
+		int y = (int) degreeToMeter(_mInfo.getLongitude());
 		
-		// TODO --> CONVERT LONGITUDE AND LATITUDE TO SCREEN COORDINATES AND SET NEW POINT OF POSITION POI OBJECT.
+		Point p = new Point(x, y); // TODO --> convert lat & long to x & y	
 		
+		if (position == null) {
+			position = new POIObject("0", DrawingContext.POI_TYPE, new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1), POIServer.loadImage("resources/position.png"), POIObject.POI_TYPE.TYPE_POSITION);
+			position.setVisible(true);
+		} else {
+			position.setPoly(new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1));
+		}		
 		notifyObservers(position); // Notify that position has changed
 	}
 	
-	public static final double lat2y(double aLat) {
-	    return ((1 - Math.log(Math.tan(aLat * Math.PI / 180) + 1 / Math.cos(aLat * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, 0)) * 256 * 1000;
-	}
-	
-	public static final double lon2x(double lon) {
-	    return (lon + 180f) / 360f * 256f * 1000;
+	private double degreeToMeter (float _deg) {
+		double meter = Math.log10((Math.tan((90.0 + _deg) * Math.PI / 360.0)) / (Math.PI / 180.0))*111319.490778d;
+		return meter;
 	}
 }
