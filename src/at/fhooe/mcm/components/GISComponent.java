@@ -46,7 +46,6 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		
 		// Got a position update ?
 		if (_o instanceof POIObject && ((POIObject)_o).getPOIType() == POIObject.POI_TYPE.TYPE_POSITION) {
-			mModel.zoomToFit();
 			mModel.drawPolygons(); // repaint!
 			System.out.println("Position Update!");
 		}

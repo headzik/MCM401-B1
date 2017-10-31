@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import org.postgis.Point;
 
 import at.fhooe.mcm.gis.DrawingContext;
+import at.fhooe.mcm.gis.GISServer;
 import at.fhooe.mcm.gis.GeoDoublePoint;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.poi.POIObject;
@@ -34,19 +35,20 @@ public class GPSModel extends Observable implements PositionUpdateListener {
 		// Start parsing
 		t = (new Thread(mParser));
 		t.start();
+		position.setVisible(true);
 	}
 	
 	public void stopParsing() {
 		if (t != null)
-			t.interrupt();	}
+			t.interrupt();	
+			position.setVisible(false);
+		}
 
 	@Override
 	public void updateSats(NMEAInfo _mInfo) {
 		// Set position of poi object to new position (convert coordinates)
-		int x = (int) degreeToMeter(_mInfo.getLatitude());
-		int y = (int) degreeToMeter(_mInfo.getLongitude());
 		
-		Point p = new Point(x, y); // TODO --> convert lat & long to x & y	
+		Point p = convertLatLong(_mInfo.getLatitude(), _mInfo.getLongitude());
 		
 		if (position == null) {
 			position = new POIObject("0", DrawingContext.POI_TYPE, new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1), POIServer.loadImage("resources/position.png"), POIObject.POI_TYPE.TYPE_POSITION);
@@ -57,8 +59,8 @@ public class GPSModel extends Observable implements PositionUpdateListener {
 		notifyObservers(position); // Notify that position has changed
 	}
 	
-	private double degreeToMeter (float _deg) {
-		double meter = Math.log10((Math.tan((90.0 + _deg) * Math.PI / 360.0)) / (Math.PI / 180.0))*111319.490778d;
-		return meter;
+	private Point convertLatLong(double _lat, double _long) {
+		GPSServer server = new GPSServer();
+		return server.convertLatLong(_lat,_long);	
 	}
 }

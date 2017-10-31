@@ -166,6 +166,6 @@ public class NMEAParser implements Runnable {
 					default:				
 				}	
 			}
-		} while (line != null);
+		} while (line != null && !Thread.currentThread().isInterrupted());
 	}
 }
