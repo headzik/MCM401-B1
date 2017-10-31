@@ -4,11 +4,6 @@ import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.poi.POIObject.POI_TYPE;
 
-import static at.fhooe.mcm.gis.DrawingContext.POI_TYPE;
-
-import java.awt.Point;
-import java.awt.Polygon;
-import java.util.ArrayList;
 import java.util.List;
 
 public class POIModel extends Observable {
@@ -16,19 +11,8 @@ public class POIModel extends Observable {
     private List<POIObject> mPOIs;
 
     public POIModel(){
-        mPOIs = new ArrayList<>();
-    }
-
-    public void addPOI(POIObject _poi){
-        mPOIs.add(_poi);
-    }
-
-    public void removePOI(POIObject _poi) {
-        mPOIs.clear();
-    }
-    
-    public List<POIObject> getPOIs() {
-    	return mPOIs;
+        POIServer poi = new POIServer();
+        mPOIs = poi.extractData();
     }
 
     public void update() {

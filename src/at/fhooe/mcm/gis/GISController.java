@@ -85,6 +85,7 @@ public class GISController extends WindowAdapter implements ActionListener,
         switch (_e.getActionCommand()) {
             case "Load":
                 mModel.resetModel();
+                mModel.loadData();
                 break;
             case "ZTF":
                 mModel.zoomToFit();

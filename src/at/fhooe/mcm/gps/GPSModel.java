@@ -25,7 +25,7 @@ public class GPSModel extends Observable implements PositionUpdateListener {
 	
 	public void startParsing() {
 		// Start parsing
-		Thread t = (new Thread(mParser));
+		t = (new Thread(mParser));
 		t.start();
 	}
 	

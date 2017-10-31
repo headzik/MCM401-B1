@@ -13,13 +13,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
-public class OSMServer {
+public class GISServer {
 
     private Connection mConn;
 
     private Vector<GeoObject> mObjects;
 
-    public OSMServer() {
+    public GISServer() {
         mObjects = new Vector<>();
         loadDataFromOSM();
     }
@@ -28,12 +28,12 @@ public class OSMServer {
      * Loads the data from the OSM database.
      */
     @SuppressWarnings({"unchecked"})
-    public void loadDataFromOSM() {
+    private void loadDataFromOSM() {
         try {
             System.out.println(">> Attempting to load data from OSM database...");
             // Load JDBC driver and establish connection
             Class.forName("org.postgresql.Driver");
-            String url = "jdbc:postgresql://localhost:4949/osm_faroe";
+            String url = "jdbc:postgresql://localhost:5432/osm_austria";
             mConn = DriverManager.getConnection(url, "geo", "geo");
             // Add geometry types to the connection
             PGConnection c = (PGConnection) mConn;
@@ -42,9 +42,6 @@ public class OSMServer {
 
             // Create statement and execute query
             Statement s = mConn.createStatement();
-
-            if (mObjects == null)
-                mObjects = new Vector<GeoObject>();
 
             ResultSet r;
 
@@ -77,7 +74,7 @@ public class OSMServer {
 
             }
 
-            // Get landuse types
+         /*   // Get landuse types
             query = "SELECT * FROM landuse_area AS a WHERE a.type IN (5001, 5002, 5003, 5004, 5006);";
             r = s.executeQuery(query);
 
@@ -133,6 +130,7 @@ public class OSMServer {
                         break;
                 }
             }
+            */
 
             s.close();
             mConn.close();
