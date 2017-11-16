@@ -1,7 +1,6 @@
 package at.fhooe.mcm.contextelements;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -26,19 +25,30 @@ public class TimeContext extends ContextElement {
 	}
 	
 	public Date getTime() {
-		String time = time = mHours + ":" + mMinutes + ":00";;
+		// Build hh:mm:ss string from time variables
+		StringBuffer sb = new StringBuffer();
+		if (mHours < 10)
+			sb.append("0");
+		sb.append(mHours);
+		sb.append(":");
+		if (mMinutes < 10)
+			sb.append("0");
+		sb.append(mMinutes);
+		sb.append(":00");
+
+		// Parse to Date object depending on the type of the time
 		DateFormat sdf;	
 		try {
 			switch (mType) {
 			case H24:
 				sdf = new SimpleDateFormat("HH:mm:ss");
-				return sdf.parse(time);
+				return sdf.parse(sb.toString());
 			case AM:
 				sdf = new SimpleDateFormat("hh:mm:ss");
-				return sdf.parse(time);
+				return sdf.parse(sb.toString());
 			case PM: 
 				sdf = new SimpleDateFormat("hh:mm:ss a");
-				return sdf.parse(time);
+				return sdf.parse(sb.toString());
 				default:
 					return null;
 			}
