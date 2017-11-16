@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="https://www.w3schools.com"
+xmlns="https://www.w3schools.com">
+	<xs:complexType name="contextElement">
+		<xs:sequence>
+			<xs:element name="contextId" type="xs:string"/>
+			<xs:element name="contextKey" type="xs:string"/>
+			<xs:complexType name="contextValue">
+				<xs:sequence>
+					<xs:element name="valueType" type="xs:string"/>
+					<xs:element name="value" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextElement
+	xmlns="http://www.niccimon.de/MAPGIS/ContextElement"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.niccimon.de/MAPGIS/ContextElement">
+	<contextId>200</contextId>
+	<contextKey>speed</contextKey>
+	<contextValue>
+		<valueType>kmh</valueType> <!--- Can be either kmh or mph -->
+		<value>16</value>
+	</contextValue>
+</contextElement>

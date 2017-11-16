@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextElement
+	xmlns="http://www.niccimon.de/MAPGIS/ContextElement"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.niccimon.de/MAPGIS/ContextElement">
+	<contextId>100</contextId>
+	<contextKey>position</contextKey>
+	<contextValue>
+		<valueType>GaussKrueger</valueType>
+		<value>354763295,580666584</value> <!--- x,y -->
+	</contextValue>
+</contextElement>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextElement
+	xmlns="http://www.niccimon.de/MAPGIS/ContextElement"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.niccimon.de/MAPGIS/ContextElement">
+	<contextId>300</contextId>
+	<contextKey>temperature</contextKey>
+	<contextValue>
+		<valueType>celsius</valueType> <!--- Can be either celsius or fahrenheit -->
+		<value>21</value>
+	</contextValue>
+</contextElement>
