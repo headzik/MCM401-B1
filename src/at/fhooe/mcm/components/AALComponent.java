@@ -2,7 +2,9 @@ package at.fhooe.mcm.components;
 
 import java.awt.Panel;
 
+import at.fhooe.mcm.contextparsers.DomParser;
 import at.fhooe.mcm.contextparsers.IContextParser;
+import at.fhooe.mcm.contextparsers.StreamParser;
 import at.fhooe.mcm.interfaces.IComponent;
 
 public class AALComponent implements IComponent {
@@ -16,10 +18,10 @@ public class AALComponent implements IComponent {
 	 public AALComponent(ParseMode _mode) {
 		switch (_mode) {
 		case DOM:
-			// mParser = new DomParser();
+		    mParser = new DomParser();
 			break;
 		case STREAM:
-			// mParser = new StreamParser();
+			mParser = new StreamParser();
 			break;
 			default:				
 		}

@@ -5,7 +5,7 @@ import org.postgis.Point;
 public class PositionContext extends ContextElement {
 	
 	public enum PositionType {
-		GAUSS_KRUEGER, WGS84, UTM
+		GAUSSKRUEGER, WGS84, UTM
 	}
 	
 	private int mXPos, mYPos;
