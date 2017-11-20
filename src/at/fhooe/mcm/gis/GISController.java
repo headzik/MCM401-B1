@@ -85,6 +85,7 @@ public class GISController extends WindowAdapter implements ActionListener,
         switch (_e.getActionCommand()) {
             case "Load":
                 mModel.resetModel();
+                mModel.loadData();
                 break;
             case "ZTF":
                 mModel.zoomToFit();
@@ -197,7 +198,8 @@ public class GISController extends WindowAdapter implements ActionListener,
             // print to console
             System.out.println(">> Clicked object IDs: ");
             for (int i = 0; i < objs.size(); i++) {
-                System.out.println(objs.get(i).getID());
+                //System.out.println(objs.get(i).getID());
+            	System.out.println(mModel.getWorldCoordinates(_e.getPoint()).getX() + ", " + mModel.getWorldCoordinates(_e.getPoint()).getY());
             }
         }
 

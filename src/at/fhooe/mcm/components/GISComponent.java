@@ -6,6 +6,7 @@ import at.fhooe.mcm.gis.GISView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
+import at.fhooe.mcm.poi.POIObject;
 
 import java.awt.*;
 
@@ -42,6 +43,12 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	public void update(Object _o) {
 		if (!mModel.containsObject(_o))
 			mModel.addObject(_o);
+		
+		// Got a position update ?
+		if (_o instanceof POIObject && ((POIObject)_o).getPOIType() == POIObject.POI_TYPE.TYPE_POSITION) {
+			mModel.drawPolygons(); // repaint!
+			System.out.println("Position Update!");
+		}
 	}
 
 }

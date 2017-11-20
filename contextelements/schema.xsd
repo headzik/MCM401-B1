@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="contextElement">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="contextId" type="xs:string"/>
+				<xs:element name="contextKey" type="xs:string"/>
+				<xs:element name="contextValue">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="valueType" type="xs:string"/>
+							<xs:element name="value" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

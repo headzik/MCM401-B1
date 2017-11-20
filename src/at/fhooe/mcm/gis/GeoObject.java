@@ -22,6 +22,11 @@ public class GeoObject extends Object{
 		mPolygon = _poly;
 	}
 	
+	public void setPoly(Polygon _poly) {
+		if (_poly != null)
+			mPolygon = _poly;
+	}
+	
 	/**
 	 * Returns object id.
 	 * @return Object ID
@@ -44,10 +49,6 @@ public class GeoObject extends Object{
 	 */
 	public Polygon getPoly() {
 		return mPolygon;
-	}
-	
-	public void setPoly(Polygon _poly) {
-		mPolygon = _poly;
 	}
 	
 	/**

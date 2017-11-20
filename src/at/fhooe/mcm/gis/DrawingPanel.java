@@ -4,8 +4,10 @@ import java.awt.Graphics;
 import java.awt.Panel;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JPanel;
+
 @SuppressWarnings("serial")
-public class DrawingPanel extends Panel {
+public class DrawingPanel extends JPanel {
 	
 	private boolean mDraw = false;
 	private BufferedImage mImg;

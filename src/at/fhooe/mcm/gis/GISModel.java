@@ -42,6 +42,12 @@ public class GISModel extends DataObservable {
     public boolean containsObject(Object _o) {
     	return mObjects.contains(_o);
     }
+
+    public void loadData(){
+        GISServer osm = new GISServer();
+        mObjects = osm.extractData();
+        zoomToFit();
+    }
     
     /**
      * Setter for mDrawPOIs.

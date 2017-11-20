@@ -36,7 +36,7 @@ public class MediatorView extends Frame {
 		
 		// Set layout and size
 		this.setLayout(new BorderLayout());
-		this.setSize(800, 600);
+		this.setSize(1200	, 800);
 
 		// Add tab panel
 		mJTabbedPane = new JTabbedPane();

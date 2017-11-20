@@ -6,26 +6,29 @@ import java.awt.event.ItemListener;
 import at.fhooe.mcm.poi.POIObject;
 
 public class GPSController implements ItemListener {
-
-    GPSModel mModel;
-
-    public GPSController(GPSModel m) {
-        mModel = m;
-    }
-
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-    	int state = e.getStateChange();
+	private GPSModel mModel;
 	
-		if(isChecked(state)) {
-	        mModel.startService();
-		} else {
-	        mModel.stopService();
-		}
+	public GPSController(GPSModel _model) {
+		mModel = _model;
+	}
+	
+	@Override
+	public void itemStateChanged(ItemEvent _e) {
+		String poiName = _e.getItem().toString();
+    	int state = _e.getStateChange();
     	
-    }
-    
-    public boolean isChecked(int state) {
+    	switch(poiName) {
+    	case "ON" : 
+    		if(isChecked(state)) {
+				mModel.startParsing();
+			} else {
+				mModel.stopParsing();
+    		}  	
+    		break;
+		}
+	}
+	
+	public boolean isChecked(int state) {
     	if(state == 1) {
     		return true;
     	} else {

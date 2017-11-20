@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<contextElement>
+	<contextId>200</contextId>
+	<contextKey>speed</contextKey>
+	<contextValue>
+		<valueType>kmh</valueType> <!--- Can be either kmh or mph -->
+		<value>16</value>
+	</contextValue>
+</contextElement>

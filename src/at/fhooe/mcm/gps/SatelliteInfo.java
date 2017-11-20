@@ -1,40 +1,71 @@
 package at.fhooe.mcm.gps;
 
+/**
+ * Object containing information from a satellite.
+ *
+ * @author Admin
+ */
 public class SatelliteInfo {
-    int mID;
-    int mWinkelV;
-    int mWinkelH;
-    int mSNR;
+    private int mNoOfSatellite;
+    private int mHorizontalAngle;
+    private int mVerticalAngle;
+    private int mSNR;
+    private boolean mUsed;
 
-    public SatelliteInfo() {
-        mID = 0;
-        mWinkelV = 0;
-        mWinkelH = 0;
-        mSNR = 0;
+    /**
+     * Constructor.
+     *
+     * @param _noOfSat   Number of satellite
+     * @param _hoAngle   Horizontal angle
+     * @param _vertAngle Vertical angle
+     * @param _snr       Signal to noise ratio
+     * @param _used      Indicator if it is used or not
+     */
+    public SatelliteInfo(int _noOfSat, int _hoAngle, int _vertAngle, int _snr, boolean _used) {
+        setNoOfSatellite(_noOfSat);
+        setHorizontalAngle(_hoAngle);
+        setVerticalAngle(_vertAngle);
+        setSNR(_snr);
+        mUsed = _used;
     }
 
-    public int getmWinkelH() {
-        return mWinkelH;
+    public int getNoOfSatellite() {
+        return mNoOfSatellite;
     }
-    public int getmID() {
-        return mID;
+
+    public void setNoOfSatellite(int _noOfSatellite) {
+        this.mNoOfSatellite = _noOfSatellite;
     }
-    public int getmWinkelV() {
-        return mWinkelV;
+
+    public int getHorizontalAngle() {
+        return mHorizontalAngle;
     }
+
+    public void setHorizontalAngle(int _horizontalAngle) {
+        this.mHorizontalAngle = _horizontalAngle;
+    }
+
+    public int getVerticalAngle() {
+        return mVerticalAngle;
+    }
+
+    public void setVerticalAngle(int _verticalAngle) {
+        this.mVerticalAngle = _verticalAngle;
+    }
+
     public int getSNR() {
         return mSNR;
     }
-    public void setmID(int _mID) {
-        mID = _mID;
-    }
-    public void setmWinkelH(int _mWinkelH) {
-        mWinkelH = _mWinkelH;
-    }
-    public void setmWinkelV(int _mWinkelV) {
-        mWinkelV = _mWinkelV;
-    }
+
     public void setSNR(int _SNR) {
-        mSNR = _SNR;
+        this.mSNR = _SNR;
+    }
+
+    public boolean isUsed() {
+        return mUsed;
+    }
+
+    public void setUsed(boolean _used) {
+        this.mUsed = _used;
     }
 }
