@@ -1,4 +1,6 @@
 package at.fhooe.mcm.gps;
+import at.fhooe.mcm.interfaces.IPositionUpdateListener;
+
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ public class NMEAParser implements Runnable {
 	private GPSReceiverSim mGPSReceiver;
 	private NMEAInfo mInfo;
 	private NMEAInfo mInfoLoad;
-	private ArrayList<PositionUpdateListener> listener;
+	private ArrayList<IPositionUpdateListener> listener;
 	
 	/**
 	 * Constructor.
@@ -21,7 +23,7 @@ public class NMEAParser implements Runnable {
 		mGPSReceiver = new GPSReceiverSim(_filename, 1000, "$GPGGA");
 		mInfo = new NMEAInfo();
 		mInfoLoad = new NMEAInfo();
-		listener = new ArrayList<PositionUpdateListener>();
+		listener = new ArrayList<IPositionUpdateListener>();
 	}
 
 	/**
@@ -30,7 +32,7 @@ public class NMEAParser implements Runnable {
 	public void update() {
 		mInfo = mInfoLoad;
 		mInfoLoad = new NMEAInfo();
-		for (PositionUpdateListener l : listener)
+		for (IPositionUpdateListener l : listener)
 			l.updateSats(mInfo);
 	}
 	
@@ -38,7 +40,7 @@ public class NMEAParser implements Runnable {
 	 * Adds a listener.
 	 * @param _listener Given listener.
 	 */
-	public void addListener(PositionUpdateListener _listener) {
+	public void addListener(IPositionUpdateListener _listener) {
 		listener.add(_listener);
 	}
 	

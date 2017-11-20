@@ -1,4 +1,4 @@
-package at.fhooe.mcm.contextparsers;
+package at.fhooe.mcm.interfaces;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

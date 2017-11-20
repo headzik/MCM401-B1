@@ -3,16 +3,15 @@ package at.fhooe.mcm.gps;
 import java.awt.Polygon;
 import java.io.FileNotFoundException;
 
+import at.fhooe.mcm.interfaces.IPositionUpdateListener;
 import org.postgis.Point;
 
 import at.fhooe.mcm.gis.DrawingContext;
-import at.fhooe.mcm.gis.GISServer;
-import at.fhooe.mcm.gis.GeoDoublePoint;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.poi.POIObject;
 import at.fhooe.mcm.poi.POIServer;
 
-public class GPSModel extends Observable implements PositionUpdateListener {
+public class GPSModel extends Observable implements IPositionUpdateListener {
 
 	private NMEAParser mParser;
 	private Thread t;

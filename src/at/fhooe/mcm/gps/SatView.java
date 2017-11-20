@@ -1,5 +1,7 @@
 package at.fhooe.mcm.gps;
 
+import at.fhooe.mcm.interfaces.IPositionUpdateListener;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  * @author Admin
  */
 @SuppressWarnings("serial")
-public class SatView extends Panel implements PositionUpdateListener {
+public class SatView extends Panel implements IPositionUpdateListener {
 	
 	private final int mDiam = 500;
 	private final int mSatDiam = 30;

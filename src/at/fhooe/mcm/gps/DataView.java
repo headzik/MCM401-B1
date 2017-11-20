@@ -1,5 +1,7 @@
 package at.fhooe.mcm.gps;
 
+import at.fhooe.mcm.interfaces.IPositionUpdateListener;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -12,7 +14,7 @@ import java.awt.Panel;
  * @author Admin
  */
 @SuppressWarnings("serial")
-public class DataView extends Panel implements PositionUpdateListener {
+public class DataView extends Panel implements IPositionUpdateListener {
 	
 	Label mLat, mLong, mTime, mPDOP, mHDOP, mVDOP, mFixQuality, mHeight;
 	NMEAInfo mInfo;
