@@ -22,4 +22,9 @@ public class SpeedContext extends ContextElement {
 	public int getSpeed() {
 		return mSpeed;
 	}
+
+	@Override
+	public String toString() {
+		return mSpeed+"";
+	}
 }

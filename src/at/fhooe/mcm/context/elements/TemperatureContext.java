@@ -21,5 +21,10 @@ public class TemperatureContext extends ContextElement {
 	
 	public int getTemperature() {
 		return mTemperature;
-	}	
+	}
+
+	@Override
+	public String toString() {
+		return mTemperature+"";
+	}
 }

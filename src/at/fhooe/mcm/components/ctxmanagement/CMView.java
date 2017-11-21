@@ -2,155 +2,239 @@ package at.fhooe.mcm.components.ctxmanagement;
 
 import javax.swing.*;
 
-import at.fhooe.mcm.context.elements.ContextSituation;
-import at.fhooe.mcm.context.elements.PositionContext;
-import at.fhooe.mcm.context.elements.SpeedContext;
-import at.fhooe.mcm.context.elements.TemperatureContext;
-import at.fhooe.mcm.context.elements.TimeContext;
+import at.fhooe.mcm.context.elements.*;
 
 import java.awt.*;
 
 public class CMView {
     private Panel mPanel;
-    
-    private TextField mPositionTxt, mSpeedTxt, mTempTxt, mTimeTxt;
-    
+
+    private TextField mPositionTxt, mSpeedTxt, mTempTxt, mTimeTxt, mDensityTxt, mUVTxt;
+    private JComboBox mPostionCombo, mSpeedCombo, mTempCombo, mTimeCombo, mWeatherTypeCombo, mWeatherValueCombo, mAirQualityTypeCombo, mAirQualityValueCombo, mVehicleTypeCombo, mVehicleValueCombo, mDensityCombo, mUVCombo;
+    private Label mFrequency;
+
     private Button mSetContextBtn, mThreadBtn;
-   
+
     public CMView(CMController _controller) {
-    	// Initialise Layout
-        mPanel = new Panel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        
+        // Initialise Layout
+        mPanel = new Panel();
+        mPanel.setBackground(Color.LIGHT_GRAY);
+        mPanel.setLayout(new GridBagLayout());
+
         // Initialise components
-        mPositionTxt = new TextField("---");
-        mSpeedTxt = new TextField("---");
-        mTempTxt = new TextField("---");
-        mTimeTxt = new TextField("---");
-        
+        mPositionTxt = new TextField("", 20);
+        mSpeedTxt = new TextField("", 20);
+        mTempTxt = new TextField("", 20);
+        mTimeTxt = new TextField("", 20);
+        mPostionCombo = new JComboBox(PositionContext.PositionType.values());
+        mSpeedCombo = new JComboBox(SpeedContext.SpeedType.values());
+        mTempCombo = new JComboBox(TemperatureContext.TemperatureType.values());
+        mTimeCombo = new JComboBox(TimeContext.TimeType.values());
+        mWeatherTypeCombo = new JComboBox(WeatherContext.WeatherType.values());
+        mWeatherValueCombo = new JComboBox(WeatherContext.WeatherValue.values());
+        mAirQualityTypeCombo = new JComboBox(AirQualityContext.AirQualityType.values());
+        mAirQualityValueCombo = new JComboBox(AirQualityContext.AirQualityValue.values());
+        mVehicleTypeCombo = new JComboBox(VehicleContext.VehicleType.values());
+        mVehicleValueCombo = new JComboBox(VehicleContext.VehicleValue.values());
+        mDensityTxt = new TextField("", 20);
+        mDensityCombo = new JComboBox(DensityContext.DensityType.values());
+        mUVCombo = new JComboBox(UltravioletRadiationContext.UVType.values());
+        mUVTxt = new TextField("", 20);
+
+
         mSetContextBtn = new Button("Set CTX");
         mSetContextBtn.setActionCommand("setContext");
         mSetContextBtn.addActionListener(_controller);
         mThreadBtn = new Button("Toggle CTX Broadcast");
         mThreadBtn.setActionCommand("thread");
         mThreadBtn.addActionListener(_controller);
-              
-        // Add title labels
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.WEST;
+
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.gridheight = 2;
-        mPanel.add(new Label("Current Context Situation"), gbc);    
-        
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 1;
-        gbc.gridheight = 1;
-        mPanel.add(new Label("Position: "), gbc);    
-        
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        mPanel.add(new Label("Speed: "), gbc);  
-        
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        mPanel.add(new Label("Temperature: "), gbc);    
-        
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        mPanel.add(new Label("Time: "), gbc);    
-        
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        mPanel.add(mPositionTxt, gbc);    
-        
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        mPanel.add(mSpeedTxt, gbc);  
-        
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        mPanel.add(mTempTxt, gbc);    
-        
-        gbc.gridx = 1;
-        gbc.gridy = 5;
-        mPanel.add(mTimeTxt, gbc);     
-        
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        mPanel.add(mThreadBtn, gbc); 
-        
-        gbc.gridx = 1;
-        gbc.gridy = 6;
-        mPanel.add(mSetContextBtn, gbc); 
-       
-
-        /*
-        
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        mPanel.add(new Label("Change Context Situation"), gbc);
-        
-
-        
-        */
-        
-        
-        
-        /*
-        
+        mPanel.add(new Label("Current Context Situation:"), gbc);
+        gbc.gridy++;
 
 
-        // setup time panel
+        gbc.gridx = 0;
+        Panel positionPanel = new Panel(new FlowLayout());
+        Label positionLabel = new Label("Position [Lat,Lng]:");
+        positionPanel.add(positionLabel);
+        positionPanel.add(mPositionTxt);
+        positionPanel.add(mPostionCombo);
+        mPanel.add(positionPanel, gbc);
+        gbc.gridy++;
+
+        Panel speedPanel = new Panel(new FlowLayout());
+        Label speedLabel = new Label("Speed [number]:");
+        speedPanel.add(speedLabel);
+        speedPanel.add(mSpeedTxt);
+        speedPanel.add(mSpeedCombo);
+        mPanel.add(speedPanel, gbc);
+        gbc.gridy++;
+
+        Panel temperaturePanel = new Panel(new FlowLayout());
+        Label temperatureLabel = new Label("Temperature [-/+ number]:");
+        temperaturePanel.add(temperatureLabel);
+        temperaturePanel.add(mTempTxt);
+        temperaturePanel.add(mTempCombo);
+        mPanel.add(temperaturePanel, gbc);
+        gbc.gridy++;
+
         Panel timePanel = new Panel(new FlowLayout());
-        String[] hoursStrings = new String[24];
-        for (int i = 0; i < hoursStrings.length; i++) {
-            hoursStrings[i] = String.valueOf(i);
-        }
-        String[] minutesString = new String[60];
-        for (int i = 0; i < minutesString.length; i++) {
-            minutesString[i] = String.valueOf(i);
-        }
-        JComboBox hours = new JComboBox(hoursStrings);
-        JComboBox minutes = new JComboBox(minutesString);
-        Label hoursLabel = new Label("H");
-        Label minutesLabel = new Label("M");
-        Button setTime = new Button("Set Time");
-        setTime.setActionCommand("time");
+        Label timeLabel = new Label("Time [HH:MM]:");
+        timePanel.add(timeLabel);
+        timePanel.add(mTimeTxt);
+        timePanel.add(mTimeCombo);
+        mPanel.add(timePanel, gbc);
+        gbc.gridy++;
 
-        timePanel.add(hours);
-        timePanel.add(hoursLabel);
-        timePanel.add(minutes);
-        timePanel.add(minutesLabel);
-        timePanel.add(setTime);
+        Panel weatherPanel = new Panel(new FlowLayout());
+        Label weatherLabel = new Label("Weather:");
+        weatherPanel.add(weatherLabel);
+        weatherPanel.add(mWeatherTypeCombo);
+        weatherPanel.add(mWeatherValueCombo);
+        mPanel.add(weatherPanel, gbc);
+        gbc.gridy++;
 
-        // setup time panel
+        Panel airPanel = new Panel(new FlowLayout());
+        Label airLabel = new Label("Air quality:");
+        airPanel.add(airLabel);
+        airPanel.add(mAirQualityTypeCombo);
+        airPanel.add(mAirQualityValueCombo);
+        mPanel.add(airPanel, gbc);
+        gbc.gridy++;
 
-        mPanel.add(timePanel);
-        */
+        Panel densityPanel = new Panel(new FlowLayout());
+        Label densityLabel = new Label("Density [0-10]:");
+        densityPanel.add(densityLabel);
+        densityPanel.add(mDensityTxt);
+        densityPanel.add(mDensityCombo);
+        mPanel.add(densityPanel, gbc);
+        gbc.gridy++;
 
+        Panel vehiclePanel = new Panel(new FlowLayout());
+        Label vehicleLabel = new Label("Vehicle:");
+        vehiclePanel.add(vehicleLabel);
+        vehiclePanel.add(mVehicleTypeCombo);
+        vehiclePanel.add(mVehicleValueCombo);
+        mPanel.add(vehiclePanel, gbc);
+        gbc.gridy++;
+
+        Panel uvPanel = new Panel(new FlowLayout());
+        Label uvLabel = new Label("Ultraviolet Radiation [0-15]:");
+        uvPanel.add(uvLabel);
+        uvPanel.add(mUVTxt);
+        uvPanel.add(mUVCombo);
+        mPanel.add(uvPanel, gbc);
+        gbc.gridy++;
+
+        Panel frequencyPanel = new Panel(new FlowLayout());
+        Label frequencyLabel = new Label("Update frequency [ms]:");
+        JSlider frequencySlider = new JSlider(JSlider.HORIZONTAL, 100, 10000, 1000);
+        frequencySlider.addChangeListener(_controller);
+        mFrequency = new Label();
+        mFrequency.setText("10");
+        frequencyPanel.add(frequencyLabel);
+        frequencyPanel.add(frequencySlider);
+        frequencyPanel.add(mFrequency);
+        mPanel.add(frequencyPanel, gbc);
+        gbc.gridy++;
+
+        mThreadBtn = new Button("Toggle broadcast");
+        mThreadBtn.addActionListener(_controller);
+        mThreadBtn.setActionCommand("thread");
+        mPanel.add(mThreadBtn, gbc);
+        gbc.gridy++;
+
+        mSetContextBtn = new Button("Set context");
+        mSetContextBtn.setActionCommand("setContext");
+        mSetContextBtn.addActionListener(_controller);
+        mPanel.add(mSetContextBtn, gbc);
+        gbc.gridy++;
     }
-    
+
     public void updateLabels(ContextSituation _cs) {
-    	if (_cs != null) {
-    		PositionContext posCtx = _cs.getPositionContext();
-    		TemperatureContext tempCtx = _cs.getTemperatureContext();
-    		TimeContext timeCtx = _cs.getTimeContext();
-    		SpeedContext speedCtx = _cs.getSpeedContext();
-    		
-        	if (posCtx != null)
-        		mPositionTxt.setText(posCtx.toString());
-        	if (tempCtx != null)
-        		mTempTxt.setText(tempCtx.toString());
-        	if (timeCtx != null)
-        		mTimeTxt.setText(timeCtx.toString());
-        	if (speedCtx != null)
-        		mSpeedTxt.setText(speedCtx.toString());
-    	}
+        if (_cs != null) {
+            PositionContext posCtx = _cs.getPositionContext();
+            TemperatureContext tempCtx = _cs.getTemperatureContext();
+            TimeContext timeCtx = _cs.getTimeContext();
+            SpeedContext speedCtx = _cs.getSpeedContext();
+
+            if (posCtx != null)
+                mPositionTxt.setText(posCtx.toString());
+            if (tempCtx != null)
+                mTempTxt.setText(tempCtx.toString());
+            if (timeCtx != null)
+                mTimeTxt.setText(timeCtx.toString());
+            if (speedCtx != null)
+                mSpeedTxt.setText(speedCtx.toString());
+        }
+    }
+
+    public void setFrequencyTxt(int _frequency) {
+        mFrequency.setText(String.valueOf(_frequency));
+    }
+
+    public int getAirQualityValueIndex() {
+        return mAirQualityValueCombo.getSelectedIndex();
+    }
+
+    public int getAirQualityTypeIndex() {
+        return mAirQualityTypeCombo.getSelectedIndex();
+    }
+
+    public int getVehicleTypeIndex() {
+        return mVehicleTypeCombo.getSelectedIndex();
+    }
+
+    public int getVehicleValueIndex() {
+        return mVehicleValueCombo.getSelectedIndex();
+    }
+
+    public int getWeatherTypeIndex() {
+        return mWeatherTypeCombo.getSelectedIndex();
+    }
+
+    public int getWeatherValueIndex() {
+        return mWeatherValueCombo.getSelectedIndex();
+    }
+
+    public Label getFrequency() {
+        return mFrequency;
+    }
+
+    public String getDensityTxt() {
+        return mDensityTxt.getText();
+    }
+
+    public String getSpeedTxt() {
+        return mSpeedTxt.getText();
+    }
+
+    public String getTempTxt() {
+        return mTempTxt.getText();
+    }
+
+    public String getTimeTxt() {
+        return mTimeTxt.getText();
+    }
+
+    public String getUVTxt() {
+        return mUVTxt.getText();
+    }
+
+    public String getPositionTxt() {
+        return mPositionTxt.getText();
     }
 
     public Panel getView() {
         return mPanel;
+    }
+
+    public int getDensityIndex() {
+        return mDensityCombo.getSelectedIndex();
     }
 }

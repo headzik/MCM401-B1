@@ -3,7 +3,7 @@ package at.fhooe.mcm.context.elements;
 import org.postgis.Point;
 
 public class PositionContext extends ContextElement {
-	
+
 	public enum PositionType {
 		GAUSSKRUEGER, WGS84, UTM
 	}
@@ -26,5 +26,10 @@ public class PositionContext extends ContextElement {
 	
 	public Point getPosition() {
 		return new Point (mXPos, mYPos);
+	}
+
+	@Override
+	public String toString() {
+		return mXPos+","+mYPos;
 	}
 }

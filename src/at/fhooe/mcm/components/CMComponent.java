@@ -6,12 +6,9 @@ import at.fhooe.mcm.components.ctxmanagement.CMModel;
 import at.fhooe.mcm.components.ctxmanagement.CMUpdateThread;
 import at.fhooe.mcm.components.ctxmanagement.CMView;
 import at.fhooe.mcm.context.elements.ContextElement;
-import at.fhooe.mcm.context.elements.ContextSituation;
-import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
-import at.fhooe.mcm.objects.Observable.ObserverType;
 
 import java.awt.*;
 
@@ -23,6 +20,7 @@ public class CMComponent implements IComponent, IObserver {
     private CMView mView;
     
     private Thread mUpdateThread;
+    private CMUpdateThread mCMUpdateThread;
     private boolean mThreadRunning = false;
 
     public CMComponent(Mediator _mediator){
@@ -30,9 +28,11 @@ public class CMComponent implements IComponent, IObserver {
         CMController controller = new CMController(mModel, this);
         CMView view = new CMView(controller);
         mView = view;
+        controller.setView(view);
         mPanel = view.getView();
         mMediator = _mediator;
         mModel.addObserver(this, Observable.ObserverType.CM);
+        mCMUpdateThread = new CMUpdateThread(this);
     }
     
     public void togglePeriodicUpdate() {
@@ -43,7 +43,7 @@ public class CMComponent implements IComponent, IObserver {
     }
        
     private void startPeriodicUpdate() {
-        mUpdateThread = new Thread(new CMUpdateThread(this));
+        mUpdateThread = new Thread(mCMUpdateThread);
         mUpdateThread.start();
         mThreadRunning = true;
         System.out.println(">> Periodic Context Situation Update started!");
@@ -78,5 +78,8 @@ public class CMComponent implements IComponent, IObserver {
             mView.updateLabels(mModel.getContextSituation());
         }
     }
-    
+
+    public CMUpdateThread getCMUpdateThread() {
+        return mCMUpdateThread;
+    }
 }

@@ -25,6 +25,21 @@ public class CMModel extends Observable {
             case "time":
                 mContextSituation.setTimeContext((TimeContext) _contextElement);
                 break;
+            case "air":
+                mContextSituation.setAirQualityContext((AirQualityContext) _contextElement);
+                break;
+            case "density":
+                mContextSituation.setDensityContext((DensityContext) _contextElement);
+                break;
+            case "uv":
+                mContextSituation.setUltravioletRadiationContext((UltravioletRadiationContext) _contextElement);
+                break;
+            case "vehicle":
+                mContextSituation.setVehicleContext((VehicleContext) _contextElement);
+                break;
+            case "weather":
+                mContextSituation.setWeatherContext((WeatherContext) _contextElement);
+                break;
             default:
                 break;
 

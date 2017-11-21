@@ -57,4 +57,8 @@ public class TimeContext extends ContextElement {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return mHours+":"+mMinutes;
+	}
 }
