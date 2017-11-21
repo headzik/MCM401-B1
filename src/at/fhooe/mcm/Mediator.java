@@ -1,13 +1,17 @@
 package at.fhooe.mcm;
 
 import at.fhooe.mcm.components.*;
+import at.fhooe.mcm.contextelements.ContextElement;
+import at.fhooe.mcm.contextelements.ContextSituation;
 import at.fhooe.mcm.contextparsers.DomParser;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
+import at.fhooe.mcm.poi.POIObject;
 import at.fhooe.mcm.views.MediatorView;
 
+import javax.naming.Context;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,19 +26,20 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
         GISComponent g = new GISComponent();
         mComponents.add(g);
-        addObserver(g);
+        addObserver(g, ObserverType.GIS);
 
         GPSComponent gps = new GPSComponent(this);
         mComponents.add(gps);
 
-        POIComponent p = new POIComponent(this);
-        mComponents.add(p);
+//        POIComponent p = new POIComponent(this);
+        //       mComponents.add(p);
 
-        AALComponent a = new AALComponent(AALComponent.ParseMode.DOM);
+        AALComponent a = new AALComponent(this);
         mComponents.add(a);
 
         CMComponent c = new CMComponent(this);
         mComponents.add(c);
+        addObserver(c, ObserverType.CM);
 
         mMediatorView.addTabs(mComponents);
 
@@ -46,6 +51,12 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     @Override
     public void update(Object _o) {
-        notifyObservers(_o);
+
+        if (_o instanceof ContextElement) {
+            notifyObservers(_o, ObserverType.CM);
+        } else if (_o instanceof POIObject) {
+            notifyObservers(_o, ObserverType.GIS);
+        }
+
     }
 }

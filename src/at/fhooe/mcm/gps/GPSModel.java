@@ -34,7 +34,6 @@ public class GPSModel extends Observable implements IPositionUpdateListener {
 		// Start parsing
 		t = (new Thread(mParser));
 		t.start();
-		position.setVisible(true);
 	}
 	
 	public void stopParsing() {

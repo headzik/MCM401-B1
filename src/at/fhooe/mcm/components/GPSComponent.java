@@ -27,7 +27,7 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
 		
 		view = mView.getView();
 		mMediator = _mediator;
-		mModel.addObserver(this);
+		mModel.addObserver(this, ObserverType.GIS);
 	}
 	
 	@Override

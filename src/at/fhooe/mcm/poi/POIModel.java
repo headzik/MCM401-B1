@@ -20,11 +20,6 @@ public class POIModel extends Observable {
             notifyObservers(poi);
         }
     }
-
-    @Override
-    public void addObserver(IObserver _observer) {
-        super.addObserver(_observer);
-    }
     
     /**
      * Changes visibility of all POIs with the specific type.

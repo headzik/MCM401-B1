@@ -26,7 +26,7 @@ public class POIComponent extends Observable implements IComponent, IObserver {
 
 		mediator = _mediator;
 
-		mModel.addObserver(this);
+		mModel.addObserver(this, ObserverType.GIS);
 	}
 	
 	public Panel getView() {

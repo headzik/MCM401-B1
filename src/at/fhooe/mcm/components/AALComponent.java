@@ -1,52 +1,47 @@
 package at.fhooe.mcm.components;
 
+import at.fhooe.mcm.Mediator;
 import at.fhooe.mcm.aal.AALController;
 import at.fhooe.mcm.aal.AALModel;
 import at.fhooe.mcm.aal.AALView;
-import at.fhooe.mcm.contextparsers.DomParser;
-import at.fhooe.mcm.contextparsers.StreamParser;
-import at.fhooe.mcm.gps.GPSView;
 import at.fhooe.mcm.interfaces.IComponent;
-import at.fhooe.mcm.interfaces.IContextParser;
+import at.fhooe.mcm.interfaces.IObserver;
+import at.fhooe.mcm.objects.Observable;
 
 import java.awt.*;
 
-public class AALComponent implements IComponent {
+public class AALComponent implements IComponent, IObserver {
 
-	private Panel mView;
-	private AALModel mModel;
-	
-	public enum ParseMode {
-		DOM, STREAM
-	}
-	
-	private IContextParser mParser = null;
-	
-	 public AALComponent(ParseMode _mode) {
-		switch (_mode) {
-		case DOM:
-		    mParser = new DomParser();
-			break;
-		case STREAM:
-			mParser = new StreamParser();
-			break;
-			default:				
-		}
+    private Panel mView;
+    private AALModel mModel;
+    private Mediator mMediator;
 
-		 mModel = new AALModel();
-		 AALController controller = new AALController(mModel);
-		 AALView view = new AALView(controller);
+    public AALComponent(Mediator _mediator) {
 
-		 mView = view.getView();
-	}
+        mMediator = _mediator;
 
-	@Override
-	public Panel getView() {
-		return mView;
-	}
+        mModel = new AALModel();
+        AALController controller = new AALController(mModel);
+        AALView view = new AALView(controller);
 
-	@Override
-	public String getName() {
-		return "AALComponent";
-	}
+        controller.setView(view);
+
+        mView = view.getView();
+        mModel.addObserver(this, Observable.ObserverType.AAL);
+    }
+
+    @Override
+    public Panel getView() {
+        return mView;
+    }
+
+    @Override
+    public String getName() {
+        return "AALComponent";
+    }
+
+    @Override
+    public void update(Object _o) {
+        mMediator.update(_o);
+    }
 }

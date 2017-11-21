@@ -3,7 +3,7 @@
 	<contextId>400</contextId>
 	<contextKey>time</contextKey>
 	<contextValue>
-		<valueType>24</valueType> <!--- Can be either 24 (for 24h format), AM or PM -->
+		<valueType>H24</valueType> <!--- Can be either H24 (for 24h format), AM or PM -->
 		<value>23,53</value> <!--- HH,MM -->
 	</contextValue>
 </contextElement>
