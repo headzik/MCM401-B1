@@ -4,12 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import at.fhooe.mcm.contextelements.ContextElement;
-import at.fhooe.mcm.contextelements.PositionContext;
-import at.fhooe.mcm.contextelements.SpeedContext;
-import at.fhooe.mcm.contextelements.TemperatureContext;
-import at.fhooe.mcm.contextelements.TimeContext;
-import at.fhooe.mcm.contextparsers.StreamParser;
+import at.fhooe.mcm.context.elements.ContextElement;
+import at.fhooe.mcm.context.elements.PositionContext;
+import at.fhooe.mcm.context.elements.SpeedContext;
+import at.fhooe.mcm.context.elements.TemperatureContext;
+import at.fhooe.mcm.context.elements.TimeContext;
+import at.fhooe.mcm.context.parsers.StreamParser;
 
 public class StreamParserTest {
 

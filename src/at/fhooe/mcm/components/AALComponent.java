@@ -1,9 +1,9 @@
 package at.fhooe.mcm.components;
 
 import at.fhooe.mcm.Mediator;
-import at.fhooe.mcm.aal.AALController;
-import at.fhooe.mcm.aal.AALModel;
-import at.fhooe.mcm.aal.AALView;
+import at.fhooe.mcm.components.aal.AALController;
+import at.fhooe.mcm.components.aal.AALModel;
+import at.fhooe.mcm.components.aal.AALView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;

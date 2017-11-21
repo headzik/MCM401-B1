@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Panel;
 
 import at.fhooe.mcm.Mediator;
-import at.fhooe.mcm.gis.GISModel;
+import at.fhooe.mcm.components.gis.GISModel;
+import at.fhooe.mcm.components.poi.POIController;
+import at.fhooe.mcm.components.poi.POIModel;
+import at.fhooe.mcm.components.poi.POIView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
-import at.fhooe.mcm.poi.POIController;
-import at.fhooe.mcm.poi.POIModel;
-import at.fhooe.mcm.poi.POIView;
 
 public class POIComponent extends Observable implements IComponent, IObserver {
 

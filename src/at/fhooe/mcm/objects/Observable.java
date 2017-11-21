@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.fhooe.mcm.components.AALComponent;
-import at.fhooe.mcm.contextelements.ContextSituation;
+import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.interfaces.*;
 
 public class Observable {

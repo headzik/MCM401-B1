@@ -2,9 +2,9 @@ package at.fhooe.mcm.components;
 
 
 import at.fhooe.mcm.Mediator;
-import at.fhooe.mcm.gps.GPSController;
-import at.fhooe.mcm.gps.GPSModel;
-import at.fhooe.mcm.gps.GPSView;
+import at.fhooe.mcm.components.gps.GPSController;
+import at.fhooe.mcm.components.gps.GPSModel;
+import at.fhooe.mcm.components.gps.GPSView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;

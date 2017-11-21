@@ -3,7 +3,7 @@ package at.fhooe.mcm.interfaces;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import at.fhooe.mcm.contextelements.ContextElement;
+import at.fhooe.mcm.context.elements.ContextElement;
 
 public interface IContextParser {
 
