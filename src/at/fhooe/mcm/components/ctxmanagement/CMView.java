@@ -16,6 +16,8 @@ public class CMView {
     private Button mSetContextBtn, mThreadBtn;
     
     private Button mRecordSession, mStartSession, mStopSession;
+    
+    private JSlider mSlider;
 
     public CMView(CMController _controller) {
         // Initialise Layout
@@ -148,12 +150,12 @@ public class CMView {
 
         Panel frequencyPanel = new Panel(new FlowLayout());
         Label frequencyLabel = new Label("Update frequency [ms]:");
-        JSlider frequencySlider = new JSlider(JSlider.HORIZONTAL, 100, 10000, 1000);
-        frequencySlider.addChangeListener(_controller);
+        mSlider = new JSlider(JSlider.HORIZONTAL, 100, 10000, 1000);
+        mSlider.addChangeListener(_controller);
         mFrequency = new Label();
-        mFrequency.setText("10");
+        mFrequency.setText("1000");
         frequencyPanel.add(frequencyLabel);
-        frequencyPanel.add(frequencySlider);
+        frequencyPanel.add(mSlider);
         frequencyPanel.add(mFrequency);
         mPanel.add(frequencyPanel, gbc);
         gbc.gridy++;
@@ -267,4 +269,8 @@ public class CMView {
     public int getDensityIndex() {
         return mDensityCombo.getSelectedIndex();
     }
+
+	public JSlider getSlider() {
+		return mSlider;
+	}
 }

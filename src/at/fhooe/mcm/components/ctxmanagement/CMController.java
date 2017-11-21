@@ -65,6 +65,8 @@ public class CMController implements ActionListener, ChangeListener {
                 	mComponent.recordContextSituation(mModel.getContextSituation());
                 }
                 
+                // Broadcast the new situation
+                mComponent.broadcastContextSituation();
                 break;
             case "record":
             	if (mComponent.isRecording())
@@ -99,6 +101,8 @@ public class CMController implements ActionListener, ChangeListener {
         if (_e.getSource() instanceof JSlider){
             mView.setFrequencyTxt(((JSlider) _e.getSource()).getValue());
             mComponent.getCMUpdateThread().setInterval(((JSlider) _e.getSource()).getValue());
+            if (mComponent.isPlaying())
+            	mComponent.getSimulationPlayer().setInterval(((JSlider) _e.getSource()).getValue());
         }
     }
 }

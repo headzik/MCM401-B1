@@ -25,7 +25,7 @@ public class CMUpdateThread implements Runnable {
 	public void run() {
 		while (!mInterrupted) {
 			try {
-				mComponent.periodicUpdate();
+				mComponent.broadcastContextSituation();
 				Thread.sleep(mUpdateInterval);
 			} catch (InterruptedException _e) {
 				// Reserved for future use

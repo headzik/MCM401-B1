@@ -90,7 +90,7 @@ public class CMComponent implements IComponent, IObserver {
     	mThreadRunning = false;
     }
     
-    public void periodicUpdate() {
+    public void broadcastContextSituation() {
     	mMediator.notifyObservers(mModel.getContextSituation());
     	System.out.println("UPDATE!");
     }
@@ -109,7 +109,7 @@ public class CMComponent implements IComponent, IObserver {
     public void update(Object _o) {
         if (_o instanceof ContextElement){
             mModel.setContextElement((ContextElement)_o);
-            mView.updateGUIElements(mModel.getContextSituation());
+            mView.updateGUIElements(mModel.getContextSituation());    
         }
         
         if (_o instanceof ContextSituation) {
@@ -123,7 +123,7 @@ public class CMComponent implements IComponent, IObserver {
     }
 
 	public void startSimulationPlayback(String _path) {
-		mPlayer = new CMSimulationPlayer(_path, this, 5000); // TODO GET INTERVAL
+		mPlayer = new CMSimulationPlayer(_path, this, mView.getSlider().getValue());
 		
 		Thread t  = new Thread(mPlayer);
 		t.start();
@@ -140,6 +140,10 @@ public class CMComponent implements IComponent, IObserver {
 
 	public boolean isPlaying() {
 		return mIsPlaying;
+	}
+
+	public CMSimulationPlayer getSimulationPlayer() {
+		return mPlayer;
 	}
 
 

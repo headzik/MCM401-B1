@@ -49,8 +49,8 @@ public class CMSimulationPlayer implements Runnable {
 				String content = readStream(fis);
 				
 				ContextSituation cs = gson.fromJson(content, ContextSituation.class);
-				mComponent.update(cs);
-				
+				mComponent.update(cs);	
+				mComponent.broadcastContextSituation();
 				fis.close();
 				System.out.println(">> Simulation update!");
 				Thread.sleep(mInterval);
@@ -58,6 +58,8 @@ public class CMSimulationPlayer implements Runnable {
 				e.printStackTrace();
 			}			
 		}	
+		
+		mComponent.stopSimulationPlayback();
 	}
 	
 	public static String readStream(InputStream is) {
