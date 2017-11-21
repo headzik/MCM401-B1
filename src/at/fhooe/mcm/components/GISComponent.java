@@ -1,20 +1,16 @@
 package at.fhooe.mcm.components;
 
-import at.fhooe.mcm.components.gis.DrawingContext;
+import java.awt.Panel;
+
 import at.fhooe.mcm.components.gis.GISController;
 import at.fhooe.mcm.components.gis.GISModel;
 import at.fhooe.mcm.components.gis.GISView;
 import at.fhooe.mcm.components.gis.GeoObject;
-import at.fhooe.mcm.components.poi.POIObject;
-import at.fhooe.mcm.components.poi.POIServer;
-import at.fhooe.mcm.components.poi.POIObject.POI_TYPE;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
-
-import java.awt.*;
 
 
 public class GISComponent extends Observable implements IComponent, IObserver{
@@ -30,9 +26,7 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		c.setView(v);
 
 		mModel.addObserver(v);
-
 		view = v.getView();
-
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package at.fhooe.mcm.context.elements;
 
-public class AirQualityContext extends ContextElement{
+import java.io.Serializable;
+
+public class AirQualityContext extends ContextElement implements Serializable {
 
     public enum AirQualityType{
         COLD, WARM

@@ -38,6 +38,7 @@ public class GPSModel extends Observable implements IPositionUpdateListener {
 	
 	public void stopParsing() {
 		if (t != null)
+			mParser.interrupt();
 			t.interrupt();	
 		}
 

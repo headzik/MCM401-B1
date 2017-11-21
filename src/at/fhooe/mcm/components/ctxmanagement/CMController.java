@@ -31,7 +31,6 @@ public class CMController implements ActionListener, ChangeListener {
                 mComponent.togglePeriodicUpdate();
                 break;
             case "setContext":
-
                 String s;
                 s = mView.getPositionTxt();
                 if (!s.isEmpty())
@@ -61,7 +60,36 @@ public class CMController implements ActionListener, ChangeListener {
                 s = mView.getUVTxt();
                 if (!s.isEmpty())
                     mModel.setContextElement(new UltravioletRadiationContext(900, "uv", UltravioletRadiationContext.UVType.OUTSIDE, Integer.parseInt(s)));
+                
+                if (mComponent.isRecording()) {
+                	mComponent.recordContextSituation(mModel.getContextSituation());
+                }
+                
                 break;
+            case "record":
+            	if (mComponent.isRecording())
+            		mComponent.stopSimulationRecording();
+            	else
+            		mComponent.startSimulationRecording();
+            	break;
+            	
+            case "start":
+            	if (mComponent.isRecording())
+            		mComponent.stopSimulationRecording();
+            	
+            	if (!mComponent.isPlaying()) {
+            	JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new java.io.File("logs/"));
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                if (fileChooser.showOpenDialog(mView.getView()) == JFileChooser.APPROVE_OPTION)
+                	mComponent.startSimulationPlayback(fileChooser.getSelectedFile().getAbsolutePath());
+            	} 
+            	break;
+            case "stop":
+            	if (mComponent.isPlaying())
+            		mComponent.stopSimulationPlayback();
+            	break;
             default:
         }
     }

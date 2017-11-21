@@ -23,7 +23,6 @@ public class GISView implements IDataObserver {
 				   mScrollLeftButton, mScrollRightButton, mRotateLeftButton, 
 				   mRotateRightButton, mPOIToggleButton, mStickyToggleButton,
 				   mSaveImageButton;
-	private Choice mChoice;
 	private TextField mScale;
 	private GISController mController;
 

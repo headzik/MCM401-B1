@@ -1,0 +1,1 @@
+{"mAirQualityContext":{"mType":"COLD","mAirQuality":"NORMAL","mID":600,"mKey":"air"},"mDensityContext":{"mType":"CARS","mDensity":3,"mID":700,"mKey":"density"},"mVehicleContext":{"mType":"PRIVATE","mVehicle":"CAR","mID":800,"mKey":"vehicle"},"mWeatherContext":{"mType":"SUBTROPICS","mWeather":"SUNNY","mID":500,"mKey":"weather"}}

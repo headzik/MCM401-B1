@@ -14,6 +14,8 @@ public class CMView {
     private Label mFrequency;
 
     private Button mSetContextBtn, mThreadBtn;
+    
+    private Button mRecordSession, mStartSession, mStopSession;
 
     public CMView(CMController _controller) {
         // Initialise Layout
@@ -45,9 +47,22 @@ public class CMView {
         mSetContextBtn = new Button("Set CTX");
         mSetContextBtn.setActionCommand("setContext");
         mSetContextBtn.addActionListener(_controller);
+        
         mThreadBtn = new Button("Toggle CTX Broadcast");
         mThreadBtn.setActionCommand("thread");
         mThreadBtn.addActionListener(_controller);
+        
+        mRecordSession = new Button("Record Session");
+        mStartSession = new Button ("Start Simulation");
+        mStopSession = new Button ("Stop Simulation");
+        
+        mRecordSession.setActionCommand("record");
+        mStartSession.setActionCommand("start");
+        mStopSession.setActionCommand("stop");
+        
+        mRecordSession.addActionListener(_controller);
+        mStartSession.addActionListener(_controller);
+        mStopSession.addActionListener(_controller);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.anchor = GridBagConstraints.WEST;
@@ -154,15 +169,30 @@ public class CMView {
         mSetContextBtn.addActionListener(_controller);
         mPanel.add(mSetContextBtn, gbc);
         gbc.gridy++;
+        
+        mPanel.add(mRecordSession, gbc);
+        gbc.gridy++;
+        mPanel.add(mStartSession, gbc);
+        gbc.gridy++;
+        mPanel.add(mStopSession, gbc);
+        gbc.gridy++;
+             
     }
 
-    public void updateLabels(ContextSituation _cs) {
+    public void updateGUIElements(ContextSituation _cs) {
         if (_cs != null) {
             PositionContext posCtx = _cs.getPositionContext();
             TemperatureContext tempCtx = _cs.getTemperatureContext();
             TimeContext timeCtx = _cs.getTimeContext();
             SpeedContext speedCtx = _cs.getSpeedContext();
-
+            
+            // TODO Update UI
+            DensityContext densityCtx = _cs.getDensityContext();
+            UltravioletRadiationContext uvCTx = _cs.getUltravioletRadiationContext();
+            VehicleContext vehicleCtx = _cs.getVehicleContext();
+            WeatherContext weatherCtx = _cs.getWeatherContext();
+            AirQualityContext airQualityCtx = _cs.getAirQualityContext();
+            
             if (posCtx != null)
                 mPositionTxt.setText(posCtx.toString());
             if (tempCtx != null)

@@ -1,6 +1,8 @@
 package at.fhooe.mcm.context.elements;
 
-public abstract class ContextElement {
+import java.io.Serializable;
+
+public abstract class ContextElement implements Serializable {
 
 	private int mID;
 	private String mKey;

@@ -10,6 +10,10 @@ public class CMModel extends Observable {
     public ContextSituation getContextSituation() {
     	return mContextSituation;
     }
+    
+    public void setContextSituation(ContextSituation _cs) {
+    	mContextSituation = _cs;
+    }
 
     public void setContextElement(ContextElement _contextElement) {
         switch (_contextElement.getKey()){

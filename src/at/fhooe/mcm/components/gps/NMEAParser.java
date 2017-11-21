@@ -15,6 +15,8 @@ public class NMEAParser implements Runnable {
 	private NMEAInfo mInfoLoad;
 	private ArrayList<IPositionUpdateListener> listener;
 	
+	private boolean mInterrupted = false;
+	
 	/**
 	 * Constructor.
 	 * @throws FileNotFoundException Thrown if filename not fount.
@@ -24,6 +26,10 @@ public class NMEAParser implements Runnable {
 		mInfo = new NMEAInfo();
 		mInfoLoad = new NMEAInfo();
 		listener = new ArrayList<IPositionUpdateListener>();
+	}
+	
+	public void interrupt() {
+		mInterrupted = true;
 	}
 
 	/**
@@ -49,6 +55,7 @@ public class NMEAParser implements Runnable {
 	 */
 	@Override
 	public void run() {
+		mInterrupted = false;
 		String line;
 		ArrayList<Integer> usedSats = new ArrayList<Integer>();
 
@@ -168,6 +175,6 @@ public class NMEAParser implements Runnable {
 					default:				
 				}	
 			}
-		} while (line != null && !Thread.currentThread().isInterrupted());
+		} while (line != null && !mInterrupted);
 	}
 }

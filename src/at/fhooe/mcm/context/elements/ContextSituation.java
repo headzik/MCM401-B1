@@ -1,6 +1,8 @@
 package at.fhooe.mcm.context.elements;
 
-public class ContextSituation {
+import java.io.Serializable;
+
+public class ContextSituation implements Serializable {
 
     private PositionContext mPositionContext;
     private SpeedContext mSpeedContext;

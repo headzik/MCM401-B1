@@ -47,8 +47,6 @@ import java.io.IOException;
                     Thread.sleep(mSleepTime);
                     return newLine;
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
                 }
             }
 

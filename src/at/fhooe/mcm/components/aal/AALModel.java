@@ -11,16 +11,9 @@ import java.io.IOException;
 public class AALModel extends Observable{
 
     private IContextParser mParser;
-    private ContextSituation mContextSituation;
-
 
     public enum ParseMode {
         DOM, STREAM
-    }
-
-
-    public AALModel() {
-        mContextSituation = new ContextSituation();
     }
 
     public void parseContextFile(String _filePathText, ParseMode _selectedParser) {
