@@ -1,0 +1,45 @@
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(Compiler)
+
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+
+public class Compiler {
+
+	public Compiler() {}
+	
+	public static void main(String[] _argv) {
+		InputStream input = new ByteArrayInputStream(_argv[0].getBytes());
+		Compiler compiler = new Compiler(input);
+		compiler.stmt();
+	}
+}
+
+PARSER_END(Compiler) 
+
+SKIP : {" " | "\t" | "\n" | "\r" }
+
+TOKEN :
+{
+	  <DT :						("Day"|"Night")>	{ System.out.println("daytime(const)"); }
+	| <EQUALS:					("EQUALS")>			{ System.out.println("EQUALS "); }
+	| <CONTEXT_IDENTIFIER_DT: 	("dt_now")> 		{ System.out.println("daytime (var) "); }
+}
+
+void stmt() : {}
+{
+	daytime_stmt() daytime_comparison()
+}
+
+void daytime_comparison() : { }
+{
+	<EQUALS> daytime_stmt()
+}
+
+void daytime_stmt() : { } 
+{
+	<DT> | <CONTEXT_IDENTIFIER_DT>
+}
