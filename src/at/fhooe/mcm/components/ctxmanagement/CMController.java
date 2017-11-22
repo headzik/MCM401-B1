@@ -64,9 +64,7 @@ public class CMController implements ActionListener, ChangeListener {
                 if (mComponent.isRecording()) {
                 	mComponent.recordContextSituation(mModel.getContextSituation());
                 }
-                
-                // Broadcast the new situation
-                mComponent.broadcastContextSituation();
+   
                 break;
             case "record":
             	if (mComponent.isRecording())

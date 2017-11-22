@@ -92,7 +92,6 @@ public class CMComponent implements IComponent, IObserver {
     
     public void broadcastContextSituation() {
     	mMediator.notifyObservers(mModel.getContextSituation());
-    	System.out.println("UPDATE!");
     }
 
     @Override
