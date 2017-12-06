@@ -9,7 +9,7 @@ public class TreeNode_LESS extends TreeNode{
   @Override
   public Object calculate() throws NodeError {
 		if (((TreeNodeContextVar)getChilds()[0]).getType() == ContextType.TIME) {
-			if (((LocalTime) getChilds()[0].calculate()).isBefore((LocalTime) getChilds()[0].calculate())) {
+			if (((LocalTime) getChilds()[0].calculate()).isBefore((LocalTime) getChilds()[1].calculate())) {
 				return true;
 			} else {
 				return false;

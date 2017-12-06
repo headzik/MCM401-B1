@@ -38,6 +38,10 @@ private int jjMoveStringLiteralDfa0_0()
          return jjMoveStringLiteralDfa1_0(0x40L);
       case 62:
          return jjStopAtPos(0, 8);
+      case 65:
+         return jjMoveStringLiteralDfa1_0(0x8000L);
+      case 79:
+         return jjMoveStringLiteralDfa1_0(0x10000L);
       case 100:
          return jjMoveStringLiteralDfa1_0(0x800L);
       case 102:
@@ -63,6 +67,12 @@ private int jjMoveStringLiteralDfa1_0(long active0)
          if ((active0 & 0x40L) != 0L)
             return jjStopAtPos(1, 6);
          break;
+      case 78:
+         return jjMoveStringLiteralDfa2_0(active0, 0x8000L);
+      case 82:
+         if ((active0 & 0x10000L) != 0L)
+            return jjStopAtPos(1, 16);
+         break;
       case 101:
          return jjMoveStringLiteralDfa2_0(active0, 0xa00L);
       case 105:
@@ -87,6 +97,10 @@ private int jjMoveStringLiteralDfa2_0(long old0, long active0)
    }
    switch(curChar)
    {
+      case 68:
+         if ((active0 & 0x8000L) != 0L)
+            return jjStopAtPos(2, 15);
+         break;
       case 101:
          return jjMoveStringLiteralDfa3_0(active0, 0x2400L);
       case 109:
@@ -322,14 +336,15 @@ static final int[] jjnextStates = {
 /** Token literal values. */
 public static final String[] jjstrLiteralImages = {
 "", null, null, null, null, null, "\75\75", "\74", "\76", "\164\145\155\160", 
-"\163\160\145\145\144", "\144\145\156\163\151\164\171", "\164\151\155\145", "\146\165\145\154", null, };
+"\163\160\145\145\144", "\144\145\156\163\151\164\171", "\164\151\155\145", "\146\165\145\154", null, 
+"\101\116\104", "\117\122", };
 
 /** Lexer state names. */
 public static final String[] lexStateNames = {
    "DEFAULT",
 };
 static final long[] jjtoToken = {
-   0x7fe1L, 
+   0x1ffe1L, 
 };
 static final long[] jjtoSkip = {
    0x1eL, 
@@ -513,7 +528,7 @@ void TokenLexicalActions(Token matchedToken)
       case 9 :
         image.append(jjstrLiteralImages[9]);
         lengthOfMatch = jjstrLiteralImages[9].length();
-                                                          System.out.println("temp (var) ");
+                                                  System.out.println("temp (var) ");
          break;
       case 10 :
         image.append(jjstrLiteralImages[10]);
@@ -528,7 +543,7 @@ void TokenLexicalActions(Token matchedToken)
       case 12 :
         image.append(jjstrLiteralImages[12]);
         lengthOfMatch = jjstrLiteralImages[12].length();
-                                                  System.out.println("density (var) ");
+                                                  System.out.println("time (var) ");
          break;
       case 13 :
         image.append(jjstrLiteralImages[13]);
@@ -538,6 +553,16 @@ void TokenLexicalActions(Token matchedToken)
       case 14 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                                                                                                      System.out.println("TIME ");
+         break;
+      case 15 :
+        image.append(jjstrLiteralImages[15]);
+        lengthOfMatch = jjstrLiteralImages[15].length();
+                     System.out.println("AND ");
+         break;
+      case 16 :
+        image.append(jjstrLiteralImages[16]);
+        lengthOfMatch = jjstrLiteralImages[16].length();
+                   System.out.println("OR  ");
          break;
       default :
          break;

@@ -28,6 +28,10 @@ public interface CompilerConstants {
   int CONTEXT_FUEL = 13;
   /** RegularExpression Id. */
   int TIME = 14;
+  /** RegularExpression Id. */
+  int AND = 15;
+  /** RegularExpression Id. */
+  int OR = 16;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -49,6 +53,8 @@ public interface CompilerConstants {
     "\"time\"",
     "\"fuel\"",
     "<TIME>",
+    "\"AND\"",
+    "\"OR\"",
   };
 
 }

@@ -43,19 +43,21 @@ TOKEN :
 	| <EQUALS:				("==")>			{ System.out.println("EQUALS "); }
   | <LESS:					("<")>			  { System.out.println("LESS "); }
   | <GREATER:				(">")>			{ System.out.println("GREATER "); }
-	| <CONTEXT_TEMP: 	("temp")> 		{ System.out.println("temp (var) "); }
+  | <CONTEXT_TEMP: 	("temp")> 		{ System.out.println("temp (var) "); }
   | <CONTEXT_SPEED: ("speed")>    { System.out.println("speed (var) "); }
   | <CONTEXT_DENSITY: ("density")>    { System.out.println("density (var) "); }
   | <CONTEXT_TIME: ("time")>			{ System.out.println("time (var) "); }
   | <CONTEXT_FUEL: ("fuel")>			{ System.out.println("fuel (var) "); }
   | <TIME: ((["2"]["0"-"3"]|["0"-"1"]["0"-"9"]|["1"-"9"])":"["0"-"5"]["0"-"9"]":"(["0"-"5"]["0"-"9"]|["6"]["0"]))> { System.out.println("TIME ");}
+  | <AND: ("AND")> { System.out.println("AND "); }
+  | <OR: ("OR")> { System.out.println("OR  "); }
 }
 
 TreeNode stmt() : {
   TreeNode nodeA = null;
   TreeNode root = null; }
 {
-  nodeA = context_stmt() root = context_comparison(nodeA) { return root; }
+    nodeA = context_stmt() root = context_comparison(nodeA) (root = context_join(root))? { return root; }
 }
 
 TreeNode context_comparison(TreeNode _nodeA) : {
@@ -79,7 +81,22 @@ TreeNode context_comparison(TreeNode _nodeA) : {
   }
 }
 
-
+TreeNode context_join(TreeNode _root) : {
+    TreeNode root = null;
+    TreeNode nodeB = null;
+}
+{
+    <AND> nodeB = stmt(){
+        root = new TreeNode_AND();
+        root.setChilds(new TreeNode[]{_root, nodeB});
+        return root;
+    }
+    | <OR> nodeB = stmt(){
+         root = new TreeNode_OR();
+         root.setChilds(new TreeNode[]{_root, nodeB});
+         return root;
+     }
+}
 
 TreeNode context_stmt() : { Token t; }
 	{
@@ -87,7 +104,7 @@ TreeNode context_stmt() : { Token t; }
 	| <CONTEXT_TEMP> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TEMPERATURE); }
 	| <CONTEXT_DENSITY> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.DENSITY); }
 	| <CONTEXT_TIME> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TIME); }
-	| <CONTEXT_FUEL> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.FUEL); }
+	| <CONTEXT_FUEL> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.FUELSTATUS); }
   	| t = <TIME> { return new TreeNodeTime(t.image); }
   	| t = <DIGIT> { return new TreeNodeDigit(t.image); }
 	}

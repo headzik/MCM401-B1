@@ -10,7 +10,7 @@ public class TreeNode_GREATER extends TreeNode {
 	@Override
 	public Object calculate() throws NodeError {
 		if (((TreeNodeContextVar)getChilds()[0]).getType() == ContextType.TIME) {
-			if (((LocalTime) getChilds()[0].calculate()).isAfter((LocalTime) getChilds()[0].calculate())) {
+			if (((LocalTime) getChilds()[0].calculate()).isAfter((LocalTime) getChilds()[1].calculate())) {
 				return true;
 			} else {
 				return false;
