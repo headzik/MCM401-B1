@@ -1,14 +1,25 @@
 package at.fhooe.mcm.nodes;
 
+import java.time.LocalTime;
+
 import at.fhooe.mcm.context.elements.ContextElement;
+import at.fhooe.mcm.nodes.TreeNodeContextVar.ContextType;
 
 public class TreeNode_LESS extends TreeNode{
   @Override
   public Object calculate() throws NodeError {
-    if (((int) getChilds()[0].calculate()) < ((int) getChilds()[1].calculate()))
-      return true;
-    else
-      return false;
+		if (((TreeNodeContextVar)getChilds()[0]).getType() == ContextType.TIME) {
+			if (((LocalTime) getChilds()[0].calculate()).isBefore((LocalTime) getChilds()[0].calculate())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+		    if (((int) getChilds()[0].calculate()) < ((int) getChilds()[1].calculate()))
+		    	return true;
+		    else
+		     	return false;
+		}
   }
 
   @Override
@@ -22,6 +33,6 @@ public class TreeNode_LESS extends TreeNode{
 
   @Override
   public void clear() {
-
+	  // Nothing to clear
   }
 }

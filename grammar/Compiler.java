@@ -84,9 +84,21 @@ public class Compiler implements CompilerConstants {
       jj_consume_token(CONTEXT_DENSITY);
                               {if (true) return new TreeNodeContextVar(TreeNodeContextVar.ContextType.DENSITY);}
       break;
+    case CONTEXT_TIME:
+      jj_consume_token(CONTEXT_TIME);
+                           {if (true) return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TIME);}
+      break;
+    case CONTEXT_FUEL:
+      jj_consume_token(CONTEXT_FUEL);
+                           {if (true) return new TreeNodeContextVar(TreeNodeContextVar.ContextType.FUEL);}
+      break;
+    case TIME:
+      t = jj_consume_token(TIME);
+                       {if (true) return new TreeNodeTime(t.image);}
+      break;
     case DIGIT:
       t = jj_consume_token(DIGIT);
-                  {if (true) return new TreeNodeDigit(t.image);}
+                        {if (true) return new TreeNodeDigit(t.image);}
       break;
     default:
       jj_la1[1] = jj_gen;
@@ -111,7 +123,7 @@ public class Compiler implements CompilerConstants {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x1c0,0xe20,};
+      jj_la1_0 = new int[] {0x1c0,0x7e20,};
    }
 
   /** Constructor with InputStream. */
@@ -228,7 +240,7 @@ public class Compiler implements CompilerConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[12];
+    boolean[] la1tokens = new boolean[15];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -242,7 +254,7 @@ public class Compiler implements CompilerConstants {
         }
       }
     }
-    for (int i = 0; i < 12; i++) {
+    for (int i = 0; i < 15; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

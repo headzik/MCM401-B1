@@ -1,15 +1,27 @@
 package at.fhooe.mcm.nodes;
 
-import at.fhooe.mcm.context.elements.ContextElement;
 
-public class TreeNode_GREATER extends TreeNode{
-  @Override
-  public Object calculate() throws NodeError {
-    if (((int) getChilds()[0].calculate()) > ((int) getChilds()[1].calculate()))
-      return true;
-    else
-      return false;
-  }
+import java.time.LocalTime;
+
+import at.fhooe.mcm.context.elements.ContextElement;
+import at.fhooe.mcm.nodes.TreeNodeContextVar.ContextType;
+
+public class TreeNode_GREATER extends TreeNode {
+	@Override
+	public Object calculate() throws NodeError {
+		if (((TreeNodeContextVar)getChilds()[0]).getType() == ContextType.TIME) {
+			if (((LocalTime) getChilds()[0].calculate()).isAfter((LocalTime) getChilds()[0].calculate())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			if (((int) getChilds()[0].calculate()) > ((int) getChilds()[1].calculate()))
+				return true;
+			else
+				return false;
+		}
+	}
 
   @Override
   public void setVariableParameters(ContextElement[] _contextElements) {
@@ -23,6 +35,6 @@ public class TreeNode_GREATER extends TreeNode{
 
   @Override
   public void clear() {
-
+	  // Nothing to clear
   }
 }

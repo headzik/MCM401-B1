@@ -2,6 +2,7 @@ package at.fhooe.mcm.context.elements;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class TimeContext extends ContextElement {
@@ -24,8 +25,9 @@ public class TimeContext extends ContextElement {
 		return mType;
 	}
 	
-	public Date getTime() {
+	public LocalTime getTime() {
 		// Build hh:mm:ss string from time variables
+		
 		StringBuffer sb = new StringBuffer();
 		if (mHours < 10)
 			sb.append("0");
@@ -35,7 +37,11 @@ public class TimeContext extends ContextElement {
 			sb.append("0");
 		sb.append(mMinutes);
 		sb.append(":00");
-
+		
+		return LocalTime.parse(sb.toString());
+		
+		
+		/*
 		// Parse to Date object depending on the type of the time
 		DateFormat sdf;	
 		try {
@@ -55,6 +61,7 @@ public class TimeContext extends ContextElement {
 		} catch (Exception _e) {
 			return null;
 		}
+		*/
 	}
 
 	@Override

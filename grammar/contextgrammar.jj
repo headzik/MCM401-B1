@@ -46,6 +46,9 @@ TOKEN :
 	| <CONTEXT_TEMP: 	("temp")> 		{ System.out.println("temp (var) "); }
   | <CONTEXT_SPEED: ("speed")>    { System.out.println("speed (var) "); }
   | <CONTEXT_DENSITY: ("density")>    { System.out.println("density (var) "); }
+  | <CONTEXT_TIME: ("time")>			{ System.out.println("time (var) "); }
+  | <CONTEXT_FUEL: ("fuel")>			{ System.out.println("fuel (var) "); }
+  | <TIME: ((["2"]["0"-"3"]|["0"-"1"]["0"-"9"]|["1"-"9"])":"["0"-"5"]["0"-"9"]":"(["0"-"5"]["0"-"9"]|["6"]["0"]))> { System.out.println("TIME ");}
 }
 
 TreeNode stmt() : {
@@ -76,10 +79,15 @@ TreeNode context_comparison(TreeNode _nodeA) : {
   }
 }
 
+
+
 TreeNode context_stmt() : { Token t; }
 	{
   	<CONTEXT_SPEED> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.SPEED); }
 	| <CONTEXT_TEMP> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TEMPERATURE); }
 	| <CONTEXT_DENSITY> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.DENSITY); }
-  | t = <DIGIT> { return new TreeNodeDigit(t.image); }
+	| <CONTEXT_TIME> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TIME); }
+	| <CONTEXT_FUEL> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.FUEL); }
+  	| t = <TIME> { return new TreeNodeTime(t.image); }
+  	| t = <DIGIT> { return new TreeNodeDigit(t.image); }
 	}

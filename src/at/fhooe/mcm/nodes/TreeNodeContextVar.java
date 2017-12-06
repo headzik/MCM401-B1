@@ -2,13 +2,15 @@ package at.fhooe.mcm.nodes;
 
 import at.fhooe.mcm.context.elements.ContextElement;
 import at.fhooe.mcm.context.elements.DensityContext;
+import at.fhooe.mcm.context.elements.FuelContext;
 import at.fhooe.mcm.context.elements.SpeedContext;
 import at.fhooe.mcm.context.elements.TemperatureContext;
+import at.fhooe.mcm.context.elements.TimeContext;
 
 public class TreeNodeContextVar extends TreeNode {
 
   public enum ContextType {
-    SPEED, TEMPERATURE, DENSITY
+    TIME, FUELSTATUS, SPEED, TEMPERATURE, DENSITY
   }
 
   private ContextType mType;
@@ -31,6 +33,10 @@ public class TreeNodeContextVar extends TreeNode {
         return ((TemperatureContext) mContextElement).getTemperature();
       case DENSITY:
         return ((DensityContext) mContextElement).getDensity();
+      case FUELSTATUS:
+    	  return ((FuelContext) mContextElement).getStatus();
+      case TIME:
+    	  return ((TimeContext) mContextElement).getTime();
     }
     return null;
   }
@@ -51,6 +57,14 @@ public class TreeNodeContextVar extends TreeNode {
           if (ce instanceof DensityContext)
             mContextElement = ce;
           break;
+        case FUELSTATUS:
+          if (ce instanceof FuelContext)
+            mContextElement = ce;
+          break;
+        case TIME:
+            if (ce instanceof TimeContext)
+              mContextElement = ce;
+            break;
       }
     }
   }
