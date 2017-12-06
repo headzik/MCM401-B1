@@ -1,0 +1,85 @@
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(Compiler)
+
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+
+public class Compiler {
+
+	public Compiler() {}
+
+  public static TreeNode evaluate(String _expr) throws ParseException {
+    InputStream input = new ByteArrayInputStream(_expr.getBytes());
+    Compiler compiler = new Compiler(input);
+    TreeNode t = compiler.stmt();
+		t.setVariableParameters(new ContextElement[]{new SpeedContext(4001, "speed", SpeedContext.SpeedType.KMH, 100), new TemperatureContext(2001, "temp", TemperatureContext.TemperatureType.CELSIUS, 25),new DensityContext(8001, "density", DensityContext.DensityType.CARS, 2)});
+		try {
+			System.out.println(String.valueOf(t.calculate()));
+		} catch(Exception _e){
+			_e.printStackTrace();
+		}
+    return t;
+  }
+
+	public static void main(String[] _argv) {
+    try {
+      TreeNode node = Compiler.evaluate(_argv[0]);
+    } catch (Exception _e) {
+      _e.printStackTrace();
+    }
+	}
+}
+
+PARSER_END(Compiler)
+
+SKIP : {" " | "\t" | "\n" | "\r" }
+
+TOKEN :
+{
+    <DIGIT:         (["0"-"9"])+>            { System.out.println("DIGIT ");}
+	| <EQUALS:				("==")>			{ System.out.println("EQUALS "); }
+  | <LESS:					("<")>			  { System.out.println("LESS "); }
+  | <GREATER:				(">")>			{ System.out.println("GREATER "); }
+	| <CONTEXT_TEMP: 	("temp")> 		{ System.out.println("temp (var) "); }
+  | <CONTEXT_SPEED: ("speed")>    { System.out.println("speed (var) "); }
+  | <CONTEXT_DENSITY: ("density")>    { System.out.println("density (var) "); }
+}
+
+TreeNode stmt() : {
+  TreeNode nodeA = null;
+  TreeNode root = null; }
+{
+  nodeA = context_stmt() root = context_comparison(nodeA) { return root; }
+}
+
+TreeNode context_comparison(TreeNode _nodeA) : {
+  TreeNode root = null;
+  TreeNode nodeB = null; }
+{
+  <LESS> nodeB = context_stmt() {
+  root = new TreeNode_LESS();
+  root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+  return root;
+  }
+  | <GREATER> nodeB = context_stmt() {
+  root = new TreeNode_GREATER();
+  root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+  return root;
+  }
+	| <EQUALS> nodeB = context_stmt() {
+  root = new TreeNode_EQUALS();
+  root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+  return root;
+  }
+}
+
+TreeNode context_stmt() : { Token t; }
+	{
+  	<CONTEXT_SPEED> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.SPEED); }
+	| <CONTEXT_TEMP> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TEMPERATURE); }
+	| <CONTEXT_DENSITY> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.DENSITY); }
+  | t = <DIGIT> { return new TreeNodeDigit(t.image); }
+	}

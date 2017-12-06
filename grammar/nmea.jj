@@ -1,0 +1,73 @@
+options {
+	STATIC = false;
+}
+
+PARSER_BEGIN(Compiler)
+
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+
+public class Compiler {
+
+	public Compiler() {}
+
+	public static void main(String[] _argv) {
+		InputStream input = new ByteArrayInputStream(_argv[0].getBytes());
+		Compiler compiler = new Compiler(input);
+		compiler.stmt();
+	}
+}
+
+PARSER_END(Compiler)
+
+SKIP : {" " | "\t" | "\n" | "\r" | "," }
+
+TOKEN :
+{
+	  <TYPE:						("$GPGGA")>	{ System.out.println("TYPE "); }
+	| <DIGIT: ["0"-"9"]>{System.out.println("DIGIT ");}
+	| <DEZIMAL: ((<DIGIT>)+ "." (<DIGIT>)+)> { System.out.print("DEZIMAL ");}
+	| <DIRECTION:					("N"|"S"|"E"|"W")>			{ System.out.println("DIRECTION "); }
+	| <NUMBER_SATELLITES:					(<DIGIT>)>			{ System.out.println("NUMBER_SATELLITES "); }
+
+}
+
+void stmt() : {}
+{
+	nmea_stmt() nmea_time() nmea_lat() nmea_direction() nmea_lng() nmea_direction() nmea_fix()
+}
+
+void nmea_time() : { }
+{
+	nmea_dezimal() { System.out.println("TIME");}
+}
+
+void nmea_dezimal() : { }
+{
+	<DEZIMAL>
+}
+
+void nmea_lat() : { }
+{
+	nmea_dezimal() { System.out.println("LAT");}
+}
+
+void nmea_lng() : { }
+{
+	nmea_dezimal() { System.out.println("LNG");}
+}
+
+void nmea_direction() : { }
+{
+	<DIRECTION>
+}
+
+void nmea_fix() : { }
+{
+	<DIGIT> { System.out.println("FIX");}
+}
+
+void nmea_stmt() : { }
+{
+	<TYPE>
+}

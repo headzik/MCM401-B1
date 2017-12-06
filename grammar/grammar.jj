@@ -10,15 +10,19 @@ import java.io.ByteArrayInputStream;
 public class Compiler {
 
 	public Compiler() {}
-	
+
 	public static void main(String[] _argv) {
 		InputStream input = new ByteArrayInputStream(_argv[0].getBytes());
 		Compiler compiler = new Compiler(input);
-		compiler.stmt();
+		try {
+			compiler.stmt();
+		} catch (Exception _e) {
+			_e.printStackTrace();
+		}
 	}
 }
 
-PARSER_END(Compiler) 
+PARSER_END(Compiler)
 
 SKIP : {" " | "\t" | "\n" | "\r" }
 
@@ -27,6 +31,7 @@ TOKEN :
 	  <DT :						("Day"|"Night")>	{ System.out.println("daytime(const)"); }
 	| <EQUALS:					("EQUALS")>			{ System.out.println("EQUALS "); }
 	| <CONTEXT_IDENTIFIER_DT: 	("dt_now")> 		{ System.out.println("daytime (var) "); }
+	| <TYPE:						("$GPGGA")>	{ System.out.println("TYPE "); }
 }
 
 void stmt() : {}
@@ -39,7 +44,7 @@ void daytime_comparison() : { }
 	<EQUALS> daytime_stmt()
 }
 
-void daytime_stmt() : { } 
+void daytime_stmt() : { }
 {
-	<DT> | <CONTEXT_IDENTIFIER_DT>
+	<DT> | <CONTEXT_IDENTIFIER_DT> | <TYPE>
 }
