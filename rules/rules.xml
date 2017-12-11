@@ -1,0 +1,32 @@
+<rules>
+	<rule>
+		<condition>temp &#60; 4</condition>
+		<action>
+			<class>at.fhooe.mc.GISComponent</class>
+			<method>setWarning</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mc.gis.IWarningType</type>
+					<value>at.fhooe.mc.gis.BlackIceWarning</value>
+				</parameter>				
+				<parameter>
+					<type>at.fhooe.mc.gis.IWarningType</type>
+					<value>at.fhooe.mc.gis.TestType</value>
+				</parameter>
+			</parameters>
+		</action>
+	</rule>
+	<rule>
+		<condition>speed &#62; 80</condition>
+		<action>
+			<class>at.fhooe.mc.GISComponent</class>
+			<method>setWarning</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mc.gis.IWarningType</type>
+					<value>at.fhooe.mc.gis.SpeedingWarning</value>
+				</parameter>
+			</parameters>
+		</action>
+	</rule>
+</rules>
