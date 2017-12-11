@@ -43,7 +43,6 @@ public class GISView implements IDataObserver {
 		mPanel.addMouseMotionListener(mController);
 		mPanel.addKeyListener(mController);
 
-
 		mMainPanel.add(mPanel,BorderLayout.CENTER);
 
 	}

@@ -1,7 +1,9 @@
-package at.fhooe.mcm.components;
+package at.fhooe.mcm.components.reflection;
 
 import at.fhooe.mcm.Mediator;
+import at.fhooe.mcm.components.GISComponent;
 import at.fhooe.mcm.interfaces.IComponent;
+import at.fhooe.mcm.interfaces.IDrawingContext;
 import at.fhooe.mcm.interfaces.IUIView;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,7 +21,7 @@ public class ComponentsFactory {
 
     private List<IComponent> mComponents;
     private Node mNode;
-    private String mParameterType, mParameter;
+    private String mUIMode,mDrawingContext;
 
     public ComponentsFactory(){
 
@@ -43,10 +45,13 @@ public class ComponentsFactory {
                 if (c instanceof GISComponent){
                     if (mNode.getNodeType() == Node.ELEMENT_NODE) {
                         Element eElement = (Element) mNode;
-                        mParameterType = eElement.getElementsByTagName("parameterType").item(0).getTextContent();
-                        mParameter = eElement.getElementsByTagName("parameter").item(0).getTextContent();
-                        Method m = c.getClass().getMethod("setUI", Class.forName(mParameterType));
-                        m.invoke(c, Class.forName(mParameter).newInstance());
+                        mUIMode = eElement.getElementsByTagName("uiMode").item(0).getTextContent();
+                        Method m = c.getClass().getMethod("setUI", IUIView.class);
+                        m.invoke(c, Class.forName(mUIMode).newInstance());
+
+                        mDrawingContext = eElement.getElementsByTagName("drawingContext").item(0).getTextContent();
+                        m = c.getClass().getMethod("setDrawingContext", IDrawingContext.class);
+                        m.invoke(c, Class.forName(mDrawingContext).newInstance());
                     }
                 }
                 mComponents.add(c);

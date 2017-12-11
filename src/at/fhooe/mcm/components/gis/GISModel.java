@@ -6,6 +6,7 @@ import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.components.poi.POIServer;
 import at.fhooe.mcm.components.poi.POIObject.POI_TYPE;
 import at.fhooe.mcm.context.elements.PositionContext;
+import at.fhooe.mcm.interfaces.IDrawingContext;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -32,6 +33,8 @@ public class GISModel extends DataObservable {
     private boolean mDrawPOIs;
     private boolean mUseOSM;
 
+    private IDrawingContext mDrawingContext;
+
     /**
      * Constructor initializing member variables.
      */
@@ -51,7 +54,7 @@ public class GISModel extends DataObservable {
     
     public void positionUpdate(PositionContext _pc) {
     	if (mPosition == null) {			
-			mPosition = new POIObject(Integer.toString(_pc.getID()), DrawingContext.POI_TYPE, new Polygon(new int[] {(int) _pc.getPosition().x}, new int[] {(int) _pc.getPosition().y}, 1), POIServer.loadImage("resources/position.png"), POI_TYPE.TYPE_POSITION);		
+			mPosition = new POIObject(Integer.toString(_pc.getID()), IDrawingContext.POI_TYPE, new Polygon(new int[] {(int) _pc.getPosition().x}, new int[] {(int) _pc.getPosition().y}, 1), POIServer.loadImage("resources/position.png"), POI_TYPE.TYPE_POSITION);
 			mPosition.setVisible(true);
 			addObject(mPosition);
     	} else {
@@ -140,14 +143,14 @@ public class GISModel extends DataObservable {
         if (mTransformationMatrix != null && mObjects != null) {
             for (int i = 0; i < mObjects.size(); i++) {
                 // Check if its a POI
-                if (mObjects.get(i).getType() == DrawingContext.POI_TYPE) {
+                if (mObjects.get(i).getType() == IDrawingContext.POI_TYPE) {
                     // Is POI -> draw if visible
                     if (((at.fhooe.mcm.components.poi.POIObject) mObjects.get(i)).isVisible()) {
-                        DrawingContext.drawObject(mObjects.get(i), img.getGraphics(), mTransformationMatrix);
+                        mDrawingContext.drawObject(mObjects.get(i), img.getGraphics(), mTransformationMatrix);
                     }
                 } else {
                     // Is no POI -> draw
-                    DrawingContext.drawObject(mObjects.get(i), img.getGraphics(), mTransformationMatrix);
+                    mDrawingContext.drawObject(mObjects.get(i), img.getGraphics(), mTransformationMatrix);
                 }
             }
         }
@@ -330,5 +333,9 @@ public class GISModel extends DataObservable {
         } catch (IOException e) {
             System.out.println(">> An error occured when saving the image...");
         }
+    }
+
+    public void setDrawingContext(IDrawingContext drawingContext) {
+        mDrawingContext = drawingContext;
     }
 }

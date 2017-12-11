@@ -2,17 +2,15 @@ package at.fhooe.mcm;
 
 import at.fhooe.mcm.components.*;
 import at.fhooe.mcm.components.poi.POIObject;
+import at.fhooe.mcm.components.reflection.ComponentsFactory;
 import at.fhooe.mcm.context.elements.ContextElement;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
-import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.views.MediatorView;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Mediator extends Observable implements IMediator, IObserver {
@@ -22,7 +20,7 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     public Mediator() {
         mMediatorView = new MediatorView();
-        mComponents = new ComponentsFactory().buildComponents("src/at/fhooe/mcm/components/ComponentComposition.xml", this);
+        mComponents = new ComponentsFactory().buildComponents("src/at/fhooe/mcm/components/reflection/ComponentComposition.xml", this);
 
         for (IComponent c : mComponents){
             if (c instanceof GISComponent){

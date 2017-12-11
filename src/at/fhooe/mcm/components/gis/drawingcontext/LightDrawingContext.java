@@ -1,37 +1,28 @@
-package at.fhooe.mcm.components.gis;
+package at.fhooe.mcm.components.gis.drawingcontext;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Polygon;
 
+import at.fhooe.mcm.components.gis.GeoObject;
+import at.fhooe.mcm.components.gis.Matrix;
 import at.fhooe.mcm.components.poi.POIObject;
+import at.fhooe.mcm.interfaces.IDrawingContext;
 
 
-public class DrawingContext {
-	
-	public static final int POI_TYPE = 999;
-	
-	// Landuse types
-	public static final int LANDUSE_RESIDENTIAL = 5001;
-	public static final int LANDUSE_INDUSTRIAL = 5002;
-	public static final int LANDUSE_COMMERCIAL = 5003;
-	public static final int LANDUSE_FOREST = 5004;
-	public static final int LANDUSE_MEADOW = 5006;
-	
-	// Natural types
-	public static final int NATURAL_GRASSLAND = 6001;
-	public static final int NATURAL_WOOD = 6002;
-	public static final int NATURAL_WATER = 6005;
-	
-	
+public class LightDrawingContext implements IDrawingContext{
+
+	public LightDrawingContext(){
+	}
+
 	/**
 	 * Method for drawing an object to the map.
 	 * @param _obj Object to draw
 	 * @param _g Graphics context to draw on
 	 * @param _matrix Transformationmatrix to apply
 	 */
-	public static void drawObject(GeoObject _obj, Graphics _g, Matrix _matrix) {	
+	public void drawObject(GeoObject _obj, Graphics _g, Matrix _matrix) {
 		Polygon p = _matrix.multiply(_obj.getPoly());
 		
 		switch (_obj.getType()) {

@@ -10,6 +10,7 @@ import at.fhooe.mcm.components.gis.GeoObject;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
+import at.fhooe.mcm.interfaces.IDrawingContext;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
@@ -52,6 +53,9 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	public void setUI(IUIView _view) {
 		_view.setController(mController);
 		mView.setPanel(_view.getView());
+	}
+	public void setDrawingContext(IDrawingContext _drawingContext){
+		mModel.setDrawingContext(_drawingContext);
 	}
 
 	@Override
