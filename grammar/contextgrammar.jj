@@ -3,9 +3,12 @@ options {
 }
 
 PARSER_BEGIN(Compiler)
+package at.fhooe.mcm.compiler;
 
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
+import at.fhooe.mcm.nodes.*;
+import at.fhooe.mcm.context.elements.*;
 
 public class Compiler {
 
@@ -15,7 +18,10 @@ public class Compiler {
     InputStream input = new ByteArrayInputStream(_expr.getBytes());
     Compiler compiler = new Compiler(input);
     TreeNode t = compiler.stmt();
-		t.setVariableParameters(new ContextElement[]{new SpeedContext(4001, "speed", SpeedContext.SpeedType.KMH, 100), new TemperatureContext(2001, "temp", TemperatureContext.TemperatureType.CELSIUS, 25),new DensityContext(8001, "density", DensityContext.DensityType.CARS, 2)});
+		t.setVariableParameters(new ContextElement[]{new SpeedContext(4001, "speed", SpeedContext.SpeedType.KMH, 100), 
+                                                 new TemperatureContext(2001, "temp", TemperatureContext.TemperatureType.CELSIUS, 25),
+                                                 new DensityContext(8001, "density", DensityContext.DensityType.CARS, 2),
+                                                 new PositionContext(6001/*random*/, "position", PositionContext.PositionType.GAUSSKRUEGER, 300, 400)});
 		try {
 			System.out.println(String.valueOf(t.calculate()));
 		} catch(Exception _e){
@@ -47,10 +53,13 @@ TOKEN :
   | <CONTEXT_SPEED: ("speed")>    { System.out.println("speed (var) "); }
   | <CONTEXT_DENSITY: ("density")>    { System.out.println("density (var) "); }
   | <CONTEXT_TIME: ("time")>			{ System.out.println("time (var) "); }
-  | <CONTEXT_FUEL: ("fuel")>			{ System.out.println("fuel (var) "); }
+  | <CONTEXT_FUEL: ("fuel")>			{ System.out.println("fuel (var) "); }  
+  | <CONTEXT_POSITION: ("position")> { System.out.print("position (var) "); } 
   | <TIME: ((["2"]["0"-"3"]|["0"-"1"]["0"-"9"]|["1"-"9"])":"["0"-"5"]["0"-"9"]":"(["0"-"5"]["0"-"9"]|["6"]["0"]))> { System.out.println("TIME ");}
   | <AND: ("AND")> { System.out.println("AND "); }
   | <OR: ("OR")> { System.out.println("OR  "); }
+  | <POINT: ("POINT")> 			{ System.out.println("POINT "); }
+  | <DISTANCE:    ("distance")> 			{ System.out.println("DISTANCE "); }
 }
 
 TreeNode stmt() : {
@@ -58,6 +67,7 @@ TreeNode stmt() : {
   TreeNode root = null; }
 {
     nodeA = context_stmt() root = context_comparison(nodeA) (root = context_join(root))? { return root; }
+  | nodeA = distance_stmt() root = distance_comparison(nodeA) (root = context_join(root))? { return root; }
 }
 
 TreeNode context_comparison(TreeNode _nodeA) : {
@@ -98,13 +108,73 @@ TreeNode context_join(TreeNode _root) : {
      }
 }
 
-TreeNode context_stmt() : { Token t; }
+TreeNode context_stmt() : { 
+  Token t; 
+}
 	{
   	<CONTEXT_SPEED> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.SPEED); }
 	| <CONTEXT_TEMP> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TEMPERATURE); }
 	| <CONTEXT_DENSITY> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.DENSITY); }
 	| <CONTEXT_TIME> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.TIME); }
 	| <CONTEXT_FUEL> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.FUELSTATUS); }
+	| <CONTEXT_POSITION> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.POSITION); }
   	| t = <TIME> { return new TreeNodeTime(t.image); }
   	| t = <DIGIT> { return new TreeNodeDigit(t.image); }
 	}
+
+
+TreeNode distance_stmt() : {
+  TreeNode nodeA = null;
+  TreeNode nodeB = null;
+  TreeNode root = null; }
+  {
+  <DISTANCE>  "(" nodeA = one_dim_geo_stmt() "," nodeB = one_dim_geo_stmt() ")" { 
+  root = new TreeNode_DISTANCE();
+  root.setChilds(new TreeNode[]{nodeA, nodeB});
+  return root; 
+  }
+}
+
+TreeNode one_dim_geo_stmt() : {
+  String point;
+  TreeNode x;
+  TreeNode y;
+  }
+{
+   <POINT> "(" x = number_expr() "," y = number_expr() ")" { 
+     try {
+        point = x.calculate().toString() + "," + y.calculate().toString();
+           {if (true) return new TreeNodePoint(point);}
+      } catch (NodeError e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  | <CONTEXT_POSITION> { return new TreeNodeContextVar(TreeNodeContextVar.ContextType.POSITION); }
+}
+
+TreeNode distance_comparison(TreeNode _nodeA) : {
+  TreeNode root = null;
+  TreeNode nodeB = null; }
+{
+  <LESS> nodeB = number_expr() {
+  root = new TreeNode_LESS();
+  root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+  return root;
+  }
+  | <GREATER> nodeB = number_expr() {
+  root = new TreeNode_GREATER();
+  root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+  return root;
+  }
+  | <EQUALS> nodeB = number_expr() {
+  root = new TreeNode_EQUALS();
+  root.setChilds(new TreeNode[]{ _nodeA, nodeB });
+  return root;
+  }
+} 
+
+TreeNode number_expr() : { Token t; }
+{
+  t = <DIGIT> { return new TreeNodeDigit(t.image); }
+} 

@@ -1,7 +1,5 @@
 package at.fhooe.mcm.components.aal;
 
-import at.fhooe.mcm.components.AALComponent;
-
 import javax.swing.*;
 import java.awt.*;
 

@@ -8,14 +8,18 @@ import at.fhooe.mcm.nodes.TreeNodeContextVar.ContextType;
 public class TreeNode_LESS extends TreeNode{
   @Override
   public Object calculate() throws NodeError {
-		if (((TreeNodeContextVar)getChilds()[0]).getType() == ContextType.TIME) {
-			if (((LocalTime) getChilds()[0].calculate()).isBefore((LocalTime) getChilds()[1].calculate())) {
+		TreeNode firstChild = getChilds()[0];	
+		TreeNode secondChild = getChilds()[1];
+		
+		if (firstChild instanceof TreeNodeContextVar 
+				&& ((TreeNodeContextVar)firstChild).getType() == ContextType.TIME) {
+			if (((LocalTime) firstChild.calculate()).isBefore((LocalTime) secondChild.calculate())) {
 				return true;
 			} else {
 				return false;
 			}
 		} else {
-		    if (((int) getChilds()[0].calculate()) < ((int) getChilds()[1].calculate()))
+		    if (((int) firstChild.calculate()) < ((int) secondChild.calculate()))
 		    	return true;
 		    else
 		     	return false;

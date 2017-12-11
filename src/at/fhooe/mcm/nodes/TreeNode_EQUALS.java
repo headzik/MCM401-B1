@@ -1,7 +1,5 @@
 package at.fhooe.mcm.nodes;
 
-import java.time.LocalTime;
-
 import at.fhooe.mcm.context.elements.ContextElement;
 
 public class TreeNode_EQUALS extends TreeNode {
