@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
 public class DrawingPanel extends JPanel {
 	
 	private boolean mDraw = false;

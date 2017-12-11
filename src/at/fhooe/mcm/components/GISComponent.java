@@ -17,24 +17,25 @@ import at.fhooe.mcm.objects.Observable;
 
 public class GISComponent extends Observable implements IComponent, IObserver{
 
-	private Panel mView;
+	private GISView mView;
+	private GISController mController;
 	private GISModel mModel;
 	private Mediator mMediator;
 
 	public GISComponent() {
 		mModel = new GISModel();
-		GISController c = new GISController(mModel);
-		GISView v = new GISView(c);
+		mController = new GISController(mModel);
+		GISView v = new GISView(mController);
 
-		c.setView(v);
+		mController.setView(v);
 
 		mModel.addObserver(v);
-		mView = v.getView();
+		mView = v;
 	}
 	
 	@Override
 	public Panel getView() {
-		return mView;
+		return mView.getView();
 	}
 
 	@Override
@@ -49,7 +50,8 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 
 	@Override
 	public void setUI(IUIView _view) {
-		mView = _view.getPanel();
+		_view.setController(mController);
+		mView.setPanel(_view.getView());
 	}
 
 	@Override

@@ -17,14 +17,9 @@ import java.awt.image.BufferedImage;
 public class GISView implements IDataObserver {
 
 	public DrawingPanel mPanel;
-	private Panel mMainPanel;
-	private Button mLoadButton, mZTFButton, mZoomInButton, 
-				   mZoomOutButton, mScrollUpButton, mScrollDownButton, 
-				   mScrollLeftButton, mScrollRightButton, mRotateLeftButton, 
-				   mRotateRightButton, mPOIToggleButton, mStickyToggleButton,
-				   mSaveImageButton;
-	private TextField mScale;
+	private Panel mMainPanel, mButtonPanel;
 	private GISController mController;
+	private DrawingPanel panel;
 
 	/**
 	 * Constructor initializing GUI components.
@@ -41,65 +36,15 @@ public class GISView implements IDataObserver {
 		mPanel= new DrawingPanel();
 		mPanel.setBackground(Color.LIGHT_GRAY);
 
-		Panel buttonPanel = new Panel();
-		buttonPanel.setBackground(Color.WHITE);
-		buttonPanel.setLayout(new FlowLayout());
-
-		mLoadButton = new Button("Load");
-		mZTFButton = new Button("ZTF");
-		mZoomInButton = new Button("+");
-		mZoomOutButton = new Button("-");
-		mScrollUpButton = new Button("Up");
-		mScrollDownButton = new Button("Down");
-		mScrollLeftButton = new Button("Left");
-		mScrollRightButton = new Button("Right");
-		mRotateLeftButton = new Button("Rot<");
-		mRotateRightButton = new Button("Rot>");
-		mPOIToggleButton = new Button("POI");
-		mStickyToggleButton = new Button("Sticky");
-		mSaveImageButton = new Button("Store");
-		mScale = new TextField("1:unknown");
-
-		buttonPanel.add(mLoadButton);
-		buttonPanel.add(new Panel());
-		buttonPanel.add(mZTFButton);
-		buttonPanel.add(mZoomInButton);
-		buttonPanel.add(mZoomOutButton);
-		buttonPanel.add(new Panel());
-		buttonPanel.add(mScrollUpButton);
-		buttonPanel.add(mScrollLeftButton);
-		buttonPanel.add(mScrollDownButton);
-		buttonPanel.add(mScrollRightButton);
-		buttonPanel.add(new Panel());
-		buttonPanel.add(mRotateLeftButton);
-		buttonPanel.add(mRotateRightButton);
-		buttonPanel.add(new Panel());
-		buttonPanel.add(mPOIToggleButton);
-		buttonPanel.add(mScale);
-
 
 		mPanel.addComponentListener(mController);
 		mPanel.addMouseListener(mController);
 		mPanel.addMouseWheelListener(mController);
 		mPanel.addMouseMotionListener(mController);
 		mPanel.addKeyListener(mController);
-		mLoadButton.addActionListener(mController);
-		mZTFButton.addActionListener(mController);
-		mZoomInButton.addActionListener(mController);
-		mZoomOutButton.addActionListener(mController);
-		mScrollUpButton.addActionListener(mController);
-		mScrollDownButton.addActionListener(mController);
-		mScrollLeftButton.addActionListener(mController);
-		mScrollRightButton.addActionListener(mController);
-		mRotateLeftButton.addActionListener(mController);
-		mRotateRightButton.addActionListener(mController);
-		mPOIToggleButton.addActionListener(mController);
-		mStickyToggleButton.addActionListener(mController);
-		mSaveImageButton.addActionListener(mController);
-		mScale.addActionListener(mController);
+
 
 		mMainPanel.add(mPanel,BorderLayout.CENTER);
-		mMainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
 	}
 
@@ -109,7 +54,6 @@ public class GISView implements IDataObserver {
 	@Override
 	public void update(BufferedImage _data) {
 		mPanel.drawImage(_data);
-		mScale.setText("1:" + mController.getScale());
 	}
 	
 	/**
@@ -140,5 +84,9 @@ public class GISView implements IDataObserver {
 
 	public Panel getView(){
 		return mMainPanel;
+	}
+
+	public void setPanel(Panel _panel) {
+		mMainPanel.add(_panel, BorderLayout.SOUTH);
 	}
 }
