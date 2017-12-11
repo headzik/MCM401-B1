@@ -7,9 +7,11 @@ import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
+import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 import at.fhooe.mcm.views.MediatorView;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,6 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     public static void main(String[] args) {
         Mediator m = new Mediator();
-
     }
 
     @Override

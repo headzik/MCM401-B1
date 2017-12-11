@@ -6,6 +6,7 @@ import at.fhooe.mcm.components.aal.AALModel;
 import at.fhooe.mcm.components.aal.AALView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
+import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 
 import java.awt.*;
@@ -41,6 +42,11 @@ public class AALComponent implements IComponent, IObserver {
     @Override
     public void init(Mediator _mediator) {
         mMediator = _mediator;
+    }
+
+    @Override
+    public void setUI(IUIView _view) {
+
     }
 
     @Override

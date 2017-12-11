@@ -7,6 +7,7 @@ import at.fhooe.mcm.components.gps.GPSModel;
 import at.fhooe.mcm.components.gps.GPSView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
+import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 
 import java.awt.*;
@@ -42,6 +43,11 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
 	@Override
 	public void init(Mediator _mediator) {
 		mMediator = _mediator;
+	}
+
+	@Override
+	public void setUI(IUIView _view) {
+
 	}
 
 	@Override

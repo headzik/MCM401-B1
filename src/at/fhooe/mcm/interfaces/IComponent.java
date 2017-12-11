@@ -10,4 +10,5 @@ public interface IComponent {
 	String getName();
 
     void init(Mediator mediator);
+	void setUI(IUIView _view);
 }

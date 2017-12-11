@@ -141,5 +141,4 @@ public class GISView implements IDataObserver {
 	public Panel getView(){
 		return mMainPanel;
 	}
-
 }

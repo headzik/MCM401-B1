@@ -11,12 +11,13 @@ import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IObserver;
+import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 
 
 public class GISComponent extends Observable implements IComponent, IObserver{
 
-	private Panel view;
+	private Panel mView;
 	private GISModel mModel;
 	private Mediator mMediator;
 
@@ -28,12 +29,12 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		c.setView(v);
 
 		mModel.addObserver(v);
-		view = v.getView();
+		mView = v.getView();
 	}
 	
 	@Override
 	public Panel getView() {
-		return view;
+		return mView;
 	}
 
 	@Override
@@ -44,6 +45,11 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	@Override
 	public void init(Mediator _mediator) {
 		mMediator = _mediator;
+	}
+
+	@Override
+	public void setUI(IUIView _view) {
+		mView = _view.getPanel();
 	}
 
 	@Override
@@ -61,5 +67,4 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		}
 
 	}
-
 }

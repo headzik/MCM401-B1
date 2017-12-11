@@ -11,6 +11,7 @@ import at.fhooe.mcm.components.poi.POIView;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
+import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 
 public class POIComponent extends Observable implements IComponent, IObserver {
@@ -38,6 +39,11 @@ public class POIComponent extends Observable implements IComponent, IObserver {
 	@Override
 	public void init(Mediator _mediator) {
 		mMediator = _mediator;
+	}
+
+	@Override
+	public void setUI(IUIView _view) {
+
 	}
 
 	@Override

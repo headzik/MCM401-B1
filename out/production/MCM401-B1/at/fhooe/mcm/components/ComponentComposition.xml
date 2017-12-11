@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <components>
-    <component name="at.fhooe.mcm.components.GISComponent"/>
+    <component name="at.fhooe.mcm.components.GISComponent">
+        <parameterType>at.fhooe.mcm.interfaces.IUIView</parameterType>
+        <parameter>at.fhooe.mcm.components.gis.ui.CarUIView</parameter>
+    </component>
     <component name="at.fhooe.mcm.components.POIComponent"/>
     <component name="at.fhooe.mcm.components.GPSComponent"/>
     <component name="at.fhooe.mcm.components.AALComponent"/>
