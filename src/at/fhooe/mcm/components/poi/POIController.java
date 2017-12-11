@@ -1,7 +1,5 @@
 package at.fhooe.mcm.components.poi;
 
-import static at.fhooe.mcm.components.gis.DrawingContext.POI_TYPE;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

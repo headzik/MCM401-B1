@@ -6,8 +6,8 @@ import org.postgis.PGgeometry;
 import org.postgresql.PGConnection;
 import org.postgresql.util.PGobject;
 
-import at.fhooe.mcm.components.gis.DrawingContext;
 import at.fhooe.mcm.components.gis.GeoObject;
+import at.fhooe.mcm.interfaces.IDrawingContext;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -66,7 +66,7 @@ public class POIServer {
                     case Geometry.POINT:
                         String wkt = geom.toString();
                         org.postgis.Point p = new org.postgis.Point(wkt);
-                        mObjects.add(new POIObject(id, DrawingContext.POI_TYPE, new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1), loadImage("resources/gas.png"), POIObject.POI_TYPE.TYPE_2));
+                        mObjects.add(new POIObject(id, IDrawingContext.POI_TYPE, new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1), loadImage("resources/gas.png"), POIObject.POI_TYPE.TYPE_2));
                         break;
                     default:
                         break;
@@ -88,7 +88,7 @@ public class POIServer {
                     case Geometry.POINT:
                         String wkt = geom.toString();
                         org.postgis.Point p = new org.postgis.Point(wkt);
-                        mObjects.add(new POIObject(id, DrawingContext.POI_TYPE, new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1), loadImage("resources/police.png"), POIObject.POI_TYPE.TYPE_1));
+                        mObjects.add(new POIObject(id, IDrawingContext.POI_TYPE, new Polygon(new int[]{(int) p.getX()},new int[]{(int) p.getY()},1), loadImage("resources/police.png"), POIObject.POI_TYPE.TYPE_1));
                         break;
                     default:
                         break;
