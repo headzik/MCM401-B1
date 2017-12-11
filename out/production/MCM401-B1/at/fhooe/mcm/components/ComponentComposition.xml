@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+    <component name="at.fhooe.mcm.components.GISComponent"/>
+    <component name="at.fhooe.mcm.components.POIComponent"/>
+    <component name="at.fhooe.mcm.components.GPSComponent"/>
+    <component name="at.fhooe.mcm.components.AALComponent"/>
+    <component name="at.fhooe.mcm.components.CMComponent"/>
+</components>

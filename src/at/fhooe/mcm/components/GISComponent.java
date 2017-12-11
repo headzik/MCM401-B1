@@ -2,6 +2,7 @@ package at.fhooe.mcm.components;
 
 import java.awt.Panel;
 
+import at.fhooe.mcm.Mediator;
 import at.fhooe.mcm.components.gis.GISController;
 import at.fhooe.mcm.components.gis.GISModel;
 import at.fhooe.mcm.components.gis.GISView;
@@ -16,7 +17,8 @@ import at.fhooe.mcm.objects.Observable;
 public class GISComponent extends Observable implements IComponent, IObserver{
 
 	private Panel view;
-	GISModel mModel;
+	private GISModel mModel;
+	private Mediator mMediator;
 
 	public GISComponent() {
 		mModel = new GISModel();
@@ -37,6 +39,11 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	@Override
 	public String getName() {
 		return "GISComponent";
+	}
+
+	@Override
+	public void init(Mediator _mediator) {
+		mMediator = _mediator;
 	}
 
 	@Override

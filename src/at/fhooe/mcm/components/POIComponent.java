@@ -16,15 +16,13 @@ import at.fhooe.mcm.objects.Observable;
 public class POIComponent extends Observable implements IComponent, IObserver {
 
 	private Panel view;
-	IMediator mediator;
+	IMediator mMediator;
 	POIModel mModel;
 
-	public POIComponent(Mediator _mediator){
+	public POIComponent(){
 		mModel = new POIModel();
 		POIView v = new POIView(new POIController(mModel));
 		view = v.getView();
-
-		mediator = _mediator;
 
 		mModel.addObserver(this, ObserverType.GIS);
 	}
@@ -38,7 +36,12 @@ public class POIComponent extends Observable implements IComponent, IObserver {
 	}
 
 	@Override
+	public void init(Mediator _mediator) {
+		mMediator = _mediator;
+	}
+
+	@Override
 	public void update(Object _o) {
-		mediator.update(_o);
+		mMediator.update(_o);
 	}
 }

@@ -20,13 +20,12 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
 
     private Mediator mMediator;
 	
-	public GPSComponent(Mediator _mediator) {
+	public GPSComponent() {
 		mModel = new GPSModel();
 		mController = new GPSController(mModel);
 		mView = new GPSView(mController, mModel.getParser());
 		
 		view = mView.getView();
-		mMediator = _mediator;
 		mModel.addObserver(this, ObserverType.GIS);
 	}
 	
@@ -39,6 +38,11 @@ public class GPSComponent extends Observable implements IComponent, IObserver {
     public String getName() {
         return "GPSComponent";
     }
+
+	@Override
+	public void init(Mediator _mediator) {
+		mMediator = _mediator;
+	}
 
 	@Override
 	public void update(Object _o) {

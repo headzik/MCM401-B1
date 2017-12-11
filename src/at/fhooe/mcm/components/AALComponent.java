@@ -16,9 +16,7 @@ public class AALComponent implements IComponent, IObserver {
     private AALModel mModel;
     private Mediator mMediator;
 
-    public AALComponent(Mediator _mediator) {
-
-        mMediator = _mediator;
+    public AALComponent() {
 
         mModel = new AALModel();
         AALController controller = new AALController(mModel);
@@ -38,6 +36,11 @@ public class AALComponent implements IComponent, IObserver {
     @Override
     public String getName() {
         return "AALComponent";
+    }
+
+    @Override
+    public void init(Mediator _mediator) {
+        mMediator = _mediator;
     }
 
     @Override

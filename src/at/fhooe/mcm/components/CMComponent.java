@@ -30,14 +30,13 @@ public class CMComponent implements IComponent, IObserver {
     private CMSimulationPlayer mPlayer;
     private boolean mIsRecording, mIsPlaying;
 
-    public CMComponent(Mediator _mediator){
+    public CMComponent(){
         mModel = new CMModel();
         CMController controller = new CMController(mModel, this);
         CMView view = new CMView(controller);
         mView = view;
         controller.setView(view);
         mPanel = view.getView();
-        mMediator = _mediator;
         mModel.addObserver(this, Observable.ObserverType.CM);
         mCMUpdateThread = new CMUpdateThread(this);
     }
@@ -102,6 +101,11 @@ public class CMComponent implements IComponent, IObserver {
     @Override
     public String getName() {
         return "Context Management";
+    }
+
+    @Override
+    public void init(Mediator _mediator) {
+        mMediator = _mediator;
     }
 
     @Override

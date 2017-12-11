@@ -1,10 +1,13 @@
 package at.fhooe.mcm.interfaces;
 
+import at.fhooe.mcm.Mediator;
+
 import java.awt.Panel;
 
 public interface IComponent {
 	
-	public Panel getView();
-	public String getName();
-	
+	Panel getView();
+	String getName();
+
+    void init(Mediator mediator);
 }

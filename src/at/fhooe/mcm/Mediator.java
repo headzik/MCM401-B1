@@ -4,16 +4,12 @@ import at.fhooe.mcm.components.*;
 import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.context.elements.ContextElement;
 import at.fhooe.mcm.context.elements.ContextSituation;
-import at.fhooe.mcm.context.elements.PositionContext;
-import at.fhooe.mcm.context.parsers.DomParser;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
-import at.fhooe.mcm.objects.Observable.ObserverType;
 import at.fhooe.mcm.views.MediatorView;
 
-import javax.naming.Context;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,24 +20,16 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     public Mediator() {
         mMediatorView = new MediatorView();
-        mComponents = new ArrayList<>();
+        mComponents = new ComponentsFactory().buildComponents("src/at/fhooe/mcm/components/ComponentComposition.xml", this);
 
-        GISComponent g = new GISComponent();
-        mComponents.add(g);
-        addObserver(g, ObserverType.GIS);
-
-        GPSComponent gps = new GPSComponent(this);
-        mComponents.add(gps);
-
-        POIComponent p = new POIComponent(this);
-        mComponents.add(p);
-
-        AALComponent a = new AALComponent(this);
-        mComponents.add(a);
-
-        CMComponent c = new CMComponent(this);
-        mComponents.add(c);
-        addObserver(c, ObserverType.CM);
+        for (IComponent c : mComponents){
+            if (c instanceof GISComponent){
+                addObserver((GISComponent) c, ObserverType.GIS);
+            }
+            if (c instanceof CMComponent){
+                addObserver((CMComponent) c, ObserverType.CM);
+            }
+        }
 
         mMediatorView.addTabs(mComponents);
 
@@ -49,6 +37,7 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     public static void main(String[] args) {
         Mediator m = new Mediator();
+
     }
 
     @Override
