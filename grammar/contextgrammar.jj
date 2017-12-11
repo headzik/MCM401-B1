@@ -46,9 +46,9 @@ SKIP : {" " | "\t" | "\n" | "\r" }
 TOKEN :
 {
     <DIGIT:         (["0"-"9"])+>            { System.out.println("DIGIT ");}
-	| <EQUALS:				("==")>			{ System.out.println("EQUALS "); }
-  | <LESS:					("<")>			  { System.out.println("LESS "); }
-  | <GREATER:				(">")>			{ System.out.println("GREATER "); }
+	| <EQUALS:				("EQUALS")>			{ System.out.println("EQUALS "); }
+  | <LESS:					("LESS")>			  { System.out.println("LESS "); }
+  | <GREATER:				("GREATER")>			{ System.out.println("GREATER "); }
   | <CONTEXT_TEMP: 	("temp")> 		{ System.out.println("temp (var) "); }
   | <CONTEXT_SPEED: ("speed")>    { System.out.println("speed (var) "); }
   | <CONTEXT_DENSITY: ("density")>    { System.out.println("density (var) "); }

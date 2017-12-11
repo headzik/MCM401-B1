@@ -17,7 +17,7 @@ public class Compiler implements CompilerConstants {
                 t.setVariableParameters(new ContextElement[]{new SpeedContext(4001, "speed", SpeedContext.SpeedType.KMH, 100),
                                                  new TemperatureContext(2001, "temp", TemperatureContext.TemperatureType.CELSIUS, 25),
                                                  new DensityContext(8001, "density", DensityContext.DensityType.CARS, 2),
-                                                 new PositionContext(6001/*random*/, "position", PositionContext.PositionType.GAUSSKRUEGER, 300, 300)});
+                                                 new PositionContext(6001/*random*/, "position", PositionContext.PositionType.GAUSSKRUEGER, 300, 400)});
                 try {
                         System.out.println(String.valueOf(t.calculate()));
                 } catch(Exception _e){
@@ -28,7 +28,7 @@ public class Compiler implements CompilerConstants {
 
         public static void main(String[] _argv) {
     try {
-      TreeNode node = Compiler.evaluate("distance(position, POINT(0,0)) == 424 OR speed == 90");
+      TreeNode node = Compiler.evaluate(_argv[0]);
     } catch (Exception _e) {
       _e.printStackTrace();
     }

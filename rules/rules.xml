@@ -1,6 +1,6 @@
 <rules>
 	<rule>
-		<condition>temp &#60; 4</condition>
+		<condition>temp LESS 4</condition>
 		<action>
 			<class>at.fhooe.mc.GISComponent</class>
 			<method>setWarning</method>
@@ -10,14 +10,14 @@
 					<value>at.fhooe.mc.gis.BlackIceWarning</value>
 				</parameter>				
 				<parameter>
-					<type>at.fhooe.mc.gis.IWarningType</type>
+					<type>at.fhooe.mc.gis.ITestType</type>
 					<value>at.fhooe.mc.gis.TestType</value>
 				</parameter>
 			</parameters>
 		</action>
 	</rule>
 	<rule>
-		<condition>speed &#62; 80</condition>
+		<condition>speed GREATER 80</condition>
 		<action>
 			<class>at.fhooe.mc.GISComponent</class>
 			<method>setWarning</method>
