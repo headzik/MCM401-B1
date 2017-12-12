@@ -20,10 +20,9 @@ public class RuleEvaluator {
 		String condition = "";
 		String className = "";
 		String method = "";
-		String parameterType = "";
-		String parameterValue = "";
 		
-		String parameterStream = "";
+		String parameterTypes = "";
+		String parameterValues = "";
 		ArrayList<RuleContainer> ruleContainers = new ArrayList<>();
 		
 		try {			
@@ -37,6 +36,8 @@ public class RuleEvaluator {
 			NodeList rules = doc.getElementsByTagName("rule");
 			
 			for (int i = 0; i < rules.getLength(); i++){ 
+				parameterTypes = "";        
+				parameterValues = "";       
 				NodeList action = ((Element)rules.item(i)).getElementsByTagName("action");
 				NodeList parameters = ((Element)action.item(0)).getElementsByTagName("parameter");
 				
@@ -57,12 +58,13 @@ public class RuleEvaluator {
 					Node parameterNode = parameters.item(j);
 		            if (parameterNode.getNodeType() == Node.ELEMENT_NODE) {
 		                Element eElement = (Element) parameterNode;
-		                parameterType = eElement.getElementsByTagName("type").item(0).getTextContent();
-		                parameterValue = eElement.getElementsByTagName("value").item(0).getTextContent();
-		                parameterStream += parameterType + " " + parameterValue + ", ";
+		                parameterTypes += eElement.getElementsByTagName("type").item(0).getTextContent();
+		                parameterValues += eElement.getElementsByTagName("value").item(0).getTextContent();
+		                parameterTypes += " ";
+		                parameterValues += " ";
 		            }
 				}
-				String actionPhrase = className + "/ " + method + "/ " + parameterStream;
+				String actionPhrase = className + "/" + method + "/" + parameterTypes + "/" + parameterValues;
 				RuleContainer ruleContainer = new RuleContainer(condition, actionPhrase);
 				ruleContainers.add(ruleContainer);
 	        }			

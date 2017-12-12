@@ -1,20 +1,23 @@
 package JUnitTests;
 
+
 import java.util.ArrayList;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 
 import at.fhooe.mcm.rules.RuleContainer;
 import at.fhooe.mcm.rules.RuleEvaluator;
 
-public class RuleEvaluatorTest {
+public class RuleContainerTest {
 
 	@Test
-	public void testListNotEmpty() {
-		ArrayList<RuleContainer> emptyArrayList = new ArrayList<>();
+	public void testExecute() {
 		ArrayList<RuleContainer> ruleContainers = RuleEvaluator.parseRulesContainerFromXML("rules/rules.xml");
-		assertNotEquals(ruleContainers, emptyArrayList);
+		
+		for(RuleContainer ruleContainer: ruleContainers) {
+			ruleContainer.execute();
+		}
 	}
 
 }
