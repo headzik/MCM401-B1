@@ -4,6 +4,7 @@ import at.fhooe.mcm.components.gis.GeoObject;
 import at.fhooe.mcm.components.gis.Matrix;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public interface IDrawingContext {
 
@@ -23,4 +24,5 @@ public interface IDrawingContext {
 
     void drawObject(GeoObject _obj, Graphics _g, Matrix _matrix);
 
+    void drawBackground(BufferedImage img);
 }

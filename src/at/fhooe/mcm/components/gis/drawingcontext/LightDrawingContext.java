@@ -1,9 +1,7 @@
 package at.fhooe.mcm.components.gis.drawingcontext;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Polygon;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import at.fhooe.mcm.components.gis.GeoObject;
 import at.fhooe.mcm.components.gis.Matrix;
@@ -24,7 +22,7 @@ public class LightDrawingContext implements IDrawingContext{
 	 */
 	public void drawObject(GeoObject _obj, Graphics _g, Matrix _matrix) {
 		Polygon p = _matrix.multiply(_obj.getPoly());
-		
+
 		switch (_obj.getType()) {
 		case 233:
 			_g.setColor(Color.WHITE);
@@ -54,8 +52,7 @@ public class LightDrawingContext implements IDrawingContext{
 			// POIObject
 			Image img = ((POIObject) _obj).getImage();
 			_g.drawImage(img, p.getBounds().x - img.getWidth(null), p.getBounds().y - img.getHeight(null), null, null);
-			break;	
-			
+			break;
 		case LANDUSE_COMMERCIAL:
 			_g.setColor(Color.LIGHT_GRAY);
 			_g.fillPolygon(p);
@@ -106,8 +103,17 @@ public class LightDrawingContext implements IDrawingContext{
 			break;
 			default:
 				_g.setColor(Color.BLACK);
-				_g.drawPolygon(p);		
+				_g.drawPolygon(p);
 		}
+
+		_g.dispose();
+	}
+
+	@Override
+	public void drawBackground(BufferedImage img) {
+		Graphics2D _g = img.createGraphics();
+		_g.setColor(Color.LIGHT_GRAY);
+		_g.fillRect(0,0,img.getWidth(),img.getHeight());
 		_g.dispose();
 	}
 }

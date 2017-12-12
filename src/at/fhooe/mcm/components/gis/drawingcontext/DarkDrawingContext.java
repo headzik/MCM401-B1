@@ -6,10 +6,12 @@ import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.interfaces.IDrawingContext;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class DarkDrawingContext implements IDrawingContext{
+public class DarkDrawingContext implements IDrawingContext {
     @Override
-    public void drawObject(GeoObject _obj, Graphics _g, Matrix _matrix) {
+    public void drawObject(GeoObject _obj, Graphics _g
+            , Matrix _matrix) {
         Polygon p = _matrix.multiply(_obj.getPoly());
 
         switch (_obj.getType()) {
@@ -95,6 +97,14 @@ public class DarkDrawingContext implements IDrawingContext{
                 _g.setColor(Color.WHITE);
                 _g.drawPolygon(p);
         }
+        _g.dispose();
+    }
+
+    @Override
+    public void drawBackground(BufferedImage img) {
+        Graphics2D _g = img.createGraphics();
+        _g.setColor(Color.DARK_GRAY);
+        _g.fillRect(0, 0, img.getWidth(), img.getHeight());
         _g.dispose();
     }
 }

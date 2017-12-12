@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <components>
     <component name="at.fhooe.mcm.components.GISComponent">
-        <uiMode>at.fhooe.mcm.components.gis.ui.CarUIView</uiMode>
+        <uiMode>at.fhooe.mcm.components.gis.ui.PedestrianUIView</uiMode>
         <drawingContext>at.fhooe.mcm.components.gis.drawingcontext.LightDrawingContext</drawingContext>
     </component>
     <component name="at.fhooe.mcm.components.POIComponent"/>

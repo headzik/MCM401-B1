@@ -140,6 +140,8 @@ public class GISModel extends DataObservable {
 
         BufferedImage img = new BufferedImage(mWindowWidth, mWindowHeight, BufferedImage.TYPE_INT_ARGB);
         // Draw polygons
+
+        mDrawingContext.drawBackground(img);
         if (mTransformationMatrix != null && mObjects != null) {
             for (int i = 0; i < mObjects.size(); i++) {
                 // Check if its a POI
