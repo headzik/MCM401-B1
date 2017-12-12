@@ -28,17 +28,17 @@ public class POIController implements ItemListener {
         switch (poiName) {
             case "POI_1": {
                 if (isChecked(state)) {
-                    mModel.setVisibleByType(true, POIObject.POI_TYPE.TYPE_1);
+                    mModel.setVisibleByType(true, POI_TYPE.TYPE_1);
                 } else {
-                    mModel.setVisibleByType(false, POIObject.POI_TYPE.TYPE_1);
+                    mModel.setVisibleByType(false, POI_TYPE.TYPE_1);
                 }
             }
             break;
             case "POI_2": {
                 if (isChecked(state)) {
-                    mModel.setVisibleByType(true, POIObject.POI_TYPE.TYPE_2);
+                    mModel.setVisibleByType(true, POI_TYPE.TYPE_2);
                 } else {
-                    mModel.setVisibleByType(false, POIObject.POI_TYPE.TYPE_2);
+                    mModel.setVisibleByType(false, POI_TYPE.TYPE_2);
                 }
             }
             break;

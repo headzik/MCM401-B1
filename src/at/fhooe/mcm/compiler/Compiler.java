@@ -17,6 +17,8 @@ public class Compiler implements CompilerConstants {
                 t.setVariableParameters(new ContextElement[]{new SpeedContext(4001, "speed", SpeedContext.SpeedType.KMH, 100),
                                                  new TemperatureContext(2001, "temp", TemperatureContext.TemperatureType.CELSIUS, 25),
                                                  new DensityContext(8001, "density", DensityContext.DensityType.CARS, 2),
+                                                 new TimeContext(1001, "time", TimeContext.TimeType.H24, 9, 30),
+                                                 new FuelContext(3001, "fuel", 9),
                                                  new PositionContext(6001/*random*/, "position", PositionContext.PositionType.GAUSSKRUEGER, 300, 400)});
                 try {
                         System.out.println(String.valueOf(t.calculate()));

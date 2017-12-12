@@ -8,6 +8,7 @@ import at.fhooe.mcm.components.gis.GISModel;
 import at.fhooe.mcm.components.poi.POIController;
 import at.fhooe.mcm.components.poi.POIModel;
 import at.fhooe.mcm.components.poi.POIView;
+import at.fhooe.mcm.components.poi.POI_TYPE;
 import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
@@ -36,6 +37,10 @@ public class POIComponent extends Observable implements IComponent, IObserver {
 		return "POIComponent";
 	}
 
+	public void showPOIType(POI_TYPE _type) {
+		mModel.setVisibleByType(true, _type);
+	}
+	
 	@Override
 	public void init(Mediator _mediator) {
 		mMediator = _mediator;

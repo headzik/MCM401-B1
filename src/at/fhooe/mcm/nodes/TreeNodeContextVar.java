@@ -67,6 +67,7 @@ public class TreeNodeContextVar extends TreeNode {
         case TIME:
             if (ce instanceof TimeContext)
               mContextElement = ce;
+            break;
         case POSITION:
             if (ce instanceof PositionContext)
               mContextElement = ce;

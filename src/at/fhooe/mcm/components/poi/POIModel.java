@@ -1,6 +1,6 @@
 package at.fhooe.mcm.components.poi;
 
-import at.fhooe.mcm.components.poi.POIObject.POI_TYPE;
+import at.fhooe.mcm.components.poi.POI_TYPE;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
 

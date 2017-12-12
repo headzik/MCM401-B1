@@ -7,9 +7,6 @@ import at.fhooe.mcm.components.gis.GeoObject;
 
 public class POIObject extends GeoObject {
 	
-	public static enum POI_TYPE {
-		TYPE_1, TYPE_2, TYPE_POSITION
-	}
 	
 	private Image mImg;
 	private POI_TYPE mType;

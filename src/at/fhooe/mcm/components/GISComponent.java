@@ -8,7 +8,7 @@ import at.fhooe.mcm.components.gis.GISController;
 import at.fhooe.mcm.components.gis.GISModel;
 import at.fhooe.mcm.components.gis.GISView;
 import at.fhooe.mcm.components.gis.GeoObject;
-import at.fhooe.mcm.components.gis.warnings.IWarningType;
+import at.fhooe.mcm.components.gis.warnings.WarningType;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
@@ -24,7 +24,7 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	private GISController mController;
 	private GISModel mModel;
 	private Mediator mMediator;
-	private ArrayList<IWarningType> mWarnings;
+	private ArrayList<WarningType> mWarnings;
 
 	public GISComponent() {
 		mModel = new GISModel();
@@ -39,7 +39,7 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		mWarnings = new ArrayList<>();
 	}
 	
-	public void setWarning(IWarningType warning) {
+	public void setWarning(WarningType warning) {
 		mWarnings.add(warning);
 		//display warning
 		System.out.println("Received warning of type: " + warning.toString());

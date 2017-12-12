@@ -4,7 +4,7 @@ import javax.imageio.ImageIO;
 
 import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.components.poi.POIServer;
-import at.fhooe.mcm.components.poi.POIObject.POI_TYPE;
+import at.fhooe.mcm.components.poi.POI_TYPE;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IDrawingContext;
 

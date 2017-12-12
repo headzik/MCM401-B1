@@ -4,10 +4,9 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import at.fhooe.mcm.compiler.ParseException;
-import at.fhooe.mcm.components.gis.warnings.IWarningType;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.interfaces.IComponent;
-import at.fhooe.mcm.interfaces.IUIView;
+import at.fhooe.mcm.nodes.NodeError;
 import at.fhooe.mcm.nodes.TreeNode;
 
 public class RuleContainer {
@@ -21,13 +20,17 @@ public class RuleContainer {
     }
 
     public boolean valid(ContextSituation _sit) {
-//    	_sit.get
-////    	mConditionRoot.setVariableParameters(_sit);
-//    	mConditionRoot.e
+    	try {
+			mConditionRoot.calculate();
+		} catch (NodeError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return false;
     }
 
-    public void execute() {
+    @SuppressWarnings("unchecked")
+	public void execute() {
     	String[] actionParts = mAction.split("/");
     	String className = actionParts[0];
     	String methodName = actionParts[1];    	
@@ -38,14 +41,15 @@ public class RuleContainer {
     	ArrayList<Object> arguments = new ArrayList<>();
     	
     	try {
-	    	for(String typeName: argumentTypesInString) {
-	    		argumentTypes.add(Class.forName(typeName));
-	    	}
-	    	
-	    	for(String argument: argumentValues) {
-	    		arguments.add((IWarningType)Class.forName(argument).newInstance());
-	    	}
-	    	
+    		for(int i = 0; i < argumentTypesInString.length; i++) {
+    			Class c = Class.forName(argumentTypesInString[i]);
+    			argumentTypes.add(c);
+    			if(c.isEnum()) {
+    	    		arguments.add(Enum.valueOf(c, argumentValues[i]));
+    			} else {
+    				arguments.add(Class.forName(argumentValues[i]).newInstance());
+    			}
+    		}
 	        IComponent c = (IComponent) Class.forName(className).newInstance();
 	        Method m = c.getClass().getMethod(methodName, argumentTypes.toArray(new Class[argumentTypes.size()]));
 	        m.invoke(c, arguments.toArray(new Object[arguments.size()]));
