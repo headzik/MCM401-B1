@@ -60,6 +60,14 @@ public class POIComponent extends Observable implements IComponent, IObserver {
 	}
 	
 	/**
+	 * Sets all POIs with the passed type invisible.
+	 * @param _type The type to set invisible.
+	 */
+	public void hidePOIType(POI_TYPE _type) {
+		mModel.setVisibleByType(false, _type);
+	}
+	
+	/**
 	 * Init method setting the mediator.
 	 */
 	@Override

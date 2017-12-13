@@ -6,5 +6,5 @@ package at.fhooe.mcm.components.poi;
  *
  */
 public enum POI_TYPE {
-	POLICE, GAS, TYPE_POSITION
+	TYPE_1, TYPE_2, TYPE_POSITION
 }
