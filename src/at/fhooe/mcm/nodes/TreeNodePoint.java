@@ -4,6 +4,11 @@ import org.postgis.Point;
 
 import at.fhooe.mcm.context.elements.ContextElement;
 
+/**
+ * Treenode for a point (used for position).
+ * @author ifumi
+ *
+ */
 public class TreeNodePoint extends TreeNode {
 
   private Point mPoint;

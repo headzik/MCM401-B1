@@ -4,6 +4,11 @@ import java.time.LocalTime;
 
 import at.fhooe.mcm.context.elements.ContextElement;
 
+/**
+ * Treenode for time.
+ * @author ifumi
+ *
+ */
 public class TreeNodeTime extends TreeNode {
 	
 	private LocalTime mTime;

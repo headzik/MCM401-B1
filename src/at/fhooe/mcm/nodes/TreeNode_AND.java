@@ -2,6 +2,11 @@ package at.fhooe.mcm.nodes;
 
 import at.fhooe.mcm.context.elements.ContextElement;
 
+/**
+ * Treenode for AND condition.
+ * @author ifumi
+ *
+ */
 public class TreeNode_AND extends TreeNode {
     @Override
     public Object calculate() throws NodeError {

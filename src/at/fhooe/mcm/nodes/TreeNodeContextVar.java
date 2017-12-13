@@ -8,6 +8,11 @@ import at.fhooe.mcm.context.elements.SpeedContext;
 import at.fhooe.mcm.context.elements.TemperatureContext;
 import at.fhooe.mcm.context.elements.TimeContext;
 
+/**
+ * Treenode for a context variable.
+ * @author ifumi
+ *
+ */
 public class TreeNodeContextVar extends TreeNode {
 
   public enum ContextType {

@@ -38,19 +38,19 @@ public class POIController implements ItemListener {
         int state = _e.getStateChange();
 
         switch (poiName) {
-            case "POI_1": {
+            case "Police Stations": {
                 if (isChecked(state)) {
-                    mModel.setVisibleByType(true, POI_TYPE.TYPE_1);
+                    mModel.setVisibleByType(true, POI_TYPE.POLICE);
                 } else {
-                    mModel.setVisibleByType(false, POI_TYPE.TYPE_1);
+                    mModel.setVisibleByType(false, POI_TYPE.POLICE);
                 }
             }
             break;
-            case "POI_2": {
+            case "Gas Stations": {
                 if (isChecked(state)) {
-                    mModel.setVisibleByType(true, POI_TYPE.TYPE_2);
+                    mModel.setVisibleByType(true, POI_TYPE.GAS);
                 } else {
-                    mModel.setVisibleByType(false, POI_TYPE.TYPE_2);
+                    mModel.setVisibleByType(false, POI_TYPE.GAS);
                 }
             }
             break;

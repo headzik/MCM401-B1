@@ -5,6 +5,11 @@ import java.time.LocalTime;
 import at.fhooe.mcm.context.elements.ContextElement;
 import at.fhooe.mcm.nodes.TreeNodeContextVar.ContextType;
 
+/**
+ * Treenode for LESS condition.
+ * @author ifumi
+ *
+ */
 public class TreeNode_LESS extends TreeNode{
   @Override
   public Object calculate() throws NodeError {

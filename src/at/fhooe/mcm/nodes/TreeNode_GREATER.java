@@ -6,6 +6,11 @@ import java.time.LocalTime;
 import at.fhooe.mcm.context.elements.ContextElement;
 import at.fhooe.mcm.nodes.TreeNodeContextVar.ContextType;
 
+/**
+ * Treenode for GREATER condition.
+ * @author ifumi
+ *
+ */
 public class TreeNode_GREATER extends TreeNode {
 	@Override
 	public Object calculate() throws NodeError {
