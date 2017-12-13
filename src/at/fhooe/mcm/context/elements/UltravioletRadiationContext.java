@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for UV radiation.
+ * @author ifumi
+ *
+ */
 public class UltravioletRadiationContext extends ContextElement {
 
     public enum UVType{

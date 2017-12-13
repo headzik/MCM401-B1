@@ -14,6 +14,12 @@ import com.google.gson.Gson;
 import at.fhooe.mcm.components.CMComponent;
 import at.fhooe.mcm.context.elements.ContextSituation;
 
+/**
+ * Simulation Player for the context management component.
+ * Handles the playback of a recorded simulation session.
+ * @author ifumi
+ *
+ */
 public class CMSimulationPlayer implements Runnable {
 	
 	private String mPath;
@@ -22,20 +28,36 @@ public class CMSimulationPlayer implements Runnable {
 	
 	private boolean mInterrupted = false;
 	
+	/**
+	 * Constructor.
+	 * @param _path The path of the stored session.
+	 * @param _comp The actual CM component.
+	 * @param _interval The interval to use for the playback.
+	 */
 	public CMSimulationPlayer (String _path, CMComponent _comp, int _interval) {
 		mPath = _path;
 		mComponent = _comp;
 		mInterval = _interval;
 	}
 	
+	/**
+	 * Interrupts the playback thread.
+	 */
 	public void interrupt() {
 		mInterrupted = false;
 	}
 
+	/**
+	 * Sets the interval for the playback.
+	 * @param _interval The interval to set.
+	 */
 	public void setInterval(int _interval) {
 		mInterval = _interval;
 	}
 
+	/**
+	 * The run method handling the actual playback.
+	 */
 	@Override
 	public void run() {
 		File folder = new File (mPath + "/");
@@ -62,6 +84,11 @@ public class CMSimulationPlayer implements Runnable {
 		mComponent.stopSimulationPlayback();
 	}
 	
+	/**
+	 * Reads a file (inputstream) and returns the content as string.
+	 * @param is The input stream
+	 * @return The read content as string.
+	 */
 	public static String readStream(InputStream is) {
 	    StringBuilder sb = new StringBuilder(512);
 	    try {

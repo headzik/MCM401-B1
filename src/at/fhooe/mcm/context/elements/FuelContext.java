@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for fuel status.
+ * @author ifumi
+ *
+ */
 public class FuelContext extends ContextElement {
 
 	private int mStatus; // 0- 100 %

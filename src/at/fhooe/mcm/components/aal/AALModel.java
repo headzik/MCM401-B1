@@ -8,6 +8,11 @@ import at.fhooe.mcm.objects.Observable;
 
 import java.io.IOException;
 
+/**
+ * The model for the AAL Component. Holds all data.
+ * @author ifumi
+ *
+ */
 public class AALModel extends Observable{
 
     private IContextParser mParser;
@@ -16,6 +21,11 @@ public class AALModel extends Observable{
         DOM, STREAM
     }
 
+    /**
+     * Parses a context .xml file
+     * @param _filePathText The path to the file.
+     * @param _selectedParser The parsemode to use.
+     */
     public void parseContextFile(String _filePathText, ParseMode _selectedParser) {
         System.out.println(_filePathText + " / " + _selectedParser.toString());
 

@@ -5,10 +5,18 @@ import at.fhooe.mcm.objects.Observable;
 
 import java.util.List;
 
+/**
+ * The model for the POI component.
+ * @author ifumi
+ *
+ */
 public class POIModel extends Observable {
 
     private List<POIObject> mPOIs;
 
+    /**
+     * The constructor.
+     */
     public POIModel() {
         new Thread(new Runnable() {
             public void run() {
@@ -18,6 +26,9 @@ public class POIModel extends Observable {
         }).start();
     }
 
+    /** 
+     * The update method.
+     */
     public void update() {
         if (mPOIs != null) {
             for (POIObject poi : mPOIs) {
@@ -26,7 +37,6 @@ public class POIModel extends Observable {
         }
 
         notifyObservers(null);
-
     }
 
     /**

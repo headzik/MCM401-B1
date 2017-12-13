@@ -6,6 +6,11 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+/**
+ * The main panel to draw on.
+ * @author ifumi
+ *
+ */
 public class DrawingPanel extends JPanel {
 	
 	private boolean mDraw = false;

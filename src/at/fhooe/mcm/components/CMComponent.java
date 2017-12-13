@@ -16,6 +16,11 @@ import at.fhooe.mcm.objects.Observable;
 
 import java.awt.*;
 
+/**
+ * Context Management component. Handles all manipulation and simulation of the ContextSituation.
+ * @author ifumi
+ *
+ */
 public class CMComponent implements IComponent, IObserver {
 
     private Panel mPanel;
@@ -31,6 +36,9 @@ public class CMComponent implements IComponent, IObserver {
     private CMSimulationPlayer mPlayer;
     private boolean mIsRecording, mIsPlaying;
 
+    /**
+     * Constructor.
+     */
     public CMComponent(){
         mModel = new CMModel();
         CMController controller = new CMController(mModel, this);
@@ -42,19 +50,34 @@ public class CMComponent implements IComponent, IObserver {
         mCMUpdateThread = new CMUpdateThread(this);
     }
     
+    /**
+     * Called whenever the context situation changes.
+     * @param _cs The ContextSituation.
+     */
     public void updateContextSituation(ContextSituation _cs) {
     	mModel.setContextSituation(_cs);
     }
     
+    /**
+     * Writes the passed context situation to a file for later simulation uses.
+     * @param _cs The ContextSituation to write.
+     */
 	public void recordContextSituation(ContextSituation _cs) {
 		if (isRecording())
 			mRecorder.writeContextSituation(_cs);
 	}
     
+	/**
+	 * True if a simulation is being recorded.
+	 * @return
+	 */
     public boolean isRecording() {
     	return mIsRecording;
     }
     
+    /**
+     * Starts the recording of a simulation session.
+     */
     public void startSimulationRecording() {
         if (!mIsRecording) {
             mRecorder = new CMSimulationRecorder();
@@ -63,6 +86,9 @@ public class CMComponent implements IComponent, IObserver {
         }
     }
     
+    /**
+     * Stops the recording of a simulation session.
+     */
     public void stopSimulationRecording() {
         if (mIsRecording) {
             mRecorder = null;
@@ -71,6 +97,9 @@ public class CMComponent implements IComponent, IObserver {
         }
     }
     
+    /**
+     * Toggles the periodic ContextSimulation broadcast.
+     */
     public void togglePeriodicUpdate() {
     	if (mThreadRunning)
     		stopPeriodicUpdate();
@@ -78,6 +107,9 @@ public class CMComponent implements IComponent, IObserver {
     		startPeriodicUpdate();
     }
        
+    /**
+     * Starts the periodic ContextSimulation broadcast.
+     */
     private void startPeriodicUpdate() {
         if (!mThreadRunning) {
             mView.getToggleButton().setBackground(Color.GREEN);
@@ -89,6 +121,9 @@ public class CMComponent implements IComponent, IObserver {
         }
     }
     
+	/**
+	 * Stops the periodic ContextSimulation broadcast.
+	 */
     private void stopPeriodicUpdate() {
     	if (mUpdateThread != null && mThreadRunning) {
     	    mView.getToggleButton().setBackground(Color.white);
@@ -99,32 +134,50 @@ public class CMComponent implements IComponent, IObserver {
     	}
     }
     
+    /**
+     * Broadcasts the current ContextSituation
+     */
     public void broadcastContextSituation() {
     	ContextSituation cs = mModel.getContextSituation();
     	mMediator.notifyObservers(cs);
     	mMediator.update(cs);
     }
 
+    /**
+     * Getter for the CM View.
+     */
     @Override
     public Panel getView() {
         return mPanel;
     }
 
+    /** Getter for the components name.
+     * 
+     */
     @Override
     public String getName() {
         return "Context Management";
     }
 
+    /**
+     * Init method setting the mediator.
+     */
     @Override
     public void init(Mediator _mediator) {
         mMediator = _mediator;
     }
 
+    /**
+     * Setter for the UI View.
+     */
     @Override
     public void setUI(IUIView _view) {
 
     }
 
+    /**
+     * Update method which updates all gui elements and saves the received context situation (from mediator).
+     */
     @Override
     public void update(Object _o) {
         if (_o instanceof ContextElement){
@@ -138,10 +191,18 @@ public class CMComponent implements IComponent, IObserver {
         }
     }
 
+    /**
+     * Getter for the CM Update Thread (runnable)
+     * @return The runnable.
+     */
     public CMUpdateThread getCMUpdateThread() {
         return mCMUpdateThread;
     }
 
+    /**
+     * Starts the playback of recorded simulation session.
+     * @param _path Path of the stored simulation session to play.
+     */
 	public void startSimulationPlayback(String _path) {
         if (!mIsPlaying) {
             mPlayer = new CMSimulationPlayer(_path, this, mView.getSlider().getValue());
@@ -153,6 +214,9 @@ public class CMComponent implements IComponent, IObserver {
         }
 	}
 	
+	/**
+	 * Stops the playback of a recorded simulation session.
+	 */
 	public void stopSimulationPlayback() {
 		if (mIsPlaying) {
 			mPlayer.interrupt();
@@ -160,13 +224,19 @@ public class CMComponent implements IComponent, IObserver {
 		}
 	}
 
+	/**
+	 * Returns true if a simulation session is currently played.
+	 * @return True if playing, false otherwise.
+	 */
 	public boolean isPlaying() {
 		return mIsPlaying;
 	}
 
+	/**
+	 * Returns the CM Simulation Player object which handles all the playing.
+	 * @return
+	 */
 	public CMSimulationPlayer getSimulationPlayer() {
 		return mPlayer;
 	}
-
-
 }

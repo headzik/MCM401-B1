@@ -2,6 +2,11 @@ package at.fhooe.mcm.context.elements;
 
 import org.postgis.Point;
 
+/**
+ * Context element for position.
+ * @author ifumi
+ *
+ */
 public class PositionContext extends ContextElement {
 
 	public enum PositionType {

@@ -20,11 +20,19 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Vector;
 
+/**
+ * The server for the POI component.
+ * @author ifumi
+ *
+ */
 public class POIServer {
     private Connection mConn;
 
     private Vector<POIObject> mObjects;
 
+    /**
+     * Constructor.
+     */
     public POIServer() {
         mObjects = new Vector<>();
         loadDataFromOSM();
@@ -105,6 +113,12 @@ public class POIServer {
 
     }
 
+    /**
+     * Static method which loads the image from the passed path.
+     * Used from other classes too.
+     * @param _s The path to the image.
+     * @return The loaded image as BufferedImage object.
+     */
     public static BufferedImage loadImage(String _s) {
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();

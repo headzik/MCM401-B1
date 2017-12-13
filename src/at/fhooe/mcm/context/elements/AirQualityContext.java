@@ -2,6 +2,11 @@ package at.fhooe.mcm.context.elements;
 
 import java.io.Serializable;
 
+/**
+ * Context element for Air Quality.
+ * @author ifumi
+ *
+ */
 public class AirQualityContext extends ContextElement implements Serializable {
 
     public enum AirQualityType{

@@ -16,12 +16,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * A parser class using DOM.
+ * @author ifumi
+ *
+ */
 public class DomParser implements IContextParser {
 
-	public DomParser() {
-
-	}
-
+	/**
+	 * Parses a context element from an XML file.
+	 */
 	@Override
 	public ContextElement parseContextFromXML(String _filePath) {
 		ContextElement ce = null;

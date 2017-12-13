@@ -2,6 +2,11 @@ package at.fhooe.mcm.context.elements;
 
 import java.io.Serializable;
 
+/**
+ * Context element super class.
+ * @author ifumi
+ *
+ */
 public abstract class ContextElement implements Serializable {
 
 	private int mID;

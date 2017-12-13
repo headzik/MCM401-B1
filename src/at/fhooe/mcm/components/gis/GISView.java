@@ -12,6 +12,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The view for the GIS component.
+ * @author ifumi
+ *
+ */
 public class GISView implements IDataObserver {
 
     public DrawingPanel mPanel;

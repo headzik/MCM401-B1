@@ -6,6 +6,11 @@ import at.fhooe.mcm.context.elements.*;
 
 import java.awt.*;
 
+/**
+ * The view for the CM Component. Holds all UI components.
+ * @author ifumi
+ *
+ */
 public class CMView {
     private Panel mPanel;
 
@@ -19,6 +24,10 @@ public class CMView {
     
     private JSlider mSlider;
 
+    /**
+     * Contructor.
+     * @param _controller The controller to use for the view.
+     */
     public CMView(CMController _controller) {
         // Initialise Layout
         mPanel = new Panel();

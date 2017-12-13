@@ -8,6 +8,11 @@ import at.fhooe.mcm.interfaces.IDrawingContext;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * The Drawing context for the dark theme (night).
+ * @author ifumi
+ *
+ */
 public class DarkDrawingContext implements IDrawingContext {
     @Override
     public void drawObject(GeoObject _obj, Graphics _g

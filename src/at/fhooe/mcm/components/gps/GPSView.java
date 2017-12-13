@@ -2,6 +2,11 @@ package at.fhooe.mcm.components.gps;
 
 import java.awt.*;
 
+/**
+ * The view for the GPS component.
+ * @author ifumi
+ *
+ */
 public class GPSView {
 
     private Panel mPanel;
@@ -9,6 +14,11 @@ public class GPSView {
     private SatView satView;
     private Checkbox activated;
 
+    /**
+     * Constructor.
+     * @param _controller The controller to use for the view.
+     * @param _parser The NMEAParser instance.
+     */
     public GPSView(GPSController _controller, NMEAParser _parser) {
         mPanel = new Panel();
         dataView = new DataView();
@@ -27,6 +37,10 @@ public class GPSView {
         _parser.addListener(satView);
     }
 
+    /**
+     * Getter for the GPS view.
+     * @return
+     */
     public Panel getView() {
         return mPanel;
     }

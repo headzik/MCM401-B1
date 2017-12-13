@@ -11,7 +11,7 @@ import javax.swing.JTabbedPane;
 import at.fhooe.mcm.interfaces.IComponent;
 
 /**
- * MainView of the application holding all tabs.
+ * Mainview of the application holding all tabs.
  */
 public class MediatorView extends Frame {
 	

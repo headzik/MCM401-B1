@@ -9,7 +9,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-
+/**
+ * Controller for the GIS Component.
+ * @author ifumi
+ *
+ */
 public class GISController extends WindowAdapter implements ActionListener,
         ComponentListener,
         MouseListener,

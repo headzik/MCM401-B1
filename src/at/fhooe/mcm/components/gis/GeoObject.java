@@ -3,7 +3,11 @@ package at.fhooe.mcm.components.gis;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 
-
+/**
+ * Custom geoobject.
+ * @author ifumi
+ *
+ */
 public class GeoObject extends Object{
 
 	private String mID;

@@ -11,9 +11,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-
+/**
+ * Rule evaluator parses rules from an XML
+ * @author ifumi
+ *
+ */
 public class RuleEvaluator {
 
+	/**
+	 * Parses rules from an rules.xml file.
+	 * @param _filePath The path to the rules file.
+	 * @return An arraylist containing all rules in containers.
+	 */
 	public static ArrayList<RuleContainer> parseRulesContainerFromXML(String _filePath) {
 		String condition = "";
 		String className = "";

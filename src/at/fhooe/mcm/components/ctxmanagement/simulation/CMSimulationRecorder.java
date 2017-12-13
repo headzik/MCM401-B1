@@ -10,12 +10,20 @@ import com.google.gson.Gson;
 
 import at.fhooe.mcm.context.elements.ContextSituation;
 
+/**
+ * Simulation recorder for the CM component. Handles the recording of simulation sessions.
+ * @author ifumi
+ *
+ */
 public class CMSimulationRecorder {
 
 	private int mIndex = 0;
 	private String mDirectoryName;
 	private String mFullPath;
 	
+	/**
+	 * Constructor.
+	 */
 	public CMSimulationRecorder () {
 		Date date = new Date();
 		SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss");
@@ -26,6 +34,10 @@ public class CMSimulationRecorder {
 		mFullPath = "logs/" + mDirectoryName + "/";	
 	}
 	
+	/**
+	 * Writes the passed context situation to a file.
+	 * @param _cs The context situation to write.
+	 */
 	public void writeContextSituation(ContextSituation _cs) {
 		Gson gson = new Gson();
 		String json = gson.toJson(_cs);

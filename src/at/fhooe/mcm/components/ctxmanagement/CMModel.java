@@ -3,18 +3,35 @@ package at.fhooe.mcm.components.ctxmanagement;
 import at.fhooe.mcm.context.elements.*;
 import at.fhooe.mcm.objects.Observable;
 
+/**
+ * The model for the CM Component. Holding all data.
+ * @author ifumi
+ *
+ */
 public class CMModel extends Observable {
 
     private ContextSituation mContextSituation = new ContextSituation();
 
+    /**
+     * Getter for the current context situation.
+     * @return
+     */
     public ContextSituation getContextSituation() {
         return mContextSituation;
     }
 
+    /**
+     * Setter for the current context situation.
+     * @param _cs The context situation to set.
+     */
     public void setContextSituation(ContextSituation _cs) {
         mContextSituation = _cs;
     }
 
+    /**
+     * Setter for a context element. Sets the corresponding context element in the context situation.
+     * @param _contextElement The element to set.
+     */
     public void setContextElement(ContextElement _contextElement) {
         switch (_contextElement.getKey()) {
             case "position":

@@ -1,5 +1,10 @@
 package at.fhooe.mcm.components.gis;
 
+/**
+ * Custom geo double point object.
+ * @author ifumi
+ *
+ */
 public class GeoDoublePoint {
 	
 	public double mX,mY;

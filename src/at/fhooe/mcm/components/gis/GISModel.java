@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-
+/**
+ * The model for the gis component.
+ * @author ifumi
+ *
+ */
 public class GISModel extends DataObservable {
 
     private final int ppi = 72;

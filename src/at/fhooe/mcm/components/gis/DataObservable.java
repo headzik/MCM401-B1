@@ -5,6 +5,11 @@ import at.fhooe.mcm.interfaces.IDataObserver;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * Observable class.
+ * @author ifumi
+ *
+ */
 public class DataObservable {
 
 	private ArrayList<IDataObserver> mObservers;

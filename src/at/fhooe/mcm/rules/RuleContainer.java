@@ -10,18 +10,34 @@ import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.nodes.NodeError;
 import at.fhooe.mcm.nodes.TreeNode;
 
+/**
+ * The rule container class.
+ * @author ifumi
+ *
+ */
 public class RuleContainer {
 
     private TreeNode mConditionRoot = null;
     private String mAction = null;
     private String con = null;
 
+    /**
+     * Constructor.
+     * @param _condition The condition to check.
+     * @param _action The action to execute on positive condition.
+     * @throws ParseException The thrown exception.
+     */
     public RuleContainer(String _condition, String _action) throws ParseException {      	
     	mAction = _action;
     	mConditionRoot = at.fhooe.mcm.compiler.Compiler.evaluate(_condition);
     	con = _condition;
     }
 
+    /**
+     * Checks if the condition is valid.
+     * @param _sit The Context situation to check against.
+     * @return True if valid, false otherwise.
+     */
     public boolean valid(ContextSituation _sit) {
     	mConditionRoot.setVariableParameters(_sit.getAllElements());
     	try {
@@ -33,6 +49,11 @@ public class RuleContainer {
     	return false;
     }
 
+    /**
+     * Executes the action.
+     * @param _sit The context situation to use.
+     * @param _med The mediator.
+     */
     @SuppressWarnings("unchecked")
 	public void execute(ContextSituation _sit, Mediator _med) {
     	if(valid(_sit)) {

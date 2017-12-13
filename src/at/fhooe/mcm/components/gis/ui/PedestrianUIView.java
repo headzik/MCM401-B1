@@ -5,6 +5,11 @@ import at.fhooe.mcm.interfaces.IUIView;
 
 import java.awt.*;
 
+/**
+ * The view for the pedestrian context.
+ * @author ifumi
+ *
+ */
 public class PedestrianUIView implements IUIView {
 
     private Panel mMainPanel;

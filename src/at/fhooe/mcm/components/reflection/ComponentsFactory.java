@@ -17,16 +17,23 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Component factory class
+ * @author ifumi
+ *
+ */
 public class ComponentsFactory {
 
     private List<IComponent> mComponents;
     private Node mNode;
     private String mUIMode,mDrawingContext;
 
-    public ComponentsFactory(){
-
-    }
-
+    /**
+     * Builds components depending on the specified xml file.
+     * @param _filePath The path to the xml file.
+     * @param _mediator The mediator.
+     * @return The list of the built components.
+     */
     public List<IComponent> buildComponents(String _filePath, Mediator _mediator){
         mComponents = new ArrayList<>();
         try{

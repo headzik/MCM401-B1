@@ -5,7 +5,11 @@ import at.fhooe.mcm.interfaces.IUIView;
 
 import java.awt.*;
 
-
+/**
+ * The view for the car context.
+ * @author ifumi
+ *
+ */
 public class CarUIView implements IUIView {
 
 

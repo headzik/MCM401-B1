@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for speed.
+ * @author ifumi
+ *
+ */
 public class SpeedContext extends ContextElement {
 
 	public enum SpeedType {

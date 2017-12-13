@@ -5,6 +5,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 
+/**
+ * Context element for time.
+ * @author ifumi
+ *
+ */
 public class TimeContext extends ContextElement {
 	
 	public enum TimeType {

@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for Density.
+ * @author ifumi
+ *
+ */
 public class DensityContext extends ContextElement {
 
     public enum DensityType{

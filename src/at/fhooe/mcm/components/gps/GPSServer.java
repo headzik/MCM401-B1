@@ -10,11 +10,21 @@ import org.postgis.Point;
 import org.postgresql.PGConnection;
 import org.postgresql.util.PGobject;
 
-
+/**
+ * The server for the GPS component. Used only for conversion from lat/long to x/y world.
+ * @author ifumi
+ *
+ */
 public class GPSServer {
 	
     private Connection mConn;
 
+    /**
+     * Converts lat/long to x/y world coordinates.
+     * @param _lat The latitude.
+     * @param _long The longitude.
+     * @return The point containing the world coordinates.
+     */
 	public Point convertLatLong(double _lat, double _long) {
         try {
             System.out.println(">> Attempting to convert coordinates from OSM database...");

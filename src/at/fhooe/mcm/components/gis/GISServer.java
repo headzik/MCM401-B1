@@ -10,6 +10,11 @@ import java.awt.*;
 import java.sql.*;
 import java.util.Vector;
 
+/**
+ * The server for the gis component. Handles the data extraction from the database.
+ * @author ifumi
+ *
+ */
 public class GISServer {
 
     private Connection mConn;

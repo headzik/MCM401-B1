@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for the weather.
+ * @author ifumi
+ *
+ */
 public class WeatherContext extends ContextElement {
 
     public enum WeatherType{

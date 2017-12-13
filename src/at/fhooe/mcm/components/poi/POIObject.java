@@ -5,8 +5,12 @@ import java.awt.Polygon;
 
 import at.fhooe.mcm.components.gis.GeoObject;
 
+/**
+ * Object holding all POI data.
+ * @author ifumi
+ *
+ */
 public class POIObject extends GeoObject {
-	
 	
 	private Image mImg;
 	private POI_TYPE mType;

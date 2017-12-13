@@ -8,7 +8,11 @@ import at.fhooe.mcm.components.gis.Matrix;
 import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.interfaces.IDrawingContext;
 
-
+/**
+ * The drawing context for the light theme (day).
+ * @author ifumi
+ *
+ */
 public class LightDrawingContext implements IDrawingContext{
 
 	public LightDrawingContext(){

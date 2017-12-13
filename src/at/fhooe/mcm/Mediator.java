@@ -15,12 +15,21 @@ import at.fhooe.mcm.views.MediatorView;
 
 import java.util.List;
 
+/**
+ * Mediator class handling communication between all components.
+ * @author ifumi
+ *
+ */
 public class Mediator extends Observable implements IMediator, IObserver {
 
     private MediatorView mMediatorView;
     private List<IComponent> mComponents;
     private List<RuleContainer> mRulesContainers;
 
+    /**
+     * Constructor.
+     * Initialising all components from the ComponentComposition.xml
+     */
     public Mediator() {
         mMediatorView = new MediatorView();
         mComponents = new ComponentsFactory().buildComponents("src/at/fhooe/mcm/components/reflection/ComponentComposition.xml", this);
@@ -40,10 +49,18 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     }
 
+    /**
+     * Main method.
+     * @param args
+     */
     public static void main(String[] args) {
         Mediator m = new Mediator();
     }
 
+    /**
+     * Update method. Passes received objects to registered components.
+     * Decides which component receives which object.
+     */
     @Override
     public void update(Object _o) {
 
@@ -73,6 +90,10 @@ public class Mediator extends Observable implements IMediator, IObserver {
             notifyObservers(null, ObserverType.GIS);
     }
 
+    /**
+     * Getter for the list of components.
+     * @return
+     */
 	public List<IComponent> getComponents() {
 		return mComponents;
 	}

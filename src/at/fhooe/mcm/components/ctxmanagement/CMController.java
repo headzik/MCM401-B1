@@ -10,21 +10,38 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * The controller for the CM Component. Handling all user inputs.
+ * @author ifumi
+ *
+ */
 public class CMController implements ActionListener, ChangeListener {
 
     private CMModel mModel;
     private CMComponent mComponent;
     private CMView mView;
 
+    /**
+     * Constructor.
+     * @param _model The model of the component.
+     * @param _comp The component itself.
+     */
     public CMController(CMModel _model, CMComponent _comp) {
         mModel = _model;
         mComponent = _comp;
     }
 
+    /**
+     * Setter for the CM View.
+     * @param _view The view to set.
+     */
     public void setView(CMView _view) {
         mView = _view;
     }
 
+    /**
+     * Called whenever an action is performed (a button is pressed).
+     */
     @Override
     public void actionPerformed(ActionEvent _e) {
         switch (_e.getActionCommand()) {
@@ -102,6 +119,9 @@ public class CMController implements ActionListener, ChangeListener {
         }
     }
 
+    /**
+     * Called whenever the state of the JSlider changes.
+     */
     @Override
     public void stateChanged(ChangeEvent _e) {
         if (_e.getSource() instanceof JSlider){

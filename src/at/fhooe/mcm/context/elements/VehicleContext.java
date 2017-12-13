@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for the vehicle used (car, pedestrian, ...).
+ * @author ifumi
+ *
+ */
 public class VehicleContext extends ContextElement {
 
     public enum VehicleType{

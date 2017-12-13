@@ -3,7 +3,6 @@ package at.fhooe.mcm.components;
 import java.awt.Panel;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import at.fhooe.mcm.Mediator;
 import at.fhooe.mcm.components.gis.GISController;
@@ -11,7 +10,6 @@ import at.fhooe.mcm.components.gis.GISModel;
 import at.fhooe.mcm.components.gis.GISView;
 import at.fhooe.mcm.components.gis.GeoObject;
 import at.fhooe.mcm.components.gis.warnings.WarningType;
-import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
@@ -20,7 +18,11 @@ import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.interfaces.IUIView;
 import at.fhooe.mcm.objects.Observable;
 
-
+/**
+ * The GIS Component handling the map and display of all contextinformation.
+ * @author ifumi
+ *
+ */
 public class GISComponent extends Observable implements IComponent, IObserver{
 
 	private GISView mView;
@@ -29,6 +31,9 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	private Mediator mMediator;
 	private ArrayList<WarningType> mWarnings;
 
+	/**
+	 * Constructor.
+	 */
 	public GISComponent() {
 		mModel = new GISModel();
 		mController = new GISController(mModel);
@@ -42,6 +47,10 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		mWarnings = new ArrayList<>();
 	}
 	
+	/**
+	 * Sets a warning.
+	 * @param warning The type of the warning to set.
+	 */
 	public void setWarning(WarningType warning) {
 		if (!mWarnings.contains(warning))
 			mWarnings.add(warning);
@@ -50,32 +59,51 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		mModel.updateImg();
 	}
 	
+	/**
+	 * Getter for the GIS View.
+	 */
 	@Override
 	public Panel getView() {
 		return mView.getView();
 	}
 
+	/**
+	 * Getter for the components name
+	 */
 	@Override
 	public String getName() {
 		return "GISComponent";
 	}
 
+	/**
+	 * Init method setting the mediator.
+	 */
 	@Override
 	public void init(Mediator _mediator) {
 		mMediator = _mediator;
 	}
 
+	/**
+	 * Setter for the UI View.
+	 */
 	@Override
 	public void setUI(IUIView _view) {
 		_view.setController(mController);
 		mView.setPanel(_view.getView());
 	}
 
+	/**
+	 * Setter for the drawing context.
+	 * @param _drawingContext The drawing context to use.
+	 */
 	public void setDrawingContext(IDrawingContext _drawingContext){
 		mModel.setDrawingContext(_drawingContext);
 		mModel.updateImg();
 	}
 
+	/**
+	 * Update method.
+	 */
 	@Override
 	public void update(Object _o) {
 		if (_o instanceof GeoObject && !mModel.containsObject(_o))
@@ -95,6 +123,9 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 			mModel.updateImg();
 	}
 
+	/**
+	 * Updates the view with the current set warnings.
+	 */
 	public void updateWarnings() {
 		try {
 			mView.updateWarnings(mWarnings);
@@ -103,6 +134,9 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		}
 	}
 
+	/**
+	 * Clears all warnings from the list.
+	 */
 	public void clearWarnings() {
 		mWarnings.clear();
 	}

@@ -3,6 +3,11 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Polygon;
 
+/**
+ * Matrix class for custom operations to geoobjects.
+ * @author ifumi
+ *
+ */
 public class Matrix {
 
 	private double[][] mMatrix;

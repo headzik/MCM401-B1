@@ -1,5 +1,10 @@
 package at.fhooe.mcm.context.elements;
 
+/**
+ * Context element for temperature.
+ * @author ifumi
+ *
+ */
 public class TemperatureContext extends ContextElement {
 
 	public enum TemperatureType {

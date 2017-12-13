@@ -13,8 +13,16 @@ import at.fhooe.mcm.interfaces.IContextParser;
 import org.kxml2.io.KXmlParser;
 import org.xmlpull.v1.XmlPullParser;
 
+/**
+ * A parser using STREAM.
+ * @author ifumi
+ *
+ */
 public class StreamParser implements IContextParser {
 
+	/**
+	 * Parses a context element from an xml file.
+	 */
 	@Override
 	public ContextElement parseContextFromXML(String _filePath) {
 		ContextElement ce = null;

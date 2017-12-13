@@ -2,6 +2,11 @@ package at.fhooe.mcm.context.elements;
 
 import java.io.Serializable;
 
+/**
+ * The context situation holding all current context elements.
+ * @author ifumi
+ *
+ */
 public class ContextSituation implements Serializable {
 
     private PositionContext mPositionContext;

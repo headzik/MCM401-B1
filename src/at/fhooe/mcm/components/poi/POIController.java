@@ -12,14 +12,26 @@ import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The controller for the POI component.
+ * @author ifumi
+ *
+ */
 public class POIController implements ItemListener {
 
     private POIModel mModel;
 
+    /**
+     * Constructor. 
+     * @param _model The model of the component.
+     */
     public POIController(POIModel _model) {
         mModel = _model;
     }
 
+    /**
+     * Called whenever the item state changes.
+     */
     @Override
     public void itemStateChanged(ItemEvent _e) {
         String poiName = _e.getItem().toString();
