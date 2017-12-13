@@ -2,30 +2,65 @@
 	<rule>
 		<condition>temp LESS 4</condition>
 		<action>
-			<class>at.fhooe.mc.GISComponent</class>
+			<class>at.fhooe.mcm.components.GISComponent</class>
 			<method>setWarning</method>
 			<parameters>
 				<parameter>
-					<type>at.fhooe.mc.gis.IWarningType</type>
-					<value>at.fhooe.mc.gis.BlackIceWarning</value>
-				</parameter>				
-				<parameter>
-					<type>at.fhooe.mc.gis.ITestType</type>
-					<value>at.fhooe.mc.gis.TestType</value>
-				</parameter>
+					<type>at.fhooe.mcm.components.gis.warnings.WarningType</type>
+					<value>BlackIceWarning</value>
+				</parameter>	
 			</parameters>
 		</action>
 	</rule>
 	<rule>
-		<condition>speed GREATER 80</condition>
+		<condition>temp GREATER 40</condition>
 		<action>
-			<class>at.fhooe.mc.GISComponent</class>
+			<class>at.fhooe.mcm.components.GISComponent</class>
 			<method>setWarning</method>
 			<parameters>
 				<parameter>
-					<type>at.fhooe.mc.gis.IWarningType</type>
-					<value>at.fhooe.mc.gis.SpeedingWarning</value>
-				</parameter>
+					<type>at.fhooe.mcm.components.gis.warnings.WarningType</type>
+					<value>HeatWarning</value>
+				</parameter>	
+			</parameters>
+		</action>
+	</rule>	
+	<rule>
+		<condition>fuel LESS 10</condition>
+		<action>
+			<class>at.fhooe.mcm.components.POIComponent</class>
+			<method>showPOIType</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mcm.components.poi.POI_TYPE</type>
+					<value>TYPE_2</value>
+				</parameter>	
+			</parameters>
+		</action>
+	</rule>
+	<rule>
+		<condition>time LESS 21:00:00 AND time GREATER 07:00:00</condition>
+		<action>
+			<class>at.fhooe.mcm.components.GISComponent</class>
+			<method>setDrawingContext</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mcm.interfaces.IDrawingContext</type>
+					<value>at.fhooe.mcm.components.gis.drawingcontext.LightDrawingContext</value>
+				</parameter>	
+			</parameters>
+		</action>
+	</rule>
+	<rule>
+		<condition>time GREATER 21:00:00 OR time LESS 07:00:00</condition>
+		<action>
+			<class>at.fhooe.mcm.components.GISComponent</class>
+			<method>setDrawingContext</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mcm.interfaces.IDrawingContext</type>
+					<value>at.fhooe.mcm.components.gis.drawingcontext.DarkDrawingContext</value>
+				</parameter>	
 			</parameters>
 		</action>
 	</rule>
