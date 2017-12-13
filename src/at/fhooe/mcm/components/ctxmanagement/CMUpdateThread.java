@@ -21,6 +21,8 @@ public class CMUpdateThread implements Runnable {
 		mInterrupted = true;
 	}
 
+	public void reset() { mInterrupted = false; }
+
 	@Override
 	public void run() {
 		while (!mInterrupted) {

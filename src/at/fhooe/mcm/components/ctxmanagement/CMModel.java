@@ -4,21 +4,24 @@ import at.fhooe.mcm.context.elements.*;
 import at.fhooe.mcm.objects.Observable;
 
 public class CMModel extends Observable {
-	
+
     private ContextSituation mContextSituation = new ContextSituation();
-    
+
     public ContextSituation getContextSituation() {
-    	return mContextSituation;
+        return mContextSituation;
     }
-    
+
     public void setContextSituation(ContextSituation _cs) {
-    	mContextSituation = _cs;
+        mContextSituation = _cs;
     }
 
     public void setContextElement(ContextElement _contextElement) {
-        switch (_contextElement.getKey()){
+        switch (_contextElement.getKey()) {
             case "position":
                 mContextSituation.setPositionContext((PositionContext) _contextElement);
+                break;
+            case "fuel":
+                mContextSituation.setFuelContext((FuelContext) _contextElement);
                 break;
             case "speed":
                 mContextSituation.setSpeedContext((SpeedContext) _contextElement);
@@ -44,9 +47,6 @@ public class CMModel extends Observable {
             case "weather":
                 mContextSituation.setWeatherContext((WeatherContext) _contextElement);
                 break;
-//            case "fuel":
-//                mContextSituation.setFuelContext((WeatherContext) _contextElement);
-//                break;
             default:
                 break;
 

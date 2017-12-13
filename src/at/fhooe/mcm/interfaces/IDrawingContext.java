@@ -22,6 +22,7 @@ public interface IDrawingContext {
     int NATURAL_WOOD = 6002;
     int NATURAL_WATER = 6005;
 
+
     void drawObject(GeoObject _obj, Graphics _g, Matrix _matrix);
 
     void drawBackground(BufferedImage img);

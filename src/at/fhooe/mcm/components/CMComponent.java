@@ -56,15 +56,19 @@ public class CMComponent implements IComponent, IObserver {
     }
     
     public void startSimulationRecording() {
-    	mRecorder = new CMSimulationRecorder();
-    	mIsRecording = true;
-    	System.out.println(">> Simulation recording started!");
+        if (!mIsRecording) {
+            mRecorder = new CMSimulationRecorder();
+            mIsRecording = true;
+            System.out.println(">> Simulation recording started!");
+        }
     }
     
     public void stopSimulationRecording() {
-    	mRecorder = null;
-    	mIsRecording = false;
-    	System.out.println(">> Simulation recording stopped!");
+        if (mIsRecording) {
+            mRecorder = null;
+            mIsRecording = false;
+            System.out.println(">> Simulation recording stopped!");
+        }
     }
     
     public void togglePeriodicUpdate() {
@@ -75,19 +79,24 @@ public class CMComponent implements IComponent, IObserver {
     }
        
     private void startPeriodicUpdate() {
-        mUpdateThread = new Thread(mCMUpdateThread);
-        mUpdateThread.start();
-        mThreadRunning = true;
-        System.out.println(">> Periodic Context Situation Update started!");
+        if (!mThreadRunning) {
+            mView.getToggleButton().setBackground(Color.GREEN);
+            mCMUpdateThread.reset();
+            mUpdateThread = new Thread(mCMUpdateThread);
+            mUpdateThread.start();
+            mThreadRunning = true;
+            System.out.println(">> Periodic Context Situation Update started!");
+        }
     }
     
     private void stopPeriodicUpdate() {
-    	if (mUpdateThread != null) {
+    	if (mUpdateThread != null && mThreadRunning) {
+    	    mView.getToggleButton().setBackground(Color.white);
     		mCMUpdateThread.interrupt();
     		mUpdateThread.interrupt();
+            mThreadRunning = false;
     		System.out.println(">> Periodic Context Situation Update stopped!");
     	}
-    	mThreadRunning = false;
     }
     
     public void broadcastContextSituation() {
@@ -134,12 +143,14 @@ public class CMComponent implements IComponent, IObserver {
     }
 
 	public void startSimulationPlayback(String _path) {
-		mPlayer = new CMSimulationPlayer(_path, this, mView.getSlider().getValue());
-		
-		Thread t  = new Thread(mPlayer);
-		t.start();
-		
-		mIsPlaying = true;
+        if (!mIsPlaying) {
+            mPlayer = new CMSimulationPlayer(_path, this, mView.getSlider().getValue());
+
+            Thread t  = new Thread(mPlayer);
+            t.start();
+
+            mIsPlaying = true;
+        }
 	}
 	
 	public void stopSimulationPlayback() {

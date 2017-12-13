@@ -9,32 +9,39 @@ public class POIModel extends Observable {
 
     private List<POIObject> mPOIs;
 
-    public POIModel(){  
+    public POIModel() {
         new Thread(new Runnable() {
-			public void run() {
-				POIServer poi = new POIServer();
-				mPOIs = poi.extractData();
-			}
-		}).start();    
+            public void run() {
+                POIServer poi = new POIServer();
+                mPOIs = poi.extractData();
+            }
+        }).start();
     }
 
     public void update() {
-        for (POIObject poi : mPOIs){
-            notifyObservers(poi);
+        if (mPOIs != null) {
+            for (POIObject poi : mPOIs) {
+                notifyObservers(poi);
+            }
         }
+
+        notifyObservers(null);
+
     }
-    
+
     /**
      * Changes visibility of all POIs with the specific type.
+     *
      * @param _visible Visibility of type
-     * @param _type Type of POI to change visibility for
+     * @param _type    Type of POI to change visibility for
      */
     public void setVisibleByType(boolean _visible, POI_TYPE _type) {
-    	if(mPOIs != null) {
-	    	for (POIObject poi : mPOIs) {
-	    		if (poi.getPOIType() == _type)
-	    			poi.setVisible(_visible);
-	    	}
-    	}
+        if (mPOIs != null) {
+            for (POIObject poi : mPOIs) {
+                if (poi.getPOIType() == _type)
+                    poi.setVisible(_visible);
+            }
+        }
+        update();
     }
 }

@@ -44,7 +44,6 @@ public class POIController implements ItemListener {
             break;
         }
         mModel.update();
-
     }
 
     public boolean isChecked(int state) {

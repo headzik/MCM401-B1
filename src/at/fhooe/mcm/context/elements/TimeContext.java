@@ -66,6 +66,14 @@ public class TimeContext extends ContextElement {
 
 	@Override
 	public String toString() {
-		return mHours+":"+mMinutes;
+		StringBuffer sb = new StringBuffer();
+		if (mHours < 10)
+			sb.append("0");
+		sb.append(mHours);
+		sb.append(":");
+		if (mMinutes < 10)
+			sb.append("0");
+		sb.append(mMinutes);
+		return sb.toString();
 	}
 }

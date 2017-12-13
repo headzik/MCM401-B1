@@ -11,8 +11,7 @@ public class PedestrianUIView implements IUIView {
     private Button mLoadButton, mZTFButton, mZoomInButton,
             mZoomOutButton, mScrollUpButton, mScrollDownButton,
             mScrollLeftButton, mScrollRightButton, mRotateLeftButton,
-            mRotateRightButton, mPOIToggleButton, mStickyToggleButton,
-            mSaveImageButton;
+            mRotateRightButton;
     private GISController mController;
 
     public PedestrianUIView(){
@@ -46,9 +45,6 @@ public class PedestrianUIView implements IUIView {
         mScrollRightButton = new Button("Right");
         mRotateLeftButton = new Button("Rot<");
         mRotateRightButton = new Button("Rot>");
-        mPOIToggleButton = new Button("POI");
-        mStickyToggleButton = new Button("Sticky");
-        mSaveImageButton = new Button("Store");
 
         mMainPanel.add(mLoadButton);
         mMainPanel.add(new Panel());
@@ -63,8 +59,6 @@ public class PedestrianUIView implements IUIView {
         mMainPanel.add(new Panel());
         mMainPanel.add(mRotateLeftButton);
         mMainPanel.add(mRotateRightButton);
-        mMainPanel.add(new Panel());
-        mMainPanel.add(mPOIToggleButton);
 
 
         mLoadButton.addActionListener(mController);
@@ -77,9 +71,6 @@ public class PedestrianUIView implements IUIView {
         mScrollRightButton.addActionListener(mController);
         mRotateLeftButton.addActionListener(mController);
         mRotateRightButton.addActionListener(mController);
-        mPOIToggleButton.addActionListener(mController);
-        mStickyToggleButton.addActionListener(mController);
-        mSaveImageButton.addActionListener(mController);
 
     }
 }

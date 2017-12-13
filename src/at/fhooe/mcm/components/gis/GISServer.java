@@ -7,10 +7,7 @@ import org.postgresql.PGConnection;
 import org.postgresql.util.PGobject;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Vector;
 
 public class GISServer {
@@ -43,39 +40,15 @@ public class GISServer {
             // Create statement and execute query
             Statement s = mConn.createStatement();
 
-            ResultSet r;
-
             // Get boundary types
-            String query = "SELECT * FROM boundary_area AS a WHERE a.type IN (8001, 8002, 8004);";
+            String query = "SELECT * FROM boundary_area AS a WHERE a.type IN (8001,8002,8003,8004);";
+            executeSQL(query, s);
 
-            r = s.executeQuery(query);
-            while (r.next()) {
-                String id = r.getString("id");
-                int type = r.getInt("type");
-                PGgeometry geom = (PGgeometry) r.getObject("geom");
-
-                switch (geom.getGeoType()) {
-                    case Geometry.POLYGON:
-                        String wkt = geom.toString();
-                        org.postgis.Polygon p = new org.postgis.Polygon(wkt);
-                        if (p.numRings() >= 1) {
-                            Polygon poly = new Polygon();
-                            LinearRing ring = p.getRing(0);
-                            for (int i = 0; i < ring.numPoints(); i++) {
-                                org.postgis.Point pPG = ring.getPoint(i);
-                                poly.addPoint((int) pPG.x, (int) pPG.y);
-                            }
-                            mObjects.add(new GeoObject(id, type, poly));
-                        }
-                        break;
-                    default:
-                        break;
-                }
-
-            }
+            query = "SELECT * FROM landuse_area AS a WHERE a.type IN (5001, 5002);";
+            executeSQL(query, s);
 
          /*   // Get landuse types
-            query = "SELECT * FROM landuse_area AS a WHERE a.type IN (5001, 5002, 5003, 5004, 5006);";
+
             r = s.executeQuery(query);
 
             while (r.next()) {
@@ -138,6 +111,33 @@ public class GISServer {
             System.out.println(">> Loading data failed!\n" + _e.toString());
         }
 
+    }
+
+    public void executeSQL(String _query, Statement _s) throws SQLException {
+        ResultSet _r = _s.executeQuery(_query);
+        while (_r.next()) {
+            String id = _r.getString("id");
+            int type = _r.getInt("type");
+            PGgeometry geom = (PGgeometry) _r.getObject("geom");
+
+            switch (geom.getGeoType()) {
+                case Geometry.POLYGON:
+                    String wkt = geom.toString();
+                    org.postgis.Polygon p = new org.postgis.Polygon(wkt);
+                    if (p.numRings() >= 1) {
+                        Polygon poly = new Polygon();
+                        LinearRing ring = p.getRing(0);
+                        for (int i = 0; i < ring.numPoints(); i++) {
+                            org.postgis.Point pPG = ring.getPoint(i);
+                            poly.addPoint((int) pPG.x, (int) pPG.y);
+                        }
+                        mObjects.add(new GeoObject(id, type, poly));
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public Vector<GeoObject> extractData() {

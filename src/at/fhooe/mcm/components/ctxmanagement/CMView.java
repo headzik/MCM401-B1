@@ -9,7 +9,7 @@ import java.awt.*;
 public class CMView {
     private Panel mPanel;
 
-    private TextField mPositionTxt, mSpeedTxt, mTempTxt, mTimeTxt, mDensityTxt, mUVTxt;
+    private TextField mPositionTxt, mSpeedTxt, mFuelTxt, mTempTxt, mTimeTxt, mDensityTxt, mUVTxt;
     private JComboBox mPostionCombo, mSpeedCombo, mTempCombo, mTimeCombo, mWeatherTypeCombo, mWeatherValueCombo, mAirQualityTypeCombo, mAirQualityValueCombo, mVehicleTypeCombo, mVehicleValueCombo, mDensityCombo, mUVCombo;
     private Label mFrequency;
 
@@ -27,9 +27,10 @@ public class CMView {
 
         // Initialise components
         mPositionTxt = new TextField("", 20);
-        mSpeedTxt = new TextField("", 20);
-        mTempTxt = new TextField("", 20);
-        mTimeTxt = new TextField("", 20);
+        mFuelTxt = new TextField("100", 20);
+        mSpeedTxt = new TextField("0", 20);
+        mTempTxt = new TextField("20", 20);
+        mTimeTxt = new TextField("10:00", 20);
         mPostionCombo = new JComboBox(PositionContext.PositionType.values());
         mSpeedCombo = new JComboBox(SpeedContext.SpeedType.values());
         mTempCombo = new JComboBox(TemperatureContext.TemperatureType.values());
@@ -40,10 +41,10 @@ public class CMView {
         mAirQualityValueCombo = new JComboBox(AirQualityContext.AirQualityValue.values());
         mVehicleTypeCombo = new JComboBox(VehicleContext.VehicleType.values());
         mVehicleValueCombo = new JComboBox(VehicleContext.VehicleValue.values());
-        mDensityTxt = new TextField("", 20);
+        mDensityTxt = new TextField("0", 20);
         mDensityCombo = new JComboBox(DensityContext.DensityType.values());
         mUVCombo = new JComboBox(UltravioletRadiationContext.UVType.values());
-        mUVTxt = new TextField("", 20);
+        mUVTxt = new TextField("0", 20);
 
 
         mSetContextBtn = new Button("Set CTX");
@@ -83,6 +84,14 @@ public class CMView {
         positionPanel.add(mPostionCombo);
         mPanel.add(positionPanel, gbc);
         gbc.gridy++;
+
+        Panel fuelPanel = new Panel(new FlowLayout());
+        Label fuelLabel = new Label("Fuel [%]:");
+        fuelPanel.add(fuelLabel);
+        fuelPanel.add(mFuelTxt);
+        mPanel.add(fuelPanel, gbc);
+        gbc.gridy++;
+
 
         Panel speedPanel = new Panel(new FlowLayout());
         Label speedLabel = new Label("Speed [number]:");
@@ -178,7 +187,25 @@ public class CMView {
         gbc.gridy++;
         mPanel.add(mStopSession, gbc);
         gbc.gridy++;
+
+        mSetContextBtn.setBackground(Color.WHITE);
+        mThreadBtn.setBackground(Color.WHITE);
+        mRecordSession.setBackground(Color.WHITE);
+        mStartSession.setBackground(Color.WHITE);
+        mStopSession.setBackground(Color.WHITE);
              
+    }
+
+    public Button getRecordButton() {
+        return mRecordSession;
+    }
+
+    public Button getPlayButton() {
+        return mStartSession;
+    }
+
+    public Button getToggleButton() {
+        return mThreadBtn;
     }
 
     public void updateGUIElements(ContextSituation _cs) {
@@ -244,6 +271,10 @@ public class CMView {
 
     public String getSpeedTxt() {
         return mSpeedTxt.getText();
+    }
+
+    public String getFuelTxt() {
+        return mFuelTxt.getText();
     }
 
     public String getTempTxt() {

@@ -52,14 +52,25 @@ public class Mediator extends Observable implements IMediator, IObserver {
         } else if (_o instanceof ContextSituation) {
         	// Notify all ObserverTypes which need ContextSituation here!
         	// For now we only need position updates.
+            // RESET ALL WARNINGS
+
         	for(RuleContainer ruleContainer: mRulesContainers) {
         		ruleContainer.execute((ContextSituation) _o, this);
         	}
+
+        	for (IComponent comp : mComponents){
+        	    if (comp instanceof GISComponent){
+                    ((GISComponent) comp).updateWarnings();
+                }
+            }
+
         	notifyObservers(_o, ObserverType.GIS);
         } else if (_o instanceof POIObject) {
             notifyObservers(_o, ObserverType.GIS);
         } 
-        
+
+        if (_o == null)
+            notifyObservers(null, ObserverType.GIS);
     }
 
 	public List<IComponent> getComponents() {

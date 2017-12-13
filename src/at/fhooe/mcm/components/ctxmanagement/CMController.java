@@ -1,5 +1,6 @@
 package at.fhooe.mcm.components.ctxmanagement;
 
+import java.awt.*;
 import java.awt.event.*;
 
 import at.fhooe.mcm.components.CMComponent;
@@ -36,6 +37,10 @@ public class CMController implements ActionListener, ChangeListener {
                 if (!s.isEmpty())
                     mModel.setContextElement(new PositionContext(100, "position", PositionContext.PositionType.GAUSSKRUEGER, Integer.parseInt(s.split(",")[0]), Integer.parseInt(s.split(",")[1])));
 
+                s = mView.getFuelTxt();
+                if (!s.isEmpty())
+                    mModel.setContextElement(new FuelContext(1000, "fuel", Integer.parseInt(s)));
+
                 s = mView.getSpeedTxt();
                 if (!s.isEmpty())
                     mModel.setContextElement(new SpeedContext(200, "speed", SpeedContext.SpeedType.KMH, Integer.parseInt(s)));
@@ -60,17 +65,20 @@ public class CMController implements ActionListener, ChangeListener {
                 s = mView.getUVTxt();
                 if (!s.isEmpty())
                     mModel.setContextElement(new UltravioletRadiationContext(900, "uv", UltravioletRadiationContext.UVType.OUTSIDE, Integer.parseInt(s)));
-                
+
                 if (mComponent.isRecording()) {
                 	mComponent.recordContextSituation(mModel.getContextSituation());
                 }
    
                 break;
             case "record":
-            	if (mComponent.isRecording())
-            		mComponent.stopSimulationRecording();
-            	else
-            		mComponent.startSimulationRecording();
+            	if (mComponent.isRecording()) {
+                    mComponent.stopSimulationRecording();
+                    mView.getRecordButton().setBackground(Color.white);
+                } else {
+                    mComponent.startSimulationRecording();
+                    mView.getRecordButton().setBackground(Color.RED);
+                }
             	break;
             	
             case "start":

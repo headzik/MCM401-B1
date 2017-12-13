@@ -6,7 +6,7 @@ public class FuelContext extends ContextElement {
 	
 	public FuelContext(int _id, String _key, int _status) {
 		super(_id, _key);
-		mStatus = 9;//_status;
+		mStatus = _status;
 	}
 
 	public int getStatus() {

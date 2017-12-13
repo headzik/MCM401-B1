@@ -24,7 +24,33 @@
 				</parameter>	
 			</parameters>
 		</action>
-	</rule>	
+	</rule>
+	<rule>
+		<condition>speed GREATER 100</condition>
+		<action>
+			<class>at.fhooe.mcm.components.GISComponent</class>
+			<method>setWarning</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mcm.components.gis.warnings.WarningType</type>
+					<value>SpeedWarning</value>
+				</parameter>
+			</parameters>
+		</action>
+	</rule>
+	<rule>
+		<condition>density GREATER 5</condition>
+		<action>
+			<class>at.fhooe.mcm.components.GISComponent</class>
+			<method>setWarning</method>
+			<parameters>
+				<parameter>
+					<type>at.fhooe.mcm.components.gis.warnings.WarningType</type>
+					<value>DensityWarning</value>
+				</parameter>
+			</parameters>
+		</action>
+	</rule>
 	<rule>
 		<condition>fuel LESS 10</condition>
 		<action>

@@ -340,4 +340,8 @@ public class GISModel extends DataObservable {
     public void setDrawingContext(IDrawingContext drawingContext) {
         mDrawingContext = drawingContext;
     }
+
+    public void updateImg() {
+        drawPolygons();
+    }
 }

@@ -1,7 +1,9 @@
 package at.fhooe.mcm.components;
 
 import java.awt.Panel;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import at.fhooe.mcm.Mediator;
 import at.fhooe.mcm.components.gis.GISController;
@@ -9,6 +11,7 @@ import at.fhooe.mcm.components.gis.GISModel;
 import at.fhooe.mcm.components.gis.GISView;
 import at.fhooe.mcm.components.gis.GeoObject;
 import at.fhooe.mcm.components.gis.warnings.WarningType;
+import at.fhooe.mcm.components.poi.POIObject;
 import at.fhooe.mcm.context.elements.ContextSituation;
 import at.fhooe.mcm.context.elements.PositionContext;
 import at.fhooe.mcm.interfaces.IComponent;
@@ -40,9 +43,11 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 	}
 	
 	public void setWarning(WarningType warning) {
-		mWarnings.add(warning);
+		if (!mWarnings.contains(warning))
+			mWarnings.add(warning);
 		//display warning
 		System.out.println("Received warning of type: " + warning.toString());
+		mModel.updateImg();
 	}
 	
 	@Override
@@ -65,8 +70,10 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 		_view.setController(mController);
 		mView.setPanel(_view.getView());
 	}
+
 	public void setDrawingContext(IDrawingContext _drawingContext){
 		mModel.setDrawingContext(_drawingContext);
+		mModel.updateImg();
 	}
 
 	@Override
@@ -82,6 +89,21 @@ public class GISComponent extends Observable implements IComponent, IObserver{
 				mModel.drawPolygons();
 			}
 		}
+		clearWarnings();
 
+		if (_o == null)
+			mModel.updateImg();
+	}
+
+	public void updateWarnings() {
+		try {
+			mView.updateWarnings(mWarnings);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void clearWarnings() {
+		mWarnings.clear();
 	}
 }
