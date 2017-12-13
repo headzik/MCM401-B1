@@ -9,6 +9,8 @@ import at.fhooe.mcm.interfaces.IComponent;
 import at.fhooe.mcm.interfaces.IMediator;
 import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
+import at.fhooe.mcm.rules.RuleContainer;
+import at.fhooe.mcm.rules.RuleEvaluator;
 import at.fhooe.mcm.views.MediatorView;
 
 import java.util.List;
@@ -17,11 +19,12 @@ public class Mediator extends Observable implements IMediator, IObserver {
 
     private MediatorView mMediatorView;
     private List<IComponent> mComponents;
+    private List<RuleContainer> mRulesContainers;
 
     public Mediator() {
         mMediatorView = new MediatorView();
         mComponents = new ComponentsFactory().buildComponents("src/at/fhooe/mcm/components/reflection/ComponentComposition.xml", this);
-
+        
         for (IComponent c : mComponents){
             if (c instanceof GISComponent){
                 addObserver((GISComponent) c, ObserverType.GIS);
@@ -30,6 +33,8 @@ public class Mediator extends Observable implements IMediator, IObserver {
                 addObserver((CMComponent) c, ObserverType.CM);
             }
         }
+        
+        mRulesContainers= RuleEvaluator.parseRulesContainerFromXML("rules/rules.xml");
 
         mMediatorView.addTabs(mComponents);
 
@@ -47,10 +52,17 @@ public class Mediator extends Observable implements IMediator, IObserver {
         } else if (_o instanceof ContextSituation) {
         	// Notify all ObserverTypes which need ContextSituation here!
         	// For now we only need position updates.
+        	for(RuleContainer ruleContainer: mRulesContainers) {
+        		ruleContainer.execute((ContextSituation) _o, this);
+        	}
         	notifyObservers(_o, ObserverType.GIS);
         } else if (_o instanceof POIObject) {
             notifyObservers(_o, ObserverType.GIS);
         } 
         
     }
+
+	public List<IComponent> getComponents() {
+		return mComponents;
+	}
 }

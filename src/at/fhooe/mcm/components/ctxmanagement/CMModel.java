@@ -44,6 +44,9 @@ public class CMModel extends Observable {
             case "weather":
                 mContextSituation.setWeatherContext((WeatherContext) _contextElement);
                 break;
+//            case "fuel":
+//                mContextSituation.setFuelContext((WeatherContext) _contextElement);
+//                break;
             default:
                 break;
 

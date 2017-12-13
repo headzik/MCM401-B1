@@ -13,6 +13,7 @@ public class ContextSituation implements Serializable {
     private UltravioletRadiationContext mUltravioletRadiationContext;
     private VehicleContext mVehicleContext;
     private WeatherContext mWeatherContext;
+    private FuelContext mFuelContext;
 
     public PositionContext getPositionContext() {
         return mPositionContext;
@@ -85,4 +86,26 @@ public class ContextSituation implements Serializable {
     public WeatherContext getWeatherContext() {
         return mWeatherContext;
     }
+
+	public FuelContext getFuelContext() {
+		return mFuelContext;
+	}
+	
+	public void setFuelContext(FuelContext _fuelContext) {
+		mFuelContext = _fuelContext;
+	}
+
+	public ContextElement[] getAllElements() {
+		return new ContextElement[] {mPositionContext,                  
+		 mSpeedContext,                           
+		 mTemperatureContext,                   
+		 mTimeContext,                                
+		 mAirQualityContext,                     
+		 mDensityContext,                          
+		 mUltravioletRadiationContext, 
+		 mVehicleContext,                           
+		 mWeatherContext,
+		 mFuelContext
+		};
+	}
 }

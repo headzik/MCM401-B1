@@ -1,7 +1,6 @@
 package at.fhooe.mcm.components.poi;
 
 import at.fhooe.mcm.components.poi.POI_TYPE;
-import at.fhooe.mcm.interfaces.IObserver;
 import at.fhooe.mcm.objects.Observable;
 
 import java.util.List;
@@ -31,9 +30,11 @@ public class POIModel extends Observable {
      * @param _type Type of POI to change visibility for
      */
     public void setVisibleByType(boolean _visible, POI_TYPE _type) {
-    	for (POIObject poi : mPOIs) {
-    		if (poi.getPOIType() == _type)
-    			poi.setVisible(_visible);
+    	if(mPOIs != null) {
+	    	for (POIObject poi : mPOIs) {
+	    		if (poi.getPOIType() == _type)
+	    			poi.setVisible(_visible);
+	    	}
     	}
     }
 }

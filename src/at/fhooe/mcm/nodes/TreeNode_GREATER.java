@@ -14,7 +14,7 @@ public class TreeNode_GREATER extends TreeNode {
 		
 		if (firstChild instanceof TreeNodeContextVar 
 				&& ((TreeNodeContextVar)firstChild).getType() == ContextType.TIME) {
-			if (((LocalTime) firstChild.calculate()).isBefore((LocalTime) secondChild.calculate())) {
+			if (((LocalTime) firstChild.calculate()).isAfter((LocalTime) secondChild.calculate())) {
 				return true;
 			} else {
 				return false;
